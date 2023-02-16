@@ -193,8 +193,8 @@ button {
   border-radius: 0; }
 
 button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color; }
+  outline: 1px ;
+}
 
 input,
 button,
@@ -8011,10 +8011,10 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: burlywood; }
+  color: papayawhip; }
   a:hover, a:focus {
     text-decoration: none;
-    color: burlywood;
+    color: peru;
     outline: none !important; }
 
 h1, h2, h3, h4, h5,
@@ -8251,7 +8251,7 @@ h1, h2, h3, h4, h5,
     opacity: .1;
     background: #000000; }
   .hero-wrap.hero-wrap-2 {
-    height: 80px; }
+    height: 60px; }
     .hero-wrap.hero-wrap-2 .overlay {
       opacity: .5;
       background: #fff;
@@ -8832,7 +8832,7 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 7em 0;
+  padding: 3em 0;
   position: relative; }
   @media (max-width: 767.98px) {
     .ftco-section {
