@@ -8434,16 +8434,16 @@ h1, h2, h3, h4, h5,
     border: 1px solid burlywood;
     color: #fff; }
     .btn.btn-primary:hover {
-      border: 1px solid #00bd56;
+      border: 1px solid burlywood;
       background: transparent;
-      color: #00bd56; }
+      color: burlywood; }
     .btn.btn-primary.btn-outline-primary {
-      border: 1px solid #00bd56;
+      border: 1px solid burlywood;
       background: transparent;
-      color: #00bd56; }
+      color: burlywood; }
       .btn.btn-primary.btn-outline-primary:hover {
         border: 1px solid transparent;
-        background: #00bd56;
+        background: burlywood;
         color: #fff; }
   .btn.btn-white {
     background: #fff;
@@ -9672,7 +9672,7 @@ textarea.form-control {
         border-radius: 4px; }
         .comment-list li .comment-body .reply:hover {
           color: #fff;
-          background: black; }
+          background: burlywood; }
 
 .search-form .form-group {
   position: relative; }
@@ -10131,15 +10131,15 @@ textarea.form-control {
   color: gray;
 }
 .searchButton1 {
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  font-size: 20px;
   width: 40px;
   height: 36px;
   border: 1px solid burlywood;
   background: burlywood;
   text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
+  color: #fff
 }
 
 
@@ -10148,7 +10148,17 @@ textarea.form-control {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
-
-
+.w3-dropdown-hover {
+  float:right;
+}
+.w3-bar-item {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: auto;
+  margin: auto;
+  background-color: white;
+  
+ 
+}
 
 
