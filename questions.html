@@ -93,7 +93,15 @@
 
     <section class="ftco-section bg-light">
       <div class="container">
-        <button type="button" id="submit"><span class="fa fa-pencil"><a href="questionForm.html"> 질문하기</a></span></button>
+          <!-- <ul class="col-auto"> -->
+           <button type="button" id="submit"><span class="fa fa-pencil"><a href="questionForm.html"> 질문하기</a></span></button>
+            <!-- <li class="btn btn-outline-secondary" 
+              th:href="@{/community/post/{category_name}(category_name=${category_name}, orderby=viewCount)}">조회수 순</li>
+            <li class="btn btn-outline-secondary" 
+              th:href="@{/community/post/{category_name}(category_name=${category_name}, orderby=likeCount)}">좋아요 순</li>
+            <li class="btn btn-outline-secondary" 
+              th:href="@{/community/post/{category_name}(category_name=${category_name}, orderby=id)}">최신 순</li>
+          </ul> -->
         <div class="row d-flex">
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
