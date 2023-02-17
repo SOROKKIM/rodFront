@@ -371,8 +371,10 @@ function signIn(){
   }),
 };
 
-$.ajax(settings).done(function (response) {
+$.ajax(settings).done(function (response, status, xhr) {
   console.log(response);
+  console.log(xhr.getResponseHeader('Authorization'))
+  localStorage.setItem('accessToken', xhr.getResponseHeader('Authorization')) //DB같은 역할
   alert('로그인 완료되었습니다.')
   window.location = '/index.html'
 

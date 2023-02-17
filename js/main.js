@@ -1,5 +1,8 @@
+
+
 (function($) {
 
+	getUserMe();
 	"use strict";
 
 
@@ -185,3 +188,24 @@
 
 })(jQuery);
 
+function getUserMe(){
+	var settings = {
+		"url": "http://localhost:8080/api/auth/info",
+		"method": "GET",
+		"timeout": 0,
+		"headers": {
+		  "Authorization": 
+			localStorage.getItem('accessToken')
+		},
+	  };
+	  
+	  $.ajax(settings).done(function (response) {
+		console.log(response);
+		console.log(status);
+		// if(status ===403){
+		// 	window.location = "/login.html"
+		// }
+		$('#loginUser').empty();
+		$('#loginUser').append(response.username +'님 반갑습니다.')
+	  });
+}
