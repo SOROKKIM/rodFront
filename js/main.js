@@ -191,7 +191,11 @@
 
 function getUserMe(){
 	var settings = {
+<<<<<<< HEAD
 		"url": "http://localhost:8080/api/users/mypage",
+=======
+		"url": "http://localhost:8080/users/mypage",
+>>>>>>> 6c4ff933003d2281610446456686988c7ce5992e
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
@@ -207,7 +211,7 @@ function getUserMe(){
 		// 	window.location = "/login.html"
 		// }
 		$('#loginUser').empty();
-		$('#loginUser').append(response.username +'님 반갑습니다.')
+		$('#loginUser').append(response.username + '님 반갑습니다.')
 	  });
 }
 
