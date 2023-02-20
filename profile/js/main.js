@@ -1,4 +1,7 @@
 (function ($) {
+    
+    getMyInfo();
+    getMyQeustionList();
     "use strict";
 
     // Spinner
@@ -205,3 +208,69 @@
     
 })(jQuery);
 
+function getMyQeustionList(){
+	var settings = {
+		"url": "http://localhost:8080/my-questions",
+		"method": "GET",
+		"timeout": 0,
+		"headers": {
+		  "Authorization": 
+          localStorage.getItem('accessToken')
+		},
+	  };
+	  
+	  $.ajax(settings).done(function (response) {
+		console.log(response);
+        for(let i=1; i<response.data.length; i++){
+            let questionDto1 = response.data[1];
+            let questionDto2 = response.data[2];
+            let questionDto3 = response.data[3];
+            let questionDto4 = response.data[4];
+            let questionDto5 = response.data[5];
+            let questionDto6 = response.data[6];
+            let questionDto7 = response.data[7];
+            let questionDto8 = response.data[8];
+            let questionDto9 = response.data[9];
+            // $('#questionList1').empty();
+            $('#questionList1').append(questionDto1.title);
+            // $('#questionList2').empty();
+            $('#questionList2').append(questionDto2.title);
+            // $('#questionList3').empty();
+            $('#questionList3').append(questionDto3.title);
+            // $('#questionList4').empty();
+            $('#questionList4').append(questionDto4.title);
+            // $('#questionList5').empty();
+            $('#questionList5').append(questionDto5.title);
+            // $('#questionList').empty();
+            $('#questionList6').append(questionDto6.title);
+            $('#questionList7').append(questionDto7.title);
+            $('#questionList8').append(questionDto8.title);
+            $('#questionList9').append(questionDto9.title);
+        }
+     
+
+	  });
+}
+
+function getMyInfo(){
+var settings = {
+    "url": "http://localhost:8080/users/mypage",
+    "method": "GET",
+    "timeout": 0,
+    "headers": {
+      "Authorization": localStorage.getItem('accessToken')
+    },
+  };
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+    $('#myName').empty();
+    $('#myName').append(response.username)
+    $('#mypoint').empty();
+    $('#mypoint').append(response.point)
+    $('#myphoneNumber').empty();
+    $('#myphoneNumber').append(response.phoneNumber)
+    $('#mygrade').empty();
+    $('#mygrade').append(response.grade)
+  });
+}
