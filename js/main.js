@@ -191,7 +191,7 @@
 
 function getUserMe(){
 	var settings = {
-		"url": "http://localhost:8089/api/auth/info",
+		"url": "http://localhost:8080/users/mypage",
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
@@ -207,7 +207,7 @@ function getUserMe(){
 		// 	window.location = "/login.html"
 		// }
 		$('#loginUser').empty();
-		$('#loginUser').append(response.username +'님 반갑습니다.')
+		$('#loginUser').append(response.username + '님 반갑습니다.')
 	  });
 }
 
