@@ -191,11 +191,8 @@
 
 function getUserMe(){
 	var settings = {
-<<<<<<< HEAD
-		"url": "http://localhost:8080/api/users/mypage",
-=======
+
 		"url": "http://localhost:8080/users/mypage",
->>>>>>> 6c4ff933003d2281610446456686988c7ce5992e
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
