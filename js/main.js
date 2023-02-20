@@ -191,7 +191,7 @@
 
 function getUserMe(){
 	var settings = {
-		"url": "http://localhost:8089/api/auth/info",
+		"url": "http://localhost:8080/api/users/mypage",
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
