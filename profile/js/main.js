@@ -1,5 +1,5 @@
 (function ($) {
-    getUserMe()
+    getUserMe();
     getMyInfo();
     getMyQeustionList();
     "use strict";
@@ -234,7 +234,8 @@ function getMyQeustionList(){
             let questionDto8 = response.data[8];
             let questionDto9 = response.data[9];
             // $('#questionList1').empty();
-            $('#questionList0').append(questionDto0.title, questionDto0.created_at);
+            $('#questionList0').append(questionDto0.title);
+            $('#questionList0').append(questionDto0.title);
             $('#questionList1').append(questionDto1.title);
             // $('#questionList2').empty();
             $('#questionList2').append(questionDto2.title);
