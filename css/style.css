@@ -10125,13 +10125,12 @@ textarea.form-control {
 
 .wrap1 {
   width: 100%;
-  position: absolute;
+  position: relative;
   transform: translate(-50%, -50%);
-  top: 50%
+  display: inline;
 }
 .search1 {
   width: 400px;
-  position: absolute;
   display: flex;
 }
 .searchTerm1 {
