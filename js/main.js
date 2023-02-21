@@ -3,7 +3,7 @@
 (function($) {
 
 	getUserMe();
-	
+	getAllQuestionList();
 	"use strict";
 
 
@@ -212,4 +212,34 @@ function getUserMe(){
 	  });
 }
 
+
+function getAllQuestionList(){
+  var settings = {
+  "url": "http://localhost:8080/questions",
+  "method": "GET",
+  "timeout": 0,
+  "headers": {
+	"Authorization": 
+	localStorage.getItem('accessToken')
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  for(let i=0; i<response.data.length; i++){
+    let questionList0 = response.data[0];
+	let questionList1 = response.data[1];
+	let questionList2 = response.data[2];
+	let questionList3 = response.data[3];
+	let questionList4 = response.data[4];
+	let questionList5 = response.data[5];
+  $('#question0').append(questionList0.title)
+  $('#question1').append(questionList1.title)
+  $('#question2').append(questionList2.title)
+  $('#question3').append(questionList3.title)
+  $('#question4').append(questionList4.title)
+  $('#question5').append(questionList5.title)
+  }
+});
+}
 
