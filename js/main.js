@@ -4,6 +4,9 @@
 
 	getUserMe();
 	
+	getQuestionDetail();
+
+
 	"use strict";
 
 
@@ -211,5 +214,26 @@ function getUserMe(){
 		$('#loginUser').append(response.username + '님 반갑습니다.')
 	  });
 }
+
+function getQuestionDetail() {
+	var settings = {
+	  "url": "localhost:8080/questions/1",
+	  "method": "GET",
+	  "timeout": 0,
+	  "headers": {
+		"Authorization": localStorage.getItem('accessToken'),
+	  },
+	};
+
+	$.ajax(settings).done(function (response) {
+	  console.log(response)
+	  console.log(response.title);
+	  $('#title').empty();
+	  $('#title').append(response.title);
+	  $('#content').empty();
+	  $('#content').append(response.content);
+	  });
+	}
+	
 
 

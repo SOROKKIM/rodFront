@@ -22,28 +22,6 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
 
-
-    <script>
-      function questionDetail() {
-      var settings = {
-        "url": "localhost:8080/questions/1",
-        "method": "GET",
-        "timeout": 0,
-        "headers": {
-          "Authorization": localStorage.getItem('accessToken'),
-        },
-      };
-
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-        console.log(response.title);
-        $('#title').append(response.title)
-      });
-      }
-    </script>
-
-
-
   </head>
   <body>
 
@@ -59,13 +37,16 @@
 					</div>
 					<div class="col-md-6 d-flex justify-content-md-end">
 						<div class="social-media">
-			    		<p class="mb-0 d-flex">
-			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-sign-in"><i class="sr-only">SignIn/SignUp</i></span></a>
-			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-github"><i class="sr-only">Github</i></span></a>
-			    			<!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a> -->
-			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-sign-out"><i class="sr-only">SignOut</i></span></a>
-			    		</p>
-		        </div>
+              <p class="mb-0 d-flex">
+                <a href="login.html" class="d-flex align-items-center justify-content-center"><span
+                    class="fa fa-sign-in"><i class="sr-only">SignIn/SignUp</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span
+                    class="fa fa-github"><i class="sr-only">Github</i></span></a>
+                <!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a> -->
+                <a href="#" class="d-flex align-items-center justify-content-center"><span
+                    class="fa fa-sign-out"><i class="sr-only">SignOut</i></span></a>
+              </p>
+            </div>
 					</div>
 				</div>
 			</div>
@@ -120,29 +101,31 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 ftco-animate">
-            <h2 class="mb-3" id="title">Q. 연달아서 runtime error가 뜹니다 어떻게 해야 될까요?</h2>
-            <div class="usermeta" id="username">
-              <a>노오란 병아리</a>
-              <div class="meta">April 7, 2020 at 10:05pm</div>
-              <a>⭐⭐⭐</a>
-              <div class="w3-dropdown-hover w3-right">
-                <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-                  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+            <div id="questionCard">
+              <h2 class="mb-3" id="title">Q. 연달아서 runtime error가 뜹니다 어떻게 해야 될까요?</h2>
+              <div class="usermeta" id="username">
+                <a>노오란 병아리</a>
+                <div class="meta">April 7, 2020 at 10:05pm</div>
+                <a>⭐⭐⭐</a>
+                <div class="w3-dropdown-hover w3-right">
+                  <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+                    <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+                    <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="questionContent">
-              <img src="images/error_1.png" alt="Image placeholder">
-              <p>결론적으로 양방향 연관관계는! 항상 A를 선택하는 것이 설계의 직관성과 성능 모든 면에서 이점을 가져 옵니다. 반면에 B를 선택하면 A에 비해서 얻는 이점이 없습니다. 따라서 이 부분은 거의 선택의 여지 없이 A를 방식을 사용해야 합니다.
-                mappedBy를 스펙에서 양쪽에 다 풀게되면 개발자가 A가 아닌 B를 선택할 여지를 열어주게 됩니다.(여기서 B라는 것은 야매 매핑이 아니라, 연관관계의 주인이 다른 테이블의 외래 키를 관리하는 것을 말합니다.) 이것은 A를 선택하면 깔끔하게 해결되는데, 오히려 혼란만 가중하게 되는 것이지요.</p>
-            </div>
-            <div class="tag-widget post-tag-container mb-5 mt-5">
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">JAVA</a>
-                <a href="#" class="tag-cloud-link">Spring</a>
-                <a href="#" class="tag-cloud-link">ORM</a>
-                <a href="#" class="tag-cloud-link">HTML</a>
+              <div class="questionContent" id="content">
+                <img src="images/error_1.png" alt="Image placeholder">
+                <p>결론적으로 양방향 연관관계는! 항상 A를 선택하는 것이 설계의 직관성과 성능 모든 면에서 이점을 가져 옵니다. 반면에 B를 선택하면 A에 비해서 얻는 이점이 없습니다. 따라서 이 부분은 거의 선택의 여지 없이 A를 방식을 사용해야 합니다.
+                  mappedBy를 스펙에서 양쪽에 다 풀게되면 개발자가 A가 아닌 B를 선택할 여지를 열어주게 됩니다.(여기서 B라는 것은 야매 매핑이 아니라, 연관관계의 주인이 다른 테이블의 외래 키를 관리하는 것을 말합니다.) 이것은 A를 선택하면 깔끔하게 해결되는데, 오히려 혼란만 가중하게 되는 것이지요.</p>
+              </div>
+              <div class="tag-widget post-tag-container mb-5 mt-5">
+                <div class="tagcloud">
+                  <a href="#" class="tag-cloud-link">JAVA</a>
+                  <a href="#" class="tag-cloud-link">Spring</a>
+                  <a href="#" class="tag-cloud-link">ORM</a>
+                  <a href="#" class="tag-cloud-link">HTML</a>
+                </div>
               </div>
             </div>
 
@@ -527,11 +510,7 @@
   });
   });</script>
 
-<script>
-  function open_comment_box(){
-            $('#comment_box').show()
-        }
-</script>
+
 
 
   <style>
