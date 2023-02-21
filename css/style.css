@@ -9667,7 +9667,12 @@ textarea.form-control {
         border-radius: 50%; }
     .comment-list li .comment-body {
       float: right;
-      width: calc(100% - 80px); }
+      padding: 20px;
+      width: calc(100% - 80px); 
+      background-color: #faf5f0;
+      border-radius: 6px
+      
+    }
       .comment-list li .comment-body h3 {
         font-size: 20px; }
       .comment-list li .comment-body .meta {
