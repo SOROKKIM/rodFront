@@ -353,7 +353,17 @@ $.ajax(settings).done(function (response) {
   console.log(response);
   alert('회원가입 완료되었습니다.');
   document.querySelector('.cont').classList.toggle('s--signup');
+}).fail(function(response){
+  console.log(response.status)
+  if(response.status === 500){
+    alert('중복된 아이디 입니다.')
+  }else{
+    alert('서버에 문제가 발생하였습니다.')
+  }
 });
+
+
+
 }
 
 function signIn(){
@@ -362,7 +372,6 @@ function signIn(){
   "method": "POST",
   "timeout": 0,
   "headers": {
-    "Authorization": localStorage.getItem('accessToken'),
     "Content-Type": "application/json"
   },
   "data": JSON.stringify({

@@ -1,5 +1,5 @@
 (function ($) {
-    
+    getUserMe()
     getMyInfo();
     getMyQeustionList();
     "use strict";
@@ -208,20 +208,22 @@
     
 })(jQuery);
 
+
+
 function getMyQeustionList(){
 	var settings = {
 		"url": "http://localhost:8080/my-questions",
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
-		  "Authorization": 
-          localStorage.getItem('accessToken')
+            "Authorization": localStorage.getItem('accessToken')
 		},
 	  };
 	  
 	  $.ajax(settings).done(function (response) {
 		console.log(response);
-        for(let i=1; i<response.data.length; i++){
+        for(let i=0; i<response.data.length; i++){
+            let questionDto0 = response.data[0];
             let questionDto1 = response.data[1];
             let questionDto2 = response.data[2];
             let questionDto3 = response.data[3];
@@ -232,6 +234,7 @@ function getMyQeustionList(){
             let questionDto8 = response.data[8];
             let questionDto9 = response.data[9];
             // $('#questionList1').empty();
+            $('#questionList0').append(questionDto0.title, questionDto0.created_at);
             $('#questionList1').append(questionDto1.title);
             // $('#questionList2').empty();
             $('#questionList2').append(questionDto2.title);
@@ -247,8 +250,6 @@ function getMyQeustionList(){
             $('#questionList8').append(questionDto8.title);
             $('#questionList9').append(questionDto9.title);
         }
-     
-
 	  });
 }
 
@@ -273,4 +274,27 @@ var settings = {
     $('#mygrade').empty();
     $('#mygrade').append(response.grade)
   });
+}
+
+function getUserMe(){
+	var settings = {
+
+		"url": "http://localhost:8080/users/mypage",
+		"method": "GET",
+		"timeout": 0,
+		"headers": {
+		  "Authorization": 
+			localStorage.getItem('accessToken')
+		},
+	  };
+	  
+	  $.ajax(settings).done(function (response) {
+		console.log(response);
+		console.log(status);
+		// if(status ===403){
+		// 	window.location = "/login.html"
+		// }
+		$('#loginUser').empty();
+		$('#loginUser').append(response.username + '님')
+	  });
 }
