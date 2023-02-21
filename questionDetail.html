@@ -52,7 +52,9 @@
 				<div class="row">
 					<div class="col-md-6 d-flex align-items-center">
 						<p class="mb-0 phone pl-md-2">
-              <a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i> 노오란 병아리님 반갑습니다.</a>
+              <a href="profile/index.html">
+								<i class="fa fa-user-circle-o" aria-hidden="true" ></i> 
+								<span id="loginUser"></a></span>
 						</p>
 					</div>
 					<div class="col-md-6 d-flex justify-content-md-end">
@@ -120,10 +122,10 @@
           <div class="col-lg-8 ftco-animate">
             
             <h2 class="mb-3" id="title">Q. 연달아서 runtime error가 뜹니다 어떻게 해야 될까요?</h2>
-            <div class="usermeta">
-              <a id="username">노오란 병아리</a>
-              <div class="meta" id="createdAt">April 7, 2020 at 10:05pm</div>
-              <a id="dificulty">⭐⭐⭐</a>
+            <div class="usermeta" id="username">
+              <a>노오란 병아리</a>
+              <div class="meta">April 7, 2020 at 10:05pm</div>
+              <a>⭐⭐⭐</a>
               <div class="w3-dropdown-hover w3-right">
                 <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
                   <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
@@ -133,7 +135,7 @@
             </div>
             <div class="questionContent">
               <img src="images/error_1.png" alt="Image placeholder">
-              <p id="content">결론적으로 양방향 연관관계는! 항상 A를 선택하는 것이 설계의 직관성과 성능 모든 면에서 이점을 가져 옵니다. 반면에 B를 선택하면 A에 비해서 얻는 이점이 없습니다. 따라서 이 부분은 거의 선택의 여지 없이 A를 방식을 사용해야 합니다.
+              <p>결론적으로 양방향 연관관계는! 항상 A를 선택하는 것이 설계의 직관성과 성능 모든 면에서 이점을 가져 옵니다. 반면에 B를 선택하면 A에 비해서 얻는 이점이 없습니다. 따라서 이 부분은 거의 선택의 여지 없이 A를 방식을 사용해야 합니다.
                 mappedBy를 스펙에서 양쪽에 다 풀게되면 개발자가 A가 아닌 B를 선택할 여지를 열어주게 됩니다.(여기서 B라는 것은 야매 매핑이 아니라, 연관관계의 주인이 다른 테이블의 외래 키를 관리하는 것을 말합니다.) 이것은 A를 선택하면 깔끔하게 해결되는데, 오히려 혼란만 가중하게 되는 것이지요.</p>
             </div>
             <div class="tag-widget post-tag-container mb-5 mt-5">
@@ -144,6 +146,30 @@
                 <a href="#" class="tag-cloud-link">HTML</a>
               </div>
             </div>
+
+            <h5 class="checkAnswer"><i class="fa fa-check-circle-o" aria-hidden="true" style="color:#deb887; font-weight: bold;"> 질문자 채택</i></h5>
+            <div class="usermeta" id="username">
+              <a>강인한 호랑이</a>
+              <div class="meta">April 7, 2020 at 10:05pm
+              <div class="w3-dropdown-hover w3-right">
+                <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+
+                  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+                  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="questionContent">
+              <img src="images/error_1.png" alt="Image placeholder">
+              <p>결론적으로 양방향 연관관계는! 항상 A를 선택하는 것이 설계의 직관성과 성능 모든 면에서 이점을 가져 옵니다. 반면에 B를 선택하면 A에 비해서 얻는 이점이 없습니다. 따라서 이 부분은 거의 선택의 여지 없이 A를 방식을 사용해야 합니다.
+                mappedBy를 스펙에서 양쪽에 다 풀게되면 개발자가 A가 아닌 B를 선택할 여지를 열어주게 됩니다.(여기서 B라는 것은 야매 매핑이 아니라, 연관관계의 주인이 다른 테이블의 외래 키를 관리하는 것을 말합니다.) 이것은 A를 선택하면 깔끔하게 해결되는데, 오히려 혼란만 가중하게 되는 것이지요.</p>
+            </div>
+            <div class="likeReply">
+              <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
+              <button class="nav-icon-btn comment" type="button" style="border: none; color: #deb887;" ><span class="fa fa-commenting-o" style="font-size:16px; font-weight: 650;"> 7</span></button>
+            </div>
+            
             
             <!-- <div class="about-author d-flex p-4 bg-light">
               <div class="bio mr-5">
@@ -165,10 +191,18 @@
                     <img src="images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
-                    <h3>강인한 호랑이</h3>
-                    <div class="meta">April 7, 2020 at 10:05pm</div>
+                    <h3>강인한 호랑이
+                      <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+                      <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+                    </h3>
+                    <div class="meta">April 7, 2020 at 10:05pm
+                      
+                    </div>
                     <p>Lorem ipsum dolor sit amet?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
+                    <p><a href="#" class="reply">Reply</a> 
+                      <button type="button" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
+                      <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
+                    </p>                  
                   </div>
                 </li>
     
@@ -177,11 +211,18 @@
                     <img src="images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
-                    <h3>알파베타</h3>
-                    <div class="meta">April 7, 2020 at 10:05pm</div>
+                    <h3>알파베타
+                      <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+                      <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+                    </h3>
+                    <div class="meta">April 7, 2020 at 10:05pm
+                      
+                    </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
+                    <p><a href="#" class="reply">Reply</a> 
+                      <button type="button" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
+                      <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 10</button>
+                    </p>                    </div>
     
                   <ul class="children">
                     <li class="comment">
@@ -189,9 +230,9 @@
                         <img src="images/person_1.jpg" alt="Image placeholder">
                       </div>
                       <div class="comment-body">
-                        <h3>아기다리고기다린</h3>
+                        <h3>댓글닉네임</h3>
                         <div class="meta">April 7, 2020 at 10:05pm</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum official</p>
                         
                       </div>
                 <li class="comment">
@@ -199,9 +240,9 @@
                     <img src="images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
-                    <h3>알파베타</h3>
+                    <h3>댓글닉네임</h3>
                     <div class="meta">April 7, 2020 at 10:05pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
                     
                 </li>
               </ul>
@@ -210,11 +251,16 @@
                   <img src="images/person_1.jpg" alt="Image placeholder">
                 </div>
                 <div class="comment-body">
-                  <h3>뉴진스하잎보이요</h3>
+                  <h3>뉴진스하잎보이요
+                    <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+                    <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+                  </h3>
                   <div class="meta">April 7, 2020 at 10:05pm</div>
                   <p>Lorem ipsum dolor sit amet?</p>
-                  <p><a href="#" class="reply">Reply</a></p>
-                </div>
+                  <p><a href="#" class="reply">Reply</a> 
+                    <button type="button" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
+                    <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 4</button>
+                  </p>                   </div>
               </li>
               <!-- END comment-list -->
               
@@ -248,7 +294,6 @@
                             <option value="5">⭐⭐⭐⭐⭐</option>
                         </select>
                     </div>
-                  <div class="form-group">
                   <div class="form-group">
                     <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
                   </div>
