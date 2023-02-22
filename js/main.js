@@ -240,9 +240,13 @@ function getQuestionDetail() {
 		// $('#answerContent').append(response.answerWithComments[0].content);
 		// $('#getComment').empty();
 		// $('#getComment').append(response.answerWithComments[0].commentResponseDtoList[0].content);
-		for(let i =0; i < response.length; i++) {
-			let answer = response.AnswersWithComments[i];
+		console.log(response.answerWithComments);
+		console.log(response.answerWithComments.length);
+		for(let i = 0; i < response.answerWithComments.length; i++) {
+			let answer = response.answerWithComments[i];
+			console.log("answer"+answer);
 			let tempHtml = addAnswerHTML(answer);
+			console.log(tempHtml);
 			$('#answer-box').append(tempHtml);
 		}
 
@@ -296,29 +300,30 @@ function addAnswerHTML(content) {
 }
 
 function makeAnswer(answer) {
-	return `<div class="vcard bio">
-	<img src="images/person_1.jpg" alt="Image placeholder">
-  </div>
-  <div class="comment-body">
-	<h3>B
-	  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-	  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
-	</h3>
-	<div class="meta">작성 날짜
-	  
-	</div>
-	<p id="answerContent">${answer.content}</p>
-	<p><button type="button" class="reply" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Reply</button>
-	  <div class="comment-group" class="collapse" id="collapseExample">
-		<div class="comment-form">
-		  <textarea class="form-control1" placeholder=" 댓글을 입력해주세요" id="comment"></textarea>
-		  <button type="button" onclick="commentSummit()" class="registerCommentBtn" style="color:black; background-color: #deb887; border: none; font-weight: 400; font-size: 13px; letter-spacing: .05em; padding:2px 10px; border-radius: 4px; float: right; margin-top: 5px;">등록</button>
-		</div>
-	  </div>
-	  <button type="button" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
-	  <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
-	</p>                  
-  </div>`;
+	return `<li class="comment" >
+				<div class="vcard bio">
+				<img src="images/person_1.jpg" alt="Image placeholder">
+				</div>
+				<div class="comment-body">
+				<h3>강인한 호랑이
+					<a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+					<a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+				</h3>
+				<div class="meta">April 7, 2020 at 10:05pm
+					
+				</div>
+				<p id="answerContent">${answer.content}</p>
+				<p><button type="button" class="reply" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Reply</button>
+					<div class="comment-group" class="collapse" id="collapseExample">
+					<div class="comment-form">
+						<textarea class="form-control1" placeholder=" 댓글을 입력해주세요" id="comment"></textarea>
+						<button type="button" onclick="commentSummit()" class="registerCommentBtn" style="color:black; background-color: #deb887; border: none; font-weight: 400; font-size: 13px; letter-spacing: .05em; padding:2px 10px; border-radius: 4px; float: right; margin-top: 5px;">등록</button>
+					</div>
+					</div>
+					<button type="button" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
+					<button class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
+				</p>                  
+				</div>`;
 }
 
 function addCommentHTML(username, content, createdAt) {
@@ -327,15 +332,18 @@ function addCommentHTML(username, content, createdAt) {
 }
 
 function makeComment(comment) {
-	return `<div class="vcard bio">
-	<img src="images/person_1.jpg" alt="Image placeholder">
-  </div>
-  <div class="comment-body">
-	<h3>${comment.username}
-	  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-	  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
-	</h3>
-	<div class="meta">${comment.createdAt}</div>
-	<p id="getComment">${comment.content}</p>`;
+	return `<li class="comment" >
+				<div class="vcard bio">
+				<img src="images/person_1.jpg" alt="Image placeholder">
+				</div>
+				<div class="comment-body">
+				<h3>댓글닉네임
+					<a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+					<a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+				</h3>
+				<div class="meta">April 7, 2020 at 10:05pm</div>
+				<p>${comment.content}</p>
+				</div>
+ 			 </li>`;
 }
 
