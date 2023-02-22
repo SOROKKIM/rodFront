@@ -22,6 +22,58 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
 
+
+    <script>
+      function answerSummit() {
+        var settings = {
+          "url": "http://localhost:8080/api/questions/1/answers",
+          "method": "POST",
+          "timeout": 0,
+          "headers": {
+            "Authorization": localStorage.getItem('accessToken'),
+            "Content-Type": "application/json"
+          },
+          "data": JSON.stringify({
+            "content": $('#summernote').val(),
+            "difficulty": $('#dificulty').val()
+          }),
+        };
+
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+          alert("답변등록이 완료되었습니다.")
+          window.location = '/questionDetail.html'
+        });
+      }
+    </script>
+
+    <script>
+      function commentSummit() {
+        var settings = {
+          "url": "http://localhost:8080/api/questions/answers/1/comments",
+          "method": "POST",
+          "timeout": 0,
+          "headers": {
+            "Authorization": localStorage.getItem('accessToken'),
+            "Content-Type": "application/json"
+          },
+          "data": JSON.stringify({
+            "content": $('#comment').val()
+          }),
+        };
+
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+          alert("댓글등록이 완료되었습니다.")
+          window.location = '/questionDetail.html'
+        });
+      }
+    </script>
+
+
+
+
+
   </head>
   <body>
 
@@ -180,12 +232,12 @@
                     <div class="meta">April 7, 2020 at 10:05pm
                       
                     </div>
-                    <p>Lorem ipsum dolor sit amet?</p>
+                    <p id="answerContent">Lorem ipsum dolor sit amet?</p>
                     <p><button type="button" class="reply" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Reply</button>
                       <div class="comment-group" class="collapse" id="collapseExample">
                         <div class="comment-form">
-                          <textarea class="form-control1" placeholder=" 댓글을 입력해주세요"></textarea>
-                          <button type="button" class="registerCommentBtn" style="color:black; background-color: #deb887; border: none; font-weight: 400; font-size: 13px; letter-spacing: .05em; padding:2px 10px; border-radius: 4px; float: right; margin-top: 5px;">등록</button>
+                          <textarea class="form-control1" placeholder=" 댓글을 입력해주세요" id="comment"></textarea>
+                          <button type="button" onclick="commentSummit()" class="registerCommentBtn" style="color:black; background-color: #deb887; border: none; font-weight: 400; font-size: 13px; letter-spacing: .05em; padding:2px 10px; border-radius: 4px; float: right; margin-top: 5px;">등록</button>
                         </div>
                         
       
@@ -228,7 +280,6 @@
                         </h3>
                         <div class="meta">April 7, 2020 at 10:05pm</div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum official</p>
-                        
                       </div>
                 <li class="comment">
                   <div class="vcard bio">
@@ -240,7 +291,7 @@
                       <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
                     </h3>
                     <div class="meta">April 7, 2020 at 10:05pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                    <p id="getComment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
                     
                 </li>
               </ul>
@@ -283,7 +334,7 @@
                   </div>
                   <div class="form-group mb-3">
                     <label class="form-group-text" for="inputGroupSelect01">난이도</label>
-                    <select class="form-select" id="star">
+                    <select class="form-select" id="difficulty">
                         <option selected>-- 선택하기 --</option>
                         <option value="1">⭐</option>
                         <option value="2">⭐⭐</option>
@@ -293,7 +344,7 @@
                     </select>
                 </div>
                   <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary" onclick="answerSummit()">
                   </div>
     
                 </form>
