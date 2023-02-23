@@ -270,10 +270,21 @@ function getQuestionDetail() {
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1ae3f406efa0f802658302d340a1501e3094d858
 			"Authorization": localStorage.getItem('accessToken'),
 			
 		},
 
+<<<<<<< HEAD
+=======
+			"Authorization": 
+			localStorage.getItem('accessToken'),
+		}
+
+>>>>>>> 1ae3f406efa0f802658302d340a1501e3094d858
 	};
 
 	$.ajax(settings).done(function (response) {
@@ -307,8 +318,12 @@ function getQuestionDetail() {
 			}
 			
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1ae3f406efa0f802658302d340a1501e3094d858
 	});
-}
+
 
 
   // 답변과 댓글을 불러와서 보여줌.
