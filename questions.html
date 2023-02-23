@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script>
+    <!-- <script>
       (function ($) {
         getAllQuestionList();
       })(jQuery);
@@ -58,7 +58,7 @@
       });
     }
 
-    </script>
+    </script> -->
 
 
   </head>
@@ -147,23 +147,43 @@
             <li class="btn btn-outline-secondary" 
               th:href="@{/community/post/{category_name}(category_name=${category_name}, orderby=id)}">최신 순</li>
           </ul> -->
-        <div class="row d-flex">
-          <div class="col-md-4 d-flex ftco-animate">
+
+
+          <!-- 카드(질문 목록) -->
+        <div class="row d-flex" id="cards">
+
+          <!-- <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/question_1.png');">
+              <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/question_11.png');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">
                   <div><a>April 07, 2020</a></div>
                   <div><a>보아</a></div>
                   <div><a class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-                  <div><a class="meta-chat"><span class="fa fa-heart-o"></span> 11</a></div>
                 </div>
                 <h3 class="heading"><span id="question0"></span></h3>
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate">
+
+                    <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/question_11.png');">
+              </a>
+              <div class="text p-4">
+              	<div class="meta mb-2">
+                  <div><a>April 07, 2020</a></div>
+                  <div><a>보아</a></div>
+                  <div><a class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+                </div>
+                <h3 class="heading"><span id="question1"></span></h3>
+              </div>
+            </div>
+          </div> -->
+
+         
+           <!-- <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
               <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/error_1.png');">
               </a>
@@ -178,35 +198,8 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/question_1.png');">
-              </a>
-              <div class="text p-4">
-              	<div class="meta mb-2">
-                  <div><a href="#">April 07, 2020</a></div>
-                  <div><a href="#">닉네임</a></div>
-                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-                  <div><a href="#" class="meta-chat"><span class="fa fa-heart-o"></span> 20</a></div>
-                </div>
-                <h3 class="heading"><a href="#"><span id="question2"></span></a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/image_4.jpg');">
-              </a>
-              <div class="text p-4">
-              	<div class="meta mb-2">
-                  <div><a href="#">April 07, 2020</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-                </div>
-                <h3 class="heading"><a href="#"><span id="question3"></span></a></h3>
-              </div>
-            </div>
-          </div>
+
+          
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
               <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/image_5.jpg');">
@@ -221,21 +214,15 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/image_6.jpg');">
-              </a>
-              <div class="text p-4">
-              	<div class="meta mb-2">
-                  <div><a href="#">April 07, 2020</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-                </div>
-                <h3 class="heading"><a href="#"><span id="question5"></span></a></h3>
-              </div>
-            </div>
-          </div>
+
+
+          </div> -->
+
+
         </div>
+
+
+         <!-- 페이징 넘버 -->
         <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -251,6 +238,9 @@
             </div>
           </div>
         </div>
+
+
+
       </div>
     </section>
 
@@ -328,7 +318,9 @@
   
 
   <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
   <script src="js/jquery.min.js"></script>
@@ -344,7 +336,6 @@
   <script src="js/owl.carousel.min.js"></script>
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/questionMain.js"></script>
 
   <script>

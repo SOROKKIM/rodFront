@@ -1,12 +1,7 @@
-
-
 (function ($) {
 
 	getUserMe();
-	getAllQuestionList();
-
 	"use strict";
-
 
 	$(window).stellar({
 		responsive: true,
@@ -190,6 +185,7 @@
 
 })(jQuery);
 
+
 function getUserMe() {
 	var settings = {
 
@@ -214,51 +210,31 @@ function getUserMe() {
 }
 
 
-function getAllQuestionList(){
+function questionSummit() {
 	var settings = {
-	"url": "http://localhost:8080/questions",
-	"method": "GET",
-	"timeout": 0,
-	"headers": {
-	  "Authorization": 
-	  localStorage.getItem('accessToken')
-	},
+	  "url": "http://localhost:8080/questions",
+	  "method": "POST",
+	  "timeout": 0,
+	  "headers": {
+		"Authorization": 
+		localStorage.getItem('accessToken'),
+
+
+		"Content-Type": "application/json;"
+	  },
+	  "data": JSON.stringify({
+		"title": $('#title').val(),
+		"content": $('#summernote').val(),
+		"hashtagStrs": $('#hashTag').val()
+	  }),
 	};
-	
+
 	$.ajax(settings).done(function (response) {
-	console.log(response);
-	// $('#title').empty();
-	// $('#title').append(response.title);
-
-
-	for(let i=0; i<response.data.length; i++){
-	  let answer = response.data[i];
-	  let tempHtml = addAnswerHTML(answer);
-	  $('#cards').append(tempHtml);
-	}
+	  console.log(response);
+	  alert("질문등록이 완료되었습니다.")
+	  window.location = '/questionDetail.html'
 	});
-	
-	}
-
-	function addAnswerHTML(answer) {
-		let tempHtml = makeCard(answer);
-		$('#cards').append(tempHtml);
-	  }
-
-function makeCard(answer){
-
-	return`<div class="blog-entry align-self-stretch">
-	<a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/question_11.png');">
-	</a>
-	<div class="text p-4">
-		<div class="meta mb-2">
-		<div><a>April 07, 2020</a></div>
-		<div><a>보아</a></div>
-		<div><a class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-	  </div>
-	  <h3 class="heading">${answer.content}</span></h3>
-	</div>
-  </div>`
   }
+
 
 

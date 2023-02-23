@@ -4,6 +4,7 @@
 
 	getUserMe();
 	getQuestionDetail();
+	
 	"use strict";
 
 
@@ -240,7 +241,6 @@ function answerSummit() {
 }
 
 
-
 function commentSummit() {
   var settings = {
 	"url": "http://localhost:8080/api/questions/answers/2/comments",
@@ -266,13 +266,19 @@ function commentSummit() {
 
 function getQuestionDetail() {
 	var settings = {
-		"url": "http://localhost:8080/questions/1",
+		"url": "http://localhost:8080/questions/1" ,
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
+<<<<<<< Updated upstream
 			"Authorization": localStorage.getItem('accessToken'),
 			
 		},
+=======
+			"Authorization": 
+			localStorage.getItem('accessToken'),
+		},	
+>>>>>>> Stashed changes
 	};
 
 	$.ajax(settings).done(function (response) {
@@ -306,9 +312,12 @@ function getQuestionDetail() {
 			}
 			
 		}
+<<<<<<< Updated upstream
 		
 		
 
+=======
+>>>>>>> Stashed changes
 	});
 }
 
