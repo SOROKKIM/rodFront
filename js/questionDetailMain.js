@@ -214,36 +214,6 @@ function getUserMe() {
 
 
 
-function getAllQuestionList() {
-	var settings = {
-	  "url": "http://localhost:8080/questions",
-	  "method": "GET",
-	  "timeout": 0,
-	  "headers": {
-		"Authorization":
-		  localStorage.getItem('accessToken')
-	  },
-	};
-
-  $.ajax(settings).done(function (response) {
-	console.log(response);
-	for (let i = 0; i < response.data.length; i++) {
-	  let questionList0 = response.data[0];
-	  let questionList1 = response.data[1];
-	  let questionList2 = response.data[2];
-	  let questionList3 = response.data[3];
-	  let questionList4 = response.data[4];
-	  let questionList5 = response.data[5];
-	  $('#question0').append(questionList0.title)
-	  $('#question1').append(questionList1.title)
-	  $('#question2').append(questionList2.title)
-	  $('#question3').append(questionList3.title)
-	  $('#question4').append(questionList4.title)
-	  $('#question5').append(questionList5.title)
-	}
-  });
-}
-
 
 function answerSummit() {
   var settings = {
@@ -262,8 +232,10 @@ function answerSummit() {
 
   $.ajax(settings).done(function (response) {
 	console.log(response);
+	localStorage.setItem('answerID', response('answerWithComments'('answerId'))) //DB같은 역할
 	alert("답변등록이 완료되었습니다.")
 	window.location = '/questionDetail.html'
+	
   });
 }
 
@@ -271,7 +243,7 @@ function answerSummit() {
 
 function commentSummit() {
   var settings = {
-	"url": "http://localhost:8080/api/questions/answers/1/comments",
+	"url": "http://localhost:8080/api/questions/answers/2/comments",
 	"method": "POST",
 	"timeout": 0,
 	"headers": {
@@ -299,6 +271,7 @@ function getQuestionDetail() {
 		"timeout": 0,
 		"headers": {
 			"Authorization": localStorage.getItem('accessToken'),
+			
 		},
 	};
 
@@ -315,13 +288,26 @@ function getQuestionDetail() {
 		// $('#getComment').append(response.answerWithComments[0].commentResponseDtoList[0].content);
 		console.log(response.answerWithComments);
 		console.log(response.answerWithComments.length);
+		console.log(response.answerWithComments[0].commentResponseDtoList.length);
 		for(let i = 0; i < response.answerWithComments.length; i++) {
+			console.log('test')
 			let answer = response.answerWithComments[i];
-			console.log("answer"+answer);
-			let tempHtml = addAnswerHTML(answer);
-			console.log(tempHtml);
-			$('#answer-box').append(tempHtml);
+				console.log("answer"+answer);
+				let tempHtml1 = addAnswerHTML(answer);
+				console.log(tempHtml1);
+				$('#answer-box').append(tempHtml1);
+			for(let j = 0; j < response.answerWithComments[i].commentResponseDtoList.length; j++) {
+				console.log('test2')
+				let comment = response.answerWithComments[i].commentResponseDtoList[j];
+				let tempHtml2 = addCommentHTML(comment);
+				console.log(tempHtml2);
+				$('#comment-box').append(tempHtml2);
+				console.log("comment"+comment);
+			}
+			
 		}
+		
+		
 
 	});
 }
@@ -337,8 +323,8 @@ function getQuestionDetail() {
 
   //답변 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
   function addAnswerHTML(content) {
-    let tempHtml = makeAnswer(content);
-    $('#answer-box').append(tempHtml);
+    let tempHtml1 = makeAnswer(content);
+    $('#answer-box').append(tempHtml1);
   }
 
   function makeAnswer(answer) {
@@ -368,9 +354,9 @@ function getQuestionDetail() {
           </div>`;
   }
 
-  function addCommentHTML(username, content, createdAt) {
-    let tempHtml = makeComment(username, content, createdAt);
-    $('#comment-box').append(tempHtml);
+  function addCommentHTML(content) {
+    let tempHtml2 = makeComment(content);
+    $('#comment-box').append(tempHtml2);
   }
 
   function makeComment(comment) {

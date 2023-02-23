@@ -34,12 +34,14 @@
         "timeout": 0,
         "headers": {
           "Authorization": localStorage.getItem('accessToken'),
-          "Content-Type": "application/json;"
+          "Content-Type": "application/json;",
+          
         },
         "data": JSON.stringify({
           "title": $('#title').val(),
           "content": $('#summernote').val(),
           "hashtagStrs": $('#hashTag').val()
+          
         }),
       };
 
@@ -47,6 +49,7 @@
         console.log(response);
         alert("질문등록이 완료되었습니다.")
         window.location = '/questionDetail.html'
+        window.localStorage.setItem(id, value)
       });
     }
   </script>
