@@ -270,15 +270,15 @@ function getQuestionDetail() {
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
-<<<<<<< Updated upstream
+
 			"Authorization": localStorage.getItem('accessToken'),
 			
 		},
-=======
+
 			"Authorization": 
 			localStorage.getItem('accessToken'),
-		},	
->>>>>>> Stashed changes
+		}
+
 	};
 
 	$.ajax(settings).done(function (response) {
@@ -312,14 +312,9 @@ function getQuestionDetail() {
 			}
 			
 		}
-<<<<<<< Updated upstream
-		
-		
 
-=======
->>>>>>> Stashed changes
 	});
-}
+
 
 
   // 답변과 댓글을 불러와서 보여줌.
