@@ -3,8 +3,11 @@
 (function ($) {
 
 	getUserMe();
+	// getAnswerCount();
 	getQuestionDetail();
-	
+
+	$('#questionIsSelected').hide();
+	// $('#questionIsSelected-true').show();
 	"use strict";
 
 
@@ -213,87 +216,70 @@ function getUserMe() {
 	});
 }
 
+//질문 개별 조회 시 답변 개수 확인 (ex. N개의 답변이 있습니다.)
+// function getAnswerCount() {
+// 	var settings = {
+// 		"url": "http://localhost:8080/questions/all",
+// 		"method": "GET",
+// 		"timeout": 0,
+// 		"headers": {
+// 		  "Authorization": 
+// 		  localStorage.getItem('accessToken')
+// 		},
+// 		};
+		
+// 		$.ajax(settings).done(function (response) {
+// 		console.log(response);
+// 		console.log(response.data[0].answerCount);
+// 		$('#answerCount').empty();
+// 		for (i = 0; i < response.data.length; i++) {
+// 			if(response.data[i].answerCount === )
+//   			$('#answerCount').append(response.data[i].answerCount + '개의 답변이 있습니다.');
+// 		}
+		
+// 	});
+// }
 
 
 
-function answerSummit() {
-  var settings = {
-	"url": "http://localhost:8080/api/questions/1/answers",
-	"method": "POST",
-	"timeout": 0,
-	"headers": {
-	  "Authorization": localStorage.getItem('accessToken'),
-	  "Content-Type": "application/json"
-	},
-	"data": JSON.stringify({
-	  "content": $('#summernote').val(),
-	  "difficulty": $('#dificulty').val()
-	}),
-  };
-
-  $.ajax(settings).done(function (response) {
-	console.log(response);
-	localStorage.setItem('answerID', response('answerWithComments'('answerId'))) //DB같은 역할
-	alert("답변등록이 완료되었습니다.")
-	window.location = '/questionDetail.html'
-	
-  });
-}
-
-
-function commentSummit() {
-  var settings = {
-	"url": "http://localhost:8080/api/questions/answers/2/comments",
-	"method": "POST",
-	"timeout": 0,
-	"headers": {
-	  "Authorization": localStorage.getItem('accessToken'),
-	  "Content-Type": "application/json"
-	},
-	"data": JSON.stringify({
-	  "content": $('#comment').val()
-	}),
-  };
-
-  $.ajax(settings).done(function (response) {
-	console.log(response);
-	alert("댓글등록이 완료되었습니다.")
-	window.location = '/questionDetail.html'
-  });
-}
 
 
 
+
+
+
+
+
+
+//질문/답변/댓글 한꺼번에 개별 조회
 function getQuestionDetail() {
 	var settings = {
-		"url": "http://localhost:8080/questions/1" ,
+		"url": "http://localhost:8080/questions/specific/"+localStorage.getItem('currentQuestion'),
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
-<<<<<<< HEAD
-=======
-
->>>>>>> 1ae3f406efa0f802658302d340a1501e3094d858
 			"Authorization": localStorage.getItem('accessToken'),
-			
 		},
-
-<<<<<<< HEAD
-=======
-			"Authorization": 
-			localStorage.getItem('accessToken'),
-		}
-
->>>>>>> 1ae3f406efa0f802658302d340a1501e3094d858
 	};
 
 	$.ajax(settings).done(function (response) {
 		console.log(response)
 		console.log(response.title);
+		console.log(response.createdAt);
+		console.log(response.difficulty);
+		console.log(response.totalAnswerCount);
+		$('#nickname').empty();
+		$('#nickname').append(response.nickname);
+		$('#createdAt').empty();
+		$('#createdAt').append(response.createdAt);
+		$('#difficulty').empty();
+		$('#difficulty').append('난이도 : '+response.difficulty);
 		$('#title').empty();
 		$('#title').append(response.title);
 		$('#content').empty();
 		$('#content').append(response.content);
+		$('#totalAnswerCount').empty();
+		$('#totalAnswerCount').append(response.totalAnswerCount +' 개의 답변이 있습니다.');
 		// $('#answerContent').empty();
 		// $('#answerContent').append(response.answerWithComments[0].content);
 		// $('#getComment').empty();
@@ -301,56 +287,112 @@ function getQuestionDetail() {
 		console.log(response.answerWithComments);
 		console.log(response.answerWithComments.length);
 		console.log(response.answerWithComments[0].commentResponseDtoList.length);
-		for(let i = 0; i < response.answerWithComments.length; i++) {
+		for (let i = 0; i < response.answerWithComments.length; i++) {
 			console.log('test')
 			let answer = response.answerWithComments[i];
-				console.log("answer"+answer);
-				let tempHtml1 = addAnswerHTML(answer);
-				console.log(tempHtml1);
-				$('#answer-box').append(tempHtml1);
-			for(let j = 0; j < response.answerWithComments[i].commentResponseDtoList.length; j++) {
+			console.log("answer" + answer);
+			let tempHtml1 = addAnswerHTML(answer);
+			console.log(tempHtml1);
+			$('#answer-box').append(tempHtml1);
+			for (let j = 0; j < response.answerWithComments[i].commentResponseDtoList.length; j++) {
 				console.log('test2')
 				let comment = response.answerWithComments[i].commentResponseDtoList[j];
 				let tempHtml2 = addCommentHTML(comment);
 				console.log(tempHtml2);
 				$('#comment-box').append(tempHtml2);
-				console.log("comment"+comment);
+				console.log("comment" + comment);
 			}
-			
+
 		}
-<<<<<<< HEAD
-=======
 
->>>>>>> 1ae3f406efa0f802658302d340a1501e3094d858
 	});
+}
 
 
 
-  // 답변과 댓글을 불러와서 보여줌.
-    /**
-     * 답변 목록: #answer-box
-     * 댓글 목록: #comment-box
-     * 답변 HTML 만드는 함수: addAnswerHTML
-     * 댓글 HTML 만드는 함수: addCommentHTML
-       */
 
-  //답변 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
-  function addAnswerHTML(content) {
-    let tempHtml1 = makeAnswer(content);
-    $('#answer-box').append(tempHtml1);
-  }
 
-  function makeAnswer(answer) {
-    return `<li class="comment" >
+
+
+
+
+
+
+//답변 등록
+function answerSummit() {
+	var settings = {
+		"url": "http://localhost:8080/api/questions/"+localStorage.getItem('currentQuestion')+"/answers",
+		"method": "POST",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+			"Content-Type": "application/json"
+		},
+		"data": JSON.stringify({
+			"content": $('#summernote').val(),
+			"difficulty": $('#dificulty').val()
+		}),
+	};
+
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+		// localStorage.setItem('answerId', response('answerWithComments'('answerId'))) //DB같은 역할
+		alert("답변등록이 완료되었습니다.")
+		window.location = '/questionDetail.html'
+
+	});
+}
+
+//댓글 등록
+function commentSummit() {
+	var settings = {
+		"url": "http://localhost:8080/api/questions/answers/"+localStorage.getItem('answerId')+"/comments",
+		"method": "POST",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+			"Content-Type": "application/json"
+		},
+		"data": JSON.stringify({
+			"content": $('#comment').val()
+		}),  
+	};
+
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+			// localStorage.setItem('commentId', response('answerWithComments'('commentResponseDtoList'('commentId')))) //DB같은 역할
+		alert("댓글등록이 완료되었습니다.")
+		window.location = '/questionDetail.html'
+	});
+}
+
+
+
+// 답변과 댓글을 불러와서 보여줌.
+/**
+ * 답변 목록: #answer-box
+ * 댓글 목록: #comment-box
+ * 답변 HTML 만드는 함수: addAnswerHTML
+ * 댓글 HTML 만드는 함수: addCommentHTML
+   */
+
+//답변 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
+function addAnswerHTML(id, nickName, content, createdAt) {
+	let tempHtml1 = makeAnswer(id, nickName, content, createdAt);
+	$('#answer-box').append(tempHtml1);
+}
+
+function makeAnswer(answer) {
+	return `<li class="comment" >
           <div class="vcard bio">
           <img src="images/person_1.jpg" alt="Image placeholder">
           </div>
           <div class="comment-body">
-          <h3>강인한 호랑이
+          <h3>${answer.nickName}
             <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-            <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+            <a onclick="deleteAnswer()" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
           </h3>
-          <div class="meta">April 7, 2020 at 10:05pm
+          <div class="meta">${answer.createdAt}
             
           </div>
           <p id="answerContent">${answer.content}</p>
@@ -361,29 +403,137 @@ function getQuestionDetail() {
               <button type="button" onclick="commentSummit()" class="registerCommentBtn" style="color:black; background-color: #deb887; border: none; font-weight: 400; font-size: 13px; letter-spacing: .05em; padding:2px 10px; border-radius: 4px; float: right; margin-top: 5px;">등록</button>
             </div>
             </div>
-            <button type="button" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
+            <button type="button" onclick="answerIsSelected()" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
             <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
           </p>                  
           </div>`;
-  }
+}
 
-  function addCommentHTML(content) {
-    let tempHtml2 = makeComment(content);
-    $('#comment-box').append(tempHtml2);
-  }
+function addCommentHTML(id, nickName, content, createdAt) {
+	let tempHtml2 = makeComment(id, nickName, content, createdAt);
+	$('#comment-box').append(tempHtml2);
+}
 
-  function makeComment(comment) {
-    return `<li class="comment" >
+function makeComment(comment) {
+	return `<li class="comment" >
           <div class="vcard bio">
           <img src="images/person_1.jpg" alt="Image placeholder">
           </div>
           <div class="comment-body">
-          <h3>댓글닉네임
+          <h3>${comment.nickName}
             <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-            <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+            <a onclick="deleteComment()" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
           </h3>
-          <div class="meta">April 7, 2020 at 10:05pm</div>
+          <div class="meta">${comment.createdAt}</div>
           <p>${comment.content}</p>
           </div>
         </li>`;
-  }
+}
+
+//질문 삭제
+function deleteQuestion() {
+	var settings = {
+		"url": "http://localhost:8080/questions/"+localStorage.getItem('currentQuestion'),
+		"method": "DELETE",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+		},
+	  };
+	  
+	  $.ajax(settings).done(function (response) {
+		console.log(response);
+		alert("질문 삭제가 완료되었습니다.");
+		window.location = '/questions.html'
+	  });
+}
+
+
+//답변 삭제
+function deleteAnswer() {
+	var settings = {
+		"url": "http://localhost:8080/api/answers/"+localStorage.getItem('answerId'),
+		"method": "DELETE",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+		},
+	};
+
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+		alert("답변 삭제가 완료되었습니다.")
+		window.location = '/questionDetail.html'
+	});
+}
+
+//댓글 삭제
+function deleteComment() {
+	var settings = {
+		"url": "http://localhost:8080/api/questions/answers/"+localStorage.getItem('answerId')+"/comments/"+localStorage.getItem('commentId'),
+		"method": "DELETE",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+		},
+	  };
+	  
+	  $.ajax(settings).done(function (response) {
+		console.log(response);
+		alert("댓글 삭제가 완료되었습니다.");
+		window.location = '/questionDetail.html'
+	  });
+}
+
+
+
+//답변 채택
+// function answerIsSelected() {
+// 	var settings = {
+// 		"url": "http://localhost:8080/questions/"+localStorage.getItem('currentQuestion')+"/"+localStorage.getItem('answerId'),
+// 		"method": "PATCH",
+// 		"timeout": 0,
+// 		"headers": {
+// 			"Authorization": localStorage.getItem('accessToken'),
+// 		},
+// 	  };
+	  
+// 	  $.ajax(settings).done(function (response) {
+// 		console.log(response);
+// 		alert("답변 채택이 완료되었습니다.");
+// 		// let isSelected = response;
+// 		// let tempHtml = addAnswerIsSelectedHTML(isSelected);
+// 		// $('questionIsSelected').append(tempHtml);
+// 		// $('#questionIsSelected-true').show();
+// 		window.location = '/questionDetail.html'
+// 	  });
+// }
+
+// function addAnswerIsSelectedHTML(id, nickName, content, createdAt, answerCount) {
+// 	let tempHtml = makeAnswerIsSelected(id, nickName, content, createdAt, answerCount);
+// 	$('#questionIsSelected').append(tempHtml);
+// }
+
+// function makeAnswerIsSelected(isSelected) {
+// 	return `<h5 class="checkAnswer" id="questionIsSelected-true"><i class="fa fa-check-circle-o" aria-hidden="true" style="color:#deb887; font-weight: bold;"> 질문자 채택</i></h5>
+// 	<div class="usermeta" id="username">
+// 	  <a>${isSelected.nickName}</a>
+// 	  <div class="meta">${isSelected.createdAt}
+// 	  <div class="w3-dropdown-hover w3-right">
+// 		<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+
+// 		  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+// 		  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+// 		</div>
+// 	  </div>
+// 	</div>
+// 	</div>
+// 	<div class="questionContent">
+// 	  <img src="images/error_1.png" alt="Image placeholder">
+// 	  <p>${isSelected.content}</p>
+// 	</div>
+// 	<div class="likeReply">
+// 	  <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
+// 	  <button class="nav-icon-btn comment" type="button" style="border: none; color: #deb887;" ><span class="fa fa-commenting-o" style="font-size:16px; font-weight: 650;"> ${isSelected.answerCount}</span></button>
+// 	</div>`;
+// }

@@ -23,14 +23,13 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script>
-
        window.onload = getQuestionDetail();
     </script>
 
     <script>
       function answerSummit() {
         var settings = {
-          "url": "http://localhost:8080/api/questions/1/answers",
+          "url": "http://localhost:8080/api/questions/7/answers",
           "method": "POST",
           "timeout": 0,
           "headers": {
@@ -159,14 +158,14 @@
           <div class="col-lg-8 ftco-animate">
             <div id="questionCard">
               <h2 class="mb-3" id="title">Q. 연달아서 runtime error가 뜹니다 어떻게 해야 될까요?</h2>
-              <div class="usermeta" id="username">
-                <a>노오란 병아리</a>
-                <div class="meta">April 7, 2020 at 10:05pm</div>
-                <a>⭐⭐⭐</a>
+              <div class="usermeta">
+                <a id="nickname">노오란 병아리</a>
+                <div class="meta" id="createdAt">April 7, 2020 at 10:05pm</div>
+                <a id="difficulty"></a>
                 <div class="w3-dropdown-hover w3-right">
                   <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                    <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-                    <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+                    <a href="questionEditForm.html" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+                    <a onclick="deleteQuestion()" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
                   </div>
                 </div>
               </div>
@@ -175,7 +174,7 @@
                 <p>결론적으로 양방향 연관관계는! 항상 A를 선택하는 것이 설계의 직관성과 성능 모든 면에서 이점을 가져 옵니다. 반면에 B를 선택하면 A에 비해서 얻는 이점이 없습니다. 따라서 이 부분은 거의 선택의 여지 없이 A를 방식을 사용해야 합니다.
                   mappedBy를 스펙에서 양쪽에 다 풀게되면 개발자가 A가 아닌 B를 선택할 여지를 열어주게 됩니다.(여기서 B라는 것은 야매 매핑이 아니라, 연관관계의 주인이 다른 테이블의 외래 키를 관리하는 것을 말합니다.) 이것은 A를 선택하면 깔끔하게 해결되는데, 오히려 혼란만 가중하게 되는 것이지요.</p>
               </div>
-              <div class="tag-widget post-tag-container mb-5 mt-5">
+              <div class="tag-widget post-tag-container mt-5">
                 <div class="tagcloud">
                   <a href="#" class="tag-cloud-link">JAVA</a>
                   <a href="#" class="tag-cloud-link">Spring</a>
@@ -184,28 +183,30 @@
                 </div>
               </div>
             </div>
+            
+            <div id="questionIsSelected" class="mt-5">
+              <h5 class="checkAnswer"><i class="fa fa-check-circle-o" aria-hidden="true" style="color:#deb887; font-weight: bold;"> 질문자 채택</i></h5>
+              <div class="usermeta" id="username">
+                <a>강인한 호랑이</a>
+                <div class="meta">April 7, 2020 at 10:05pm
+                <div class="w3-dropdown-hover w3-right">
+                  <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
 
-            <h5 class="checkAnswer"><i class="fa fa-check-circle-o" aria-hidden="true" style="color:#deb887; font-weight: bold;"> 질문자 채택</i></h5>
-            <div class="usermeta" id="username">
-              <a>강인한 호랑이</a>
-              <div class="meta">April 7, 2020 at 10:05pm
-              <div class="w3-dropdown-hover w3-right">
-                <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-
-                  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-                  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+                    <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+                    <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+                  </div>
                 </div>
               </div>
-            </div>
-            </div>
-            <div class="questionContent">
-              <img src="images/error_1.png" alt="Image placeholder">
-              <p>결론적으로 양방향 연관관계는! 항상 A를 선택하는 것이 설계의 직관성과 성능 모든 면에서 이점을 가져 옵니다. 반면에 B를 선택하면 A에 비해서 얻는 이점이 없습니다. 따라서 이 부분은 거의 선택의 여지 없이 A를 방식을 사용해야 합니다.
-                mappedBy를 스펙에서 양쪽에 다 풀게되면 개발자가 A가 아닌 B를 선택할 여지를 열어주게 됩니다.(여기서 B라는 것은 야매 매핑이 아니라, 연관관계의 주인이 다른 테이블의 외래 키를 관리하는 것을 말합니다.) 이것은 A를 선택하면 깔끔하게 해결되는데, 오히려 혼란만 가중하게 되는 것이지요.</p>
-            </div>
-            <div class="likeReply">
-              <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
-              <button class="nav-icon-btn comment" type="button" style="border: none; color: #deb887;" ><span class="fa fa-commenting-o" style="font-size:16px; font-weight: 650;"> 7</span></button>
+              </div>
+              <div class="questionContent">
+                <img src="images/error_1.png" alt="Image placeholder">
+                <p>결론적으로 양방향 연관관계는! 항상 A를 선택하는 것이 설계의 직관성과 성능 모든 면에서 이점을 가져 옵니다. 반면에 B를 선택하면 A에 비해서 얻는 이점이 없습니다. 따라서 이 부분은 거의 선택의 여지 없이 A를 방식을 사용해야 합니다.
+                  mappedBy를 스펙에서 양쪽에 다 풀게되면 개발자가 A가 아닌 B를 선택할 여지를 열어주게 됩니다.(여기서 B라는 것은 야매 매핑이 아니라, 연관관계의 주인이 다른 테이블의 외래 키를 관리하는 것을 말합니다.) 이것은 A를 선택하면 깔끔하게 해결되는데, 오히려 혼란만 가중하게 되는 것이지요.</p>
+              </div>
+              <div class="likeReply">
+                <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
+                <button class="nav-icon-btn comment" type="button" style="border: none; color: #deb887;" ><span class="fa fa-commenting-o" style="font-size:16px; font-weight: 650;"> 7</span></button>
+              </div>
             </div>
             
             
@@ -221,8 +222,8 @@
             </div> -->
     
     
-            <div class="pt-5 mt-5">
-              <h3 class="mb-5">6 개의 답변이 있습니다.</h3>
+            <div class="mt-5">
+              <h3 class="mb-5 mt-5" id="totalAnswerCount">6 개의 답변이 있습니다.</h3>
               <ul class="comment-list" id="answer-box">
                 <!-- <li class="comment" >
                   <div class="vcard bio">

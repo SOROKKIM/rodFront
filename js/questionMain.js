@@ -213,10 +213,10 @@ function getUserMe() {
 	});
 }
 
-
+//질문 전체 목록 페이지
 function getAllQuestionList(){
 	var settings = {
-	"url": "http://localhost:8080/questions",
+	"url": "http://localhost:8080/questions/all",
 	"method": "GET",
 	"timeout": 0,
 	"headers": {
@@ -232,33 +232,55 @@ function getAllQuestionList(){
 
 
 	for(let i=0; i<response.data.length; i++){
-	  let answer = response.data[i];
-	  let tempHtml = addAnswerHTML(answer);
+	  let questionList = response.data[i];
+	  let tempHtml = addAnswerHTML(questionList);
 	  $('#cards').append(tempHtml);
 	}
 	});
 	
 	}
 
-	function addAnswerHTML(answer) {
-		let tempHtml = makeCard(answer);
+	function addAnswerHTML(nickName, title, createdAt, answerCount) {
+		let tempHtml = makeCard(nickName, title, createdAt, answerCount);
 		$('#cards').append(tempHtml);
 	  }
 
-function makeCard(answer){
+function makeCard(questionList){
 
-	return`<div class="blog-entry align-self-stretch">
-	<a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/question_11.png');">
-	</a>
-	<div class="text p-4">
-		<div class="meta mb-2">
-		<div><a>April 07, 2020</a></div>
-		<div><a>보아</a></div>
-		<div><a class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+	return`
+	<div class="blog-entry align-self-stretch">
+	  <a onclick="goDetail(${questionList.questionId})" class="block-20 rounded" style="background-image: url('images/question_11.png');">
+	  </a>
+	  <div class="text p-4">
+		  <div class="meta mb-2">
+		  <div><a>${questionList.createdAt}</a></div>
+		  <div><a>${questionList.nickName}</a></div>
+		  <div><a class="meta-chat"><span class="fa fa-comment"></span> ${questionList.answerCount}</a></div>
+		</div>
+		<h3 class="heading"><span id="question0">${questionList.title}</span></h3>
 	  </div>
-	  <h3 class="heading">${answer.content}</span></h3>
 	</div>
-  </div>`
+  
+`
   }
+function goDetail(questionId)
+ {
+	 localStorage.setItem('currentQuestion',questionId)
+	 window.location="./questionDetail.html"
+ }
 
+{/* <div class="col-md-4 d-flex ftco-animate">
+	<div class="blog-entry align-self-stretch">
+	  <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/question_11.png');">
+	  </a>
+	  <div class="text p-4">
+		  <div class="meta mb-2">
+		  <div><a>${answer.createdAt}</a></div>
+		  <div><a>${answer.nickName}</a></div>
+		  <div><a class="meta-chat"><span class="fa fa-comment"></span> ${answer.answerCount}</a></div>
+		</div>
+		<h3 class="heading"><span id="question0">${answer.title}</span></h3>
+	  </div>
+	</div>
+  </div> */}
 

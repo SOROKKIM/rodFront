@@ -209,7 +209,7 @@ function getUserMe() {
 	});
 }
 
-
+//질문 등록
 function questionSummit() {
 	var settings = {
 	  "url": "http://localhost:8080/questions",
@@ -218,8 +218,6 @@ function questionSummit() {
 	  "headers": {
 		"Authorization": 
 		localStorage.getItem('accessToken'),
-
-
 		"Content-Type": "application/json;"
 	  },
 	  "data": JSON.stringify({
@@ -232,9 +230,13 @@ function questionSummit() {
 	$.ajax(settings).done(function (response) {
 	  console.log(response);
 	  alert("질문등록이 완료되었습니다.")
-	  window.location = '/questionDetail.html'
+	  localStorage.setItem("currentQuestion", response.questionId); // response에서 questionId 가져와서 저장
+	  window.location="./questionDetail.html"
 	});
   }
 
+// function myQuestionDetail(questionId)  {
+// 	localStorage.setItem('myCurrentQuestion',questionId)
+// }
 
 
