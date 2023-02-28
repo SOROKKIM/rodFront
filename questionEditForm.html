@@ -24,36 +24,7 @@
             });
         });</script>
 
-    <script>
-        function questionEditSummit() {
-            var settings = {
-                "url": "http://localhost:8080/questions/"+localStorage.getItem('currentQuestion'),
-                "method": "PUT",
-                "timeout": 0,
-                "headers": {
-                    "Authorization":
-                        localStorage.getItem('accessToken'),
-
-
-                    "Content-Type": "application/json;"
-                },
-                "data": JSON.stringify({
-                    "title": $('#title').val(),
-                    "content": $('#summernote').val(),
-                    "hashtagStrs": $('#hashTag').val()
-                }),
-            };
-
-            $.ajax(settings).done(function (response) {
-                console.log(response);
-                localStorage.setItem('currentQuestion',questionId)
-                alert("질문수정이 완료되었습니다.")
-                window.location = '/questionDetail.html'
-            });
-        }
-    </script>
-
-
+    
 
 </head>
 
@@ -75,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label for="tag">태그</label>
-                <input type="text" class="form-control" id="hashTag" placeholder="태그를 수정해주세요.(최대 5개)" name="tag">
+                <input type="text" class="form-control" id="hashTag2" placeholder="태그를 수정해주세요.(최대 5개)" name="tag">
             </div>
 
             <button type="button" class="btn btn-secondary" onclick="questionEditSummit()">수정완료</button>
