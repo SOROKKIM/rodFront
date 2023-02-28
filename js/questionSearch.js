@@ -191,6 +191,7 @@
 
 
 
+
 // ----------------------------------------------------------------------------------------------------------------------
 
 // 현재 페이지
@@ -232,7 +233,7 @@ var settings = {
     },
   };
 
-//   window.location = "/search.html"
+
 
   $.ajax(settings).done(function(response) {
     console.log(response);
@@ -245,6 +246,8 @@ var settings = {
       $('#card').append(tempHtml);
     }
 
+	window.location = "/search.html"
+
     // 페이지 버튼 업데이트
     resetPageButtons();
     createPageButtons(response.totalPages);
@@ -255,7 +258,6 @@ var settings = {
 // 초기 페이지 로드 시 첫 번째 페이지의 질문 목록 불러오기
 // search(1, 6);
 
-// ----------------------------------------------------------------------------------------------------------------------
 
 
 	function addAnswerHTML(nickname, title, createdAt, answerCount) {
@@ -279,3 +281,5 @@ var settings = {
 	  </div>
 	</div>`
   }
+
+  // ----------------------------------------------------------------------------------------------------------------------
