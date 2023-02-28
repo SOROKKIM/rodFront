@@ -254,27 +254,29 @@ function getMyQeustionList(){
 }
 
 function getMyInfo(){
-var settings = {
-    "url": "http://localhost:8080/users/mypage",
-    "method": "GET",
-    "timeout": 0,
-    "headers": {
-      "Authorization": localStorage.getItem('accessToken')
-    },
-  };
-  
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-    $('#myName').empty();
-    $('#myName').append(response.username)
-    $('#mypoint').empty();
-    $('#mypoint').append(response.point)
-    $('#myphoneNumber').empty();
-    $('#myphoneNumber').append(response.phoneNumber)
-    $('#mygrade').empty();
-    $('#mygrade').append(response.grade)
-  });
-}
+    var settings = {
+        "url": "http://localhost:8080/users/mypage",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Authorization": localStorage.getItem('accessToken')
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        $('#myName').empty();
+        $('#myName').append(response.username)
+        $('#mypoint').empty();
+        $('#mypoint').append(response.point)
+        $('#myphoneNumber').empty();
+        $('#myphoneNumber').append(response.phoneNumber)
+        $('#mygrade').empty();
+        $('#mygrade').append(response.grade)
+        $('#myrating').empty();
+        $('#myrating').append(response.rating)
+      });
+    }
 
 function getUserMe(){
 	var settings = {
@@ -296,5 +298,6 @@ function getUserMe(){
 		// }
 		$('#loginUser').empty();
 		$('#loginUser').append(response.username + '님')
+        $('#grade').append(response.grade)
 	  });
 }

@@ -344,6 +344,8 @@ var settings = {
     $('#myphoneNumber').append(response.phoneNumber)
     $('#mygrade').empty();
     $('#mygrade').append(response.grade)
+    $('#myrating').empty();
+    $('#myrating').append(response.rating)
   });
 }
 
