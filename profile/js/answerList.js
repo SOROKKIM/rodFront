@@ -209,7 +209,63 @@
 })(jQuery);
 
 
-// 내 질문 목록 
+
+
+
+
+
+
+
+
+
+
+// 내 답변 목록 
+function getMyAnswerList(){
+    var settings = {
+        "url": "http://localhost:8080/api/answers?page=" + page + "&size=" + size,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Authorization": localStorage.getItem('accessToken')
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        for(let i=0; i<response.length; i++){
+            let answerDto0 = response[0];
+            let answerDto1 = response[1];
+            let answerDto2 = response[2];
+            let answerDto3 = response[3];
+            let answerDto4 = response[4];
+            let answerDto5 = response[5];
+            let answerDto6 = response[6];
+            let answerDto7 = response[7];
+            let answerDto8 = response[8];
+            let answerDto9 = response[9];
+          
+            console.log(answerDto0);
+            $('#answerList0').append(answerDto0.content);
+            $('#answerList1').append(answerDto1.content);
+            $('#answerList2').append(answerDto2.content);
+         
+            $('#answerList3').append(answerDto3.content);
+       
+            $('#answerList4').append(answerDto4.content);
+   
+            $('#answerList5').append(answerDto5.content);
+        
+            $('#answerList6').append(answerDto6.content);
+         
+            $('#answerList7').append(answerDto7.content);
+            $('#answerList8').append(answerDto8.content);
+            $('#answerList9').append(answerDto9.content);
+    
+        }
+      });
+    }
+
+    // 내 답변 목록 
 function getMyAnswerList(){
     var settings = {
         "url": "http://localhost:8080/api/answers",
@@ -233,20 +289,20 @@ function getMyAnswerList(){
             let answerDto7 = response[7];
             let answerDto8 = response[8];
             let answerDto9 = response[9];
-            // $('#questionList1').empty();
+          
             console.log(answerDto0);
             $('#answerList0').append(answerDto0.content);
             $('#answerList1').append(answerDto1.content);
             $('#answerList2').append(answerDto2.content);
-            // $('#questionList2').empty();
+         
             $('#answerList3').append(answerDto3.content);
-            // $('#questionList3').empty();
+       
             $('#answerList4').append(answerDto4.content);
-            // $('#questionList4').empty();
+   
             $('#answerList5').append(answerDto5.content);
-            // $('#questionList5').empty();
+        
             $('#answerList6').append(answerDto6.content);
-            // $('#questionList').empty();
+         
             $('#answerList7').append(answerDto7.content);
             $('#answerList8').append(answerDto8.content);
             $('#answerList9').append(answerDto9.content);
@@ -254,6 +310,17 @@ function getMyAnswerList(){
         }
       });
     }
+
+
+
+
+
+
+
+
+
+    
+
 
 
 // 내 프로필 
