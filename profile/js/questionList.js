@@ -1,7 +1,7 @@
 (function ($) {
     getUserMe();
     getMyInfo();
-    getMyQeustionList();
+    getMyQeustionList(1, 10);
     "use strict";
 
     // Spinner
@@ -209,10 +209,62 @@
 })(jQuery);
 
 
+// // 내 질문 목록 
+// function getMyQeustionList(){
+// 	var settings = {
+// 		"url": "http://localhost:8080/my-questions?page=" + page + "&size=" + size,
+// 		"method": "GET",
+// 		"timeout": 0,
+// 		"headers": {
+//             "Authorization": localStorage.getItem('accessToken')
+// 		},
+// 	  };
+	  
+// 	  $.ajax(settings).done(function (response) {
+// 		console.log(response);
+//         for(let i=0; i<response.data.length; i++){
+//             let questionDto0 = response.data[0];
+//             let questionDto1 = response.data[1];
+//             let questionDto2 = response.data[2];
+//             let questionDto3 = response.data[3];
+//             let questionDto4 = response.data[4];
+//             let questionDto5 = response.data[5];
+//             let questionDto6 = response.data[6];
+//             let questionDto7 = response.data[7];
+//             let questionDto8 = response.data[8];
+//             let questionDto9 = response.data[9];
+  
+//             $('#questionList0').append(questionDto0.title);
+//             $('#questionList1').append(questionDto1.title);
+//             $('#questionList2').append(questionDto2.title);
+//             $('#questionList3').append(questionDto3.title);
+//             $('#questionList4').append(questionDto4.title);
+//             $('#questionList5').append(questionDto5.title);
+//             $('#questionList6').append(questionDto6.title);
+//             $('#questionList7').append(questionDto7.title);
+//             $('#questionList8').append(questionDto8.title);
+//             $('#questionList9').append(questionDto9.title);
+//         }
+// 	  });
+// }
+
+
+
+// 현재 페이지
+let currentPage = 1;
+
+// 페이지 버튼 클릭 시 이벤트 핸들러
+$('.page-btn').on('click', function() {
+  currentPage = parseInt($(this).data('page'));
+  getMyQeustionList(currentPage, 6);
+});
+
+
+
 // 내 질문 목록 
-function getMyQeustionList(){
+function getMyQeustionList(page, size){
 	var settings = {
-		"url": "http://localhost:8080/my-questions",
+		"url": "http://localhost:8080/my-questions?page=" + page + "&size=" + size,
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
@@ -220,38 +272,61 @@ function getMyQeustionList(){
 		},
 	  };
 	  
+
+
 	  $.ajax(settings).done(function (response) {
 		console.log(response);
+        $('#questions').empty();
+
+
         for(let i=0; i<response.data.length; i++){
-            let questionDto0 = response.data[0];
-            let questionDto1 = response.data[1];
-            let questionDto2 = response.data[2];
-            let questionDto3 = response.data[3];
-            let questionDto4 = response.data[4];
-            let questionDto5 = response.data[5];
-            let questionDto6 = response.data[6];
-            let questionDto7 = response.data[7];
-            let questionDto8 = response.data[8];
-            let questionDto9 = response.data[9];
-            // $('#questionList1').empty();
-            $('#questionList0').append(questionDto0.title);
-            $('#questionList1').append(questionDto1.title);
-            // $('#questionList2').empty();
-            $('#questionList2').append(questionDto2.title);
-            // $('#questionList3').empty();
-            $('#questionList3').append(questionDto3.title);
-            // $('#questionList4').empty();
-            $('#questionList4').append(questionDto4.title);
-            // $('#questionList5').empty();
-            $('#questionList5').append(questionDto5.title);
-            // $('#questionList').empty();
-            $('#questionList6').append(questionDto6.title);
-            $('#questionList7').append(questionDto7.title);
-            $('#questionList8').append(questionDto8.title);
-            $('#questionList9').append(questionDto9.title);
+            let questionDto = response.data[i];
+            let tempHtml = addQuestionHTML(questionDto);
+            console.log(tempHtml);
+            $('#questions').append(tempHtml);
         }
+
+        resetPageButtons();
+        createPageButtons(response.totalPages);
+    $('.page-btn[data-page="' + currentPage + '"]').addClass('active');
+
+
 	  });
 }
+
+getMyQeustionList(1, 6);
+
+
+function addQuestionHTML(title) {
+    let tempHtml = makeQuestion(title);
+    $('#questions').append(tempHtml);
+  }
+
+
+  function makeQuestion(questionDto){
+
+    return`
+             <tr>
+             <ol>
+                <th scope="row"></th>
+                <td> ${questionDto.title}</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </ol>
+            </tr>    
+            `
+}
+
+
+
+
+
+
+
+
 
 
 // 내 프로필 
@@ -301,3 +376,4 @@ function getUserMe(){
 		$('#loginUser').append(response.username + '님')
 	  });
 }
+  

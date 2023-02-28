@@ -254,8 +254,8 @@ function getAllQuestionList(page, size) {
 
   $.ajax(settings).done(function(response) {
     console.log(response);
+	$('#cards').empty();
 
-    $('#cards').empty();
 
     for (let i = 0; i < response.data.length; i++) {
       let questionList = response.data[i];
@@ -295,10 +295,13 @@ getAllQuestionList(1, 6);
 		</div>
 		<h3 class="heading"><span id="question0">${questionList.title}</span></h3>
 	  </div>
-	</div>
-  
-`
+	</div>`
   }
+
+
+
+
+
 function goDetail(questionId)
  {
 	 localStorage.setItem('currentQuestion',questionId)

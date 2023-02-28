@@ -1,7 +1,6 @@
 (function ($) {
     getUserMe();
     getMyInfo();
-    getMyQeustionList();
     "use strict";
 
     // Spinner

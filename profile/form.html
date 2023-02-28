@@ -689,13 +689,16 @@
                                 </div> -->
                             </div>
                             <div class="col-12">
-                                <div class="bg-light rounded h-100 p-4">
+                                <div class="bg-light rounded h-100 p-4" >
                                     <h6 class="mb-4">질문 내역</h6>
-                                    <div class="table-responsive">
-                                        <table class="table">
+                                   
+                                    <div class="table-responsive" >
+                                       
+                                        <table class="table" >
+                                           
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
+                                                    <!-- <th scope="col">#</th> -->
                                                     <th scope="col">질문 제목</th>
                                                     <th scope="col"> </th>
                                                     <th scope="col"></th>
@@ -704,110 +707,74 @@
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
+
                                             <tbody>
-                                                <a href="#">
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td><span id="questionList0"></span></td>
-                            
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td><span id="questionList1"></span></td>
-                            
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </a>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td><span id="questionList2"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td><span id="questionList3"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">5</th>
-                                                    <td><span id="questionList4"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">6</th>
-                                                    <td><span id="questionList5"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">7</th>
-                                                    <td><span id="questionList6"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">8</th>
-                                                    <td><span id="questionList7"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">9</th>
-                                                    <td><span id="questionList8"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">10</th>
-                                                    <td><span id="questionList9"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
+                    
                                             </tbody>
+                                    
                                         </table>
                                     </div>
+
+
                                 </div>
                             </div>
-                            
+
+
+
+
+
+
+
+                            <div class="col-12">
+                                <div class="bg-light rounded h-100 p-4" >
+                             
+                                   
+                                    <div class="table-responsive" >
+                                       
+                                        <table class="table" id="questions" >
+                                           
+                                            <thead>
+                             
+                                            </thead>
+
+                                            <tbody>
+                      
+                                             
+                                            </tbody>
+                                    
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- Table End -->
+
+         <!-- 페이징 넘버 -->
+         <div class="row mt-5">
+            <div class="col text-center">
+              <div class="block-27">
+                <ul>
+      
+                  <button class="page-btn" data-page="1" onclick="getMyQeustionList(1, 10)">1</button>
+                  <button class="page-btn" data-page="2" onclick="getMyQeustionList(2, 10)">2</button>
+                  <button class="page-btn" data-page="3" onclick="getMyQeustionList(3, 10)">3</button>
+                  <button class="page-btn" data-page="4" onclick="getMyQeustionList(4, 10)">4</button>
+                  <button class="page-btn" data-page="5" onclick="getMyQeustionList(5, 6)">5</button>
+                  <button class="page-btn" data-page="5" onclick="getMyQeustionList(6, 6)">6</button>
+                  <button class="page-btn" data-page="5" onclick="getMyQeustionList(7, 6)">7</button>
+                  <button class="page-btn" data-page="5" onclick="getMyQeustionList(8, 6)">8</button>
+                  <button class="page-btn" data-page="5" onclick="getMyQeustionList(9, 6)">9</button>
+                  <button class="page-btn" data-page="5" onclick="getMyQeustionList(10, 6)">10</button>
+                
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
 
 
             <!-- Footer Start -->
@@ -845,7 +812,7 @@
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="js/questionList.js"></script>
 </body>
 
 </html>
