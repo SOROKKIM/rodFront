@@ -24,40 +24,7 @@
             });
         });</script>
 
-<<<<<<< HEAD
-    
-=======
-    <!-- <script>
-        function questionEditSummit() {
-            var settings = {
-                "url": "http://localhost:8080/questions/"+localStorage.getItem('currentQuestion'),
-                "method": "PUT",
-                "timeout": 0,
-                "headers": {
-                    "Authorization":
-                        localStorage.getItem('accessToken'),
 
-
-                    "Content-Type": "application/json;"
-                },
-                "data": JSON.stringify({
-                    "title": $('#title').val(),
-                    "content": $('#summernote').val(),
-                    "hashtagStrs": $('#hashTag').val()
-                }),
-            };
-
-            $.ajax(settings).done(function (response) {
-                console.log(response);
-                localStorage.setItem('currentQuestion',questionId)
-                alert("질문수정이 완료되었습니다.")
-                window.location = '/questionDetail.html'
-            });
-        }
-    </script> -->
-
-
->>>>>>> 653779f7c54918b722f26efa31e97d9051bc67a1
 
 </head>
 

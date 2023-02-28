@@ -438,7 +438,7 @@ function makeAnswer(answerId, nickname, content, createdAt, likes) {
             </div>
             </div>
             <button id="${answerId}-isSelected" type="button" onclick="answerIsSelected(${answerId})" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
-            <button onclick="likeAnswer()" id="like-button" class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-2x fa-heart-o not-liked" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
+            <button onclick="likeAnswer(${answerId})" id="like-button" class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-2x fa-heart-o not-liked" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
           </p>
 		  <ul class="children" id="${answerId}-comment-box">
         	</ul>`;
@@ -568,9 +568,9 @@ function deleteComment(answerId, commentId) {
 
 
 //답변 좋아요
-function likeAnswer() {
+function likeAnswer(answerId) {
 	var settings = {
-		"url": "http://localhost:8080/api/likes/answer/"+localStorage.getItem('answerId'),
+		"url": "http://localhost:8080/api/likes/answer/"+answerId,
 		"method": "POST",
 		"timeout": 0,
 		"headers": {
@@ -581,6 +581,7 @@ function likeAnswer() {
 	  $.ajax(settings).done(function (response) {
 		console.log(response);
 		localStorage.setItem('answerId', response.answerId);//DB같은 역할
+		window.location.reload();
 	  });
 }
 
