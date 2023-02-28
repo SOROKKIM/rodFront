@@ -240,8 +240,8 @@ function getAllQuestionList(){
 	
 	}
 
-	function addAnswerHTML(nickName, title, createdAt, answerCount) {
-		let tempHtml = makeCard(nickName, title, createdAt, answerCount);
+	function addAnswerHTML(nickname, title, createdAt, answerCount) {
+		let tempHtml = makeCard(nickname, title, createdAt, answerCount);
 		$('#cards').append(tempHtml);
 	  }
 
@@ -254,7 +254,7 @@ function makeCard(questionList){
 	  <div class="text p-4">
 		  <div class="meta mb-2">
 		  <div><a>${questionList.createdAt}</a></div>
-		  <div><a>${questionList.nickName}</a></div>
+		  <div><a>${questionList.nickname}</a></div>
 		  <div><a class="meta-chat"><span class="fa fa-comment"></span> ${questionList.answerCount}</a></div>
 		</div>
 		<h3 class="heading"><span id="question0">${questionList.title}</span></h3>

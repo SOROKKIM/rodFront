@@ -253,6 +253,7 @@ function getUserMe() {
 
 //질문/답변/댓글 한꺼번에 개별 조회
 function getQuestionDetail() {
+
 	var settings = {
 		"url": "http://localhost:8080/questions/specific/"+localStorage.getItem('currentQuestion'),
 		"method": "GET",
@@ -268,6 +269,7 @@ function getQuestionDetail() {
 		console.log(response.createdAt);
 		console.log(response.difficulty);
 		console.log(response.totalAnswerCount);
+		console.log(response)
 		$('#nickname').empty();
 		$('#nickname').append(response.nickname);
 		$('#createdAt').empty();
@@ -280,6 +282,15 @@ function getQuestionDetail() {
 		$('#content').append(response.content);
 		$('#totalAnswerCount').empty();
 		$('#totalAnswerCount').append(response.totalAnswerCount +' 개의 답변이 있습니다.');
+		
+		$('#tag-box').empty();
+		console.log(response.tagList.hashTags[0])
+		for(let i=0; i<response.tagList.hashTags.length; i++) {
+			let tag = response.tagList.hashTags[i];
+			let tagHtml = addTagHtml(tag);
+			$('#tag-box').append(tagHtml);
+		}
+
 		// $('#answerContent').empty();
 		// $('#answerContent').append(response.answerWithComments[0].content);
 		// $('#getComment').empty();
@@ -290,32 +301,35 @@ function getQuestionDetail() {
 		for (let i = 0; i < response.answerWithComments.length; i++) {
 			console.log('test')
 			let answer = response.answerWithComments[i];
-			console.log("answer" + answer);
-			let tempHtml1 = addAnswerHTML(answer);
+			console.log("answer id" + answer.answerId);
+			let tempHtml1 = addAnswerHTML(answer.answerId, answer.nickname, answer.content, answer.createdAt, answer.likes);
 			console.log(tempHtml1);
 			$('#answer-box').append(tempHtml1);
+			console.log(response.answerWithComments[i].commentResponseDtoList)
 			for (let j = 0; j < response.answerWithComments[i].commentResponseDtoList.length; j++) {
 				console.log('test2')
 				let comment = response.answerWithComments[i].commentResponseDtoList[j];
-				let tempHtml2 = addCommentHTML(comment);
+				let tempHtml2 = addCommentHTML(answer.answerId, comment.commentId, comment.nickName, comment.content, comment.createdAt);
 				console.log(tempHtml2);
-				$('#comment-box').append(tempHtml2);
+				console.log("comment answer id" + answer.answerId);
+				$('#'+answer.answerId+'-comment-box').append(tempHtml2)
 				console.log("comment" + comment);
 			}
-
 		}
 
 	});
 }
 
 
+function addTagHtml(tag) {
+	let tagHtml = makeTagHtml(tag) 
+	$('#tag-box').append(tagHtml);
 
+}
 
-
-
-
-
-
+function makeTagHtml(tag) {
+	return  `<a href="#" class="tag-cloud-link" id="oneTag">${tag}</a>`;
+}
 
 
 //답변 등록
@@ -330,13 +344,13 @@ function answerSummit() {
 		},
 		"data": JSON.stringify({
 			"content": $('#summernote').val(),
-			"difficulty": $('#dificulty').val()
+			"difficulty": parseFloat($('#difficulty').val())
 		}),
 	};
 
 	$.ajax(settings).done(function (response) {
 		console.log(response);
-		// localStorage.setItem('answerId', response('answerWithComments'('answerId'))) //DB같은 역할
+		localStorage.setItem('answerId', response.answerId) ;//DB같은 역할
 		alert("답변등록이 완료되었습니다.")
 		window.location = '/questionDetail.html'
 
@@ -344,9 +358,9 @@ function answerSummit() {
 }
 
 //댓글 등록
-function commentSummit() {
+function commentSummit(answerId) {
 	var settings = {
-		"url": "http://localhost:8080/api/questions/answers/"+localStorage.getItem('answerId')+"/comments",
+		"url": "http://localhost:8080/api/questions/answers/"+answerId+"/comments",
 		"method": "POST",
 		"timeout": 0,
 		"headers": {
@@ -354,13 +368,13 @@ function commentSummit() {
 			"Content-Type": "application/json"
 		},
 		"data": JSON.stringify({
-			"content": $('#comment').val()
+			"content": $('#'+answerId+'-comment').val()
 		}),  
 	};
 
 	$.ajax(settings).done(function (response) {
 		console.log(response);
-			// localStorage.setItem('commentId', response('answerWithComments'('commentResponseDtoList'('commentId')))) //DB같은 역할
+		localStorage.setItem('commentId', response.commentId);//DB같은 역할
 		alert("댓글등록이 완료되었습니다.")
 		window.location = '/questionDetail.html'
 	});
@@ -377,57 +391,82 @@ function commentSummit() {
    */
 
 //답변 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
-function addAnswerHTML(id, nickName, content, createdAt) {
-	let tempHtml1 = makeAnswer(id, nickName, content, createdAt);
-	$('#answer-box').append(tempHtml1);
+function addAnswerHTML(answerId, nickname, content, createdAt, likes) {
+	let tempHtml1 = makeAnswer(answerId, nickname, content, createdAt, likes)
+	return tempHtml1
 }
 
-function makeAnswer(answer) {
-	return `<li class="comment" >
+function makeAnswer(answerId, nickname, content, createdAt, likes) {
+	return `<li class="comment" id="${answerId}">
           <div class="vcard bio">
           <img src="images/person_1.jpg" alt="Image placeholder">
           </div>
           <div class="comment-body">
-          <h3>${answer.nickName}
-            <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-            <a onclick="deleteAnswer()" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+          <h3>${nickname}
+            <a id="${answerId}-edit" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+            <a id="${answerId}-delete" onclick="deleteAnswer(${answerId})" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
           </h3>
-          <div class="meta">${answer.createdAt}
+          <div class="meta">${createdAt}
             
           </div>
-          <p id="answerContent">${answer.content}</p>
+          <p id="answerContent">${content}</p>
           <p><button type="button" class="reply" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Reply</button>
             <div class="comment-group" class="collapse" id="collapseExample">
             <div class="comment-form">
-              <textarea class="form-control1" placeholder=" 댓글을 입력해주세요" id="comment"></textarea>
-              <button type="button" onclick="commentSummit()" class="registerCommentBtn" style="color:black; background-color: #deb887; border: none; font-weight: 400; font-size: 13px; letter-spacing: .05em; padding:2px 10px; border-radius: 4px; float: right; margin-top: 5px;">등록</button>
+              <textarea class="form-control1" placeholder="댓글을 입력해주세요" id="${answerId}-comment"></textarea>
+              <button type="button" onclick="commentSummit(${answerId})" class="registerCommentBtn" style="color:black; background-color: #deb887; border: none; font-weight: 400; font-size: 13px; letter-spacing: .05em; padding:2px 10px; border-radius: 4px; float: right; margin-top: 5px;">등록</button>
             </div>
             </div>
-            <button type="button" onclick="answerIsSelected()" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
-            <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
-          </p>                  
-          </div>`;
+            <button id="${answerId}-isSelected" type="button" onclick="answerIsSelected()" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
+            <button onclick="likeAnswer()" id="like-button" class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-2x fa-heart-o not-liked" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
+          </p>
+		  <ul class="children" id="${answerId}-comment-box">
+        	</ul>`;
 }
 
-function addCommentHTML(id, nickName, content, createdAt) {
-	let tempHtml2 = makeComment(id, nickName, content, createdAt);
-	$('#comment-box').append(tempHtml2);
+var like_button = document.getElementById("like-button");
+if (like_button) {
+    like_button.addEventListener("click", doLikeButton);
 }
 
-function makeComment(comment) {
+function doLikeButton(e) {
+    toggleButton(e.target);
+}
+
+function toggleButton(button) {
+    button.classList.remove('liked-shaked');
+    button.classList.toggle('liked');
+    button.classList.toggle('not-liked');
+    button.classList.toggle('fa-heart-o');
+    button.classList.toggle('fa-heart');
+
+    if(button.classList.contains("liked")) {
+        button.classList.add('liked-shaked');
+    }
+}
+
+
+
+
+function addCommentHTML(answerId, commentId, nickName, content, createdAt) {
+	let tempHtml2 = makeComment(answerId, commentId, nickName, content, createdAt);
+	return tempHtml2
+}
+
+function makeComment(answerId, commentId, nickName, content, createdAt) {
 	return `<li class="comment" >
-          <div class="vcard bio">
-          <img src="images/person_1.jpg" alt="Image placeholder">
-          </div>
-          <div class="comment-body">
-          <h3>${comment.nickName}
-            <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-            <a onclick="deleteComment()" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
-          </h3>
-          <div class="meta">${comment.createdAt}</div>
-          <p>${comment.content}</p>
-          </div>
-        </li>`;
+				<div class="vcard bio">
+				<img src="images/person_1.jpg" alt="Image placeholder">
+				</div>
+				<div class="comment-body">
+				<h3>${nickName}
+					<a id="${commentId}-edit" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+					<a id="${commentId}-delete" onclick="deleteComment(${answerId}, ${commentId})" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+				</h3>
+				<div class="meta">${createdAt}</div>
+				<p id="${answerId}-comment">${content}</p>
+				</div>
+        	</li>`;
 }
 
 //질문 삭제
@@ -450,9 +489,9 @@ function deleteQuestion() {
 
 
 //답변 삭제
-function deleteAnswer() {
+function deleteAnswer(answerId) {
 	var settings = {
-		"url": "http://localhost:8080/api/answers/"+localStorage.getItem('answerId'),
+		"url": "http://localhost:8080/api/answers/"+answerId,
 		"method": "DELETE",
 		"timeout": 0,
 		"headers": {
@@ -468,9 +507,9 @@ function deleteAnswer() {
 }
 
 //댓글 삭제
-function deleteComment() {
+function deleteComment(answerId, commentId) {
 	var settings = {
-		"url": "http://localhost:8080/api/questions/answers/"+localStorage.getItem('answerId')+"/comments/"+localStorage.getItem('commentId'),
+		"url": "http://localhost:8080/api/questions/answers/"+answerId+"/comments/"+commentId,
 		"method": "DELETE",
 		"timeout": 0,
 		"headers": {
@@ -485,6 +524,23 @@ function deleteComment() {
 	  });
 }
 
+
+//답변 좋아요
+function likeAnswer() {
+	var settings = {
+		"url": "http://localhost:8080/api/likes/answer/"+localStorage.getItem('answerId'),
+		"method": "POST",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+		},
+	  };
+	  
+	  $.ajax(settings).done(function (response) {
+		console.log(response);
+		localStorage.setItem('answerId', response.answerId);//DB같은 역할
+	  });
+}
 
 
 //답변 채택
@@ -515,7 +571,7 @@ function deleteComment() {
 // }
 
 // function makeAnswerIsSelected(isSelected) {
-// 	return `<h5 class="checkAnswer" id="questionIsSelected-true"><i class="fa fa-check-circle-o" aria-hidden="true" style="color:#deb887; font-weight: bold;"> 질문자 채택</i></h5>
+// 	return 
 // 	<div class="usermeta" id="username">
 // 	  <a>${isSelected.nickName}</a>
 // 	  <div class="meta">${isSelected.createdAt}
@@ -535,5 +591,5 @@ function deleteComment() {
 // 	<div class="likeReply">
 // 	  <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
 // 	  <button class="nav-icon-btn comment" type="button" style="border: none; color: #deb887;" ><span class="fa fa-commenting-o" style="font-size:16px; font-weight: 650;"> ${isSelected.answerCount}</span></button>
-// 	</div>`;
+// 	</div>`;}
 // }

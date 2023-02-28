@@ -48,8 +48,8 @@
       $.ajax(settings).done(function (response) {
         console.log(response);
         alert("질문등록이 완료되었습니다.")
+        localStorage.setItem("currentQuestion", response.questionId); // response에서 questionId 가져와서 저장
         window.location = '/questionDetail.html'
-        window.localStorage.setItem(id, value)
       });
     }
 

@@ -6539,7 +6539,7 @@ button.bg-dark:focus {
 
 .mt-5 {
   margin-bottom: 3rem !important; 
-  border-bottom: 1px solid burlywood;
+  /* border-bottom: 1px solid burlywood; */
   padding-bottom: 3rem !important;
 }
 
@@ -9651,10 +9651,12 @@ textarea.form-control {
   padding: 0;
   margin: 0; }
   .comment-list .children {
-    padding: 50px 0 0 40px;
-    margin: 0;
+    padding: 40px 20px  40px;
+    margin-top: 20px;
     float: left;
-    width: 100%; }
+    width: 100%; 
+    background-color: white;
+  }
   .comment-list li {
     padding: 0;
     margin: 0 0 30px 0;
@@ -10218,8 +10220,24 @@ textarea.form-control {
   
 }
 
+.fa-heart:before {
+  content: "\f004";
+}
 
+#like-button:hover {
+  cursor: pointer;
+  color: #cd0928;
+}
 
+#like-button.not-liked {
+  color: #000;
+}
 
+#like-button.not-liked:hover {
+  color: #cd0928;
+}
 
+#like-button.liked {
+  color: #cd0928;
+}
 

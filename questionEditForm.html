@@ -27,7 +27,7 @@
     <script>
         function questionEditSummit() {
             var settings = {
-                "url": "http://localhost:8080/questions/4",
+                "url": "http://localhost:8080/questions/"+localStorage.getItem('currentQuestion'),
                 "method": "PUT",
                 "timeout": 0,
                 "headers": {
@@ -46,6 +46,7 @@
 
             $.ajax(settings).done(function (response) {
                 console.log(response);
+                localStorage.setItem('currentQuestion',questionId)
                 alert("질문수정이 완료되었습니다.")
                 window.location = '/questionDetail.html'
             });

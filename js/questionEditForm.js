@@ -231,7 +231,7 @@ function questionEditSummit() {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
-        // localStorage.setItem('currentQuestion',questionId)
+        localStorage.setItem('currentQuestion',questionId)
         alert("질문수정이 완료되었습니다.")
         window.location = '/questionDetail.html'
     });
