@@ -322,4 +322,3 @@ function goDetail(questionId)
 	  </div>
 	</div>
   </div> */}
-
