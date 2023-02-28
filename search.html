@@ -22,31 +22,6 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script>
-        function getSearchList() {
-            var data = {
-                "title": $("#title").val(),
-                "nickname": $("#nickname").val(),
-                "tagname": $("#tagname").val()
-            };
-            var settings = {
-            "url": "http://localhost:8080/questions/search",
-            "method": "GET",
-            "timeout": 0,
-            "data": data,
-            "dataType": "json",
-            "headers": {
-                "Authorization": localStorage.getItem('accessToken'),
-            },
-            };
-
-            $.ajax(settings).done(function (response) {
-            console.log(response);
-            window.location = '/search.html'
-            });
-        }
-
-    </script>
 
 
   </head>
@@ -85,7 +60,7 @@
         <div class="wrap11">
           <div class="wrap1">
             <div class="search1">
-                <input type="text" name="title, nickname, tagname" class="searchTerm1" placeholder="Search">
+                <input type="text" name="title" class="searchTerm1" placeholder="Search">
                 <button type="submit" class="searchButton1" onclick="getSearchList()">
                 <i class="fa fa-search"></i>
                 </button>
