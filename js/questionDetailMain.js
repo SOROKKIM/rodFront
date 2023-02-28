@@ -6,8 +6,10 @@
 	// getAnswerCount();
 	getQuestionDetail();
 
-	$('#questionIsSelected').hide();
-	// $('#questionIsSelected-true').show();
+	// $('#questionIsSelected').hide();
+	$('#questionIsSelected').show();
+
+
 	"use strict";
 
 
@@ -280,9 +282,7 @@ function getQuestionDetail() {
 		$('#title').append(response.title);
 		$('#content').empty();
 		$('#content').append(response.content);
-		$('#totalAnswerCount').empty();
-		$('#totalAnswerCount').append(response.totalAnswerCount +' 개의 답변이 있습니다.');
-		
+
 		$('#tag-box').empty();
 		console.log(response.tagList.hashTags[0])
 		for(let i=0; i<response.tagList.hashTags.length; i++) {
@@ -290,6 +290,17 @@ function getQuestionDetail() {
 			let tagHtml = addTagHtml(tag);
 			$('#tag-box').append(tagHtml);
 		}
+
+		
+		
+
+		$('#totalAnswerCount').empty();
+		$('#totalAnswerCount').append(response.totalAnswerCount +' 개의 답변이 있습니다.');
+		
+		$('#isSelected-box').empty();
+		console.log(response.answerWithComments[0].selected)
+		
+
 
 		// $('#answerContent').empty();
 		// $('#answerContent').append(response.answerWithComments[0].content);
@@ -306,6 +317,15 @@ function getQuestionDetail() {
 			console.log(tempHtml1);
 			$('#answer-box').append(tempHtml1);
 			console.log(response.answerWithComments[i].commentResponseDtoList)
+
+
+			if(answer.selected === true) {
+				let tempHtml = addAnswerIsSelectedHTML(answer.answerId, answer.nickname, answer.content, answer.createdAt, answer.likes);
+				console.log(tempHtml)
+				$('#isSelected-box').append(tempHtml);
+			}
+
+
 			for (let j = 0; j < response.answerWithComments[i].commentResponseDtoList.length; j++) {
 				console.log('test2')
 				let comment = response.answerWithComments[i].commentResponseDtoList[j];
@@ -417,7 +437,7 @@ function makeAnswer(answerId, nickname, content, createdAt, likes) {
               <button type="button" onclick="commentSummit(${answerId})" class="registerCommentBtn" style="color:black; background-color: #deb887; border: none; font-weight: 400; font-size: 13px; letter-spacing: .05em; padding:2px 10px; border-radius: 4px; float: right; margin-top: 5px;">등록</button>
             </div>
             </div>
-            <button id="${answerId}-isSelected" type="button" onclick="answerIsSelected()" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
+            <button id="${answerId}-isSelected" type="button" onclick="answerIsSelected(${answerId})" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
             <button onclick="likeAnswer()" id="like-button" class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-2x fa-heart-o not-liked" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
           </p>
 		  <ul class="children" id="${answerId}-comment-box">
@@ -544,52 +564,48 @@ function likeAnswer() {
 
 
 //답변 채택
-// function answerIsSelected() {
-// 	var settings = {
-// 		"url": "http://localhost:8080/questions/"+localStorage.getItem('currentQuestion')+"/"+localStorage.getItem('answerId'),
-// 		"method": "PATCH",
-// 		"timeout": 0,
-// 		"headers": {
-// 			"Authorization": localStorage.getItem('accessToken'),
-// 		},
-// 	  };
+function answerIsSelected(answerId) {
+	var settings = {
+		"url": "http://localhost:8080/questions/"+localStorage.getItem('currentQuestion')+"/"+answerId,
+		"method": "PATCH",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+		},
+	  };
 	  
-// 	  $.ajax(settings).done(function (response) {
-// 		console.log(response);
-// 		alert("답변 채택이 완료되었습니다.");
-// 		// let isSelected = response;
-// 		// let tempHtml = addAnswerIsSelectedHTML(isSelected);
-// 		// $('questionIsSelected').append(tempHtml);
-// 		// $('#questionIsSelected-true').show();
-// 		window.location = '/questionDetail.html'
-// 	  });
-// }
+	  $.ajax(settings).done(function (response) {
+		console.log(response);
+		alert("답변 채택이 완료되었습니다.");
+		window.location = '/questionDetail.html'
+	  });
+}
 
-// function addAnswerIsSelectedHTML(id, nickName, content, createdAt, answerCount) {
-// 	let tempHtml = makeAnswerIsSelected(id, nickName, content, createdAt, answerCount);
-// 	$('#questionIsSelected').append(tempHtml);
-// }
+function addAnswerIsSelectedHTML(answerId, nickname, content, createdAt, likes) {
+	let tempHtml = makeAnswerIsSelected(answerId, nickname, content, createdAt, likes);
+	return tempHtml
+}
 
-// function makeAnswerIsSelected(isSelected) {
-// 	return 
-// 	<div class="usermeta" id="username">
-// 	  <a>${isSelected.nickName}</a>
-// 	  <div class="meta">${isSelected.createdAt}
-// 	  <div class="w3-dropdown-hover w3-right">
-// 		<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-
-// 		  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-// 		  <a href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
-// 		</div>
-// 	  </div>
-// 	</div>
-// 	</div>
-// 	<div class="questionContent">
-// 	  <img src="images/error_1.png" alt="Image placeholder">
-// 	  <p>${isSelected.content}</p>
-// 	</div>
-// 	<div class="likeReply">
-// 	  <button class="nav-icon-btn like" type="button" style="border: none; color: #deb887;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> 11</button>
-// 	  <button class="nav-icon-btn comment" type="button" style="border: none; color: #deb887;" ><span class="fa fa-commenting-o" style="font-size:16px; font-weight: 650;"> ${isSelected.answerCount}</span></button>
-// 	</div>`;}
-// }
+function makeAnswerIsSelected(answerId, nickname, content, createdAt, likes) {
+	return `<div id="questionIsSelected" class="mt-5">
+				<h5 class="checkAnswer"><i class="fa fa-check-circle-o" aria-hidden="true" style="color:#deb887; font-weight: bold;"> 질문자 채택 답변</i></h5>
+				<div class="usermeta" id="username">
+				<a>${nickname}</a>
+				<div class="meta">${createdAt}
+				<div class="w3-dropdown-hover w3-right">
+					<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+					<a id="${answerId}-edit" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+					<a id="${answerId}-delete" onclick="deleteAnswer(${answerId})" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+					</div>
+				</div>
+				</div>
+				</div>
+				<div class="questionContent">
+				
+				<p>${content}</p>
+				</div>
+				<div class="likeReply">
+				<button class="nav-icon-btn like" type="button" style="border: none; color: #deb887;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
+				</div>
+			</div>`;
+}

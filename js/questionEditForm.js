@@ -225,7 +225,7 @@ function questionEditSummit() {
         "data": JSON.stringify({
             "title": $('#title').val(),
             "content": $('#summernote').val(),
-            "hashtagStrs": $('#hashTag').val()
+            "hashtagStrs": $('#hashTag2').val()
         }),
     };
 
@@ -234,6 +234,7 @@ function questionEditSummit() {
         localStorage.setItem('currentQuestion',questionId)
         alert("질문수정이 완료되었습니다.")
         window.location = '/questionDetail.html'
+        
     });
 }
 
