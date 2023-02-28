@@ -234,8 +234,15 @@ function questionEditSummit() {
         localStorage.setItem('currentQuestion',questionId)
         alert("질문수정이 완료되었습니다.")
         window.location = '/questionDetail.html'
-    });
-}
+    }).fail(function(response){
+		console.log(response.status)
+		if(response.status === 500){
+		  alert('질문을 수정할 권한이 없습니다.')
+		}else{
+		  alert('서버에 문제가 발생하였습니다.')
+		}
+	  });
+	  }
 
 
 

@@ -213,39 +213,75 @@ function getUserMe() {
 	});
 }
 
-//질문 전체 목록 페이지
-function getAllQuestionList(){
-	var settings = {
-	"url": "http://localhost:8080/questions/all",
-	"method": "GET",
-	"timeout": 0,
-	"headers": {
-	  "Authorization": 
-	  localStorage.getItem('accessToken')
-	},
-	};
-	
-	$.ajax(settings).done(function (response) {
-	console.log(response);
-	// $('#title').empty();
-	// $('#title').append(response.title);
 
 
-	for(let i=0; i<response.data.length; i++){
-	  let questionList = response.data[i];
-	  let tempHtml = addAnswerHTML(questionList);
-	  $('#cards').append(tempHtml);
-	}
-	});
-	
-	}
+
+// ----------------------------------------------------------------------------------------------------------------------
+
+// 현재 페이지
+let currentPage = 1;
+
+// 페이지 버튼 클릭 시 이벤트 핸들러
+$('.page-btn').on('click', function() {
+  currentPage = parseInt($(this).data('page'));
+  getAllQuestionList(currentPage, 6);
+});
+
+// 페이지 목록 생성 함수
+function createPageButtons(totalPages) {
+  let html = '';
+  for (let i = 1; i <= totalPages; i++) {
+    html += '<button class="page-btn" data-page="' + i + '">' + i + '</button>';
+  }
+  $('#page-buttons').html(html);
+}
+
+// 페이지 목록 초기화
+function resetPageButtons() {
+  $('#page-buttons').empty();
+}
+
+// 모든 질문 목록 불러오기 함수
+function getAllQuestionList(page, size) {
+  let settings = {
+    "url": "http://localhost:8080/questions/all?page=" + page + "&size=" + size,
+    "method": "GET",
+    "timeout": 0,
+    "headers": {
+      "Authorization": localStorage.getItem('accessToken')
+    },
+  };
+
+  $.ajax(settings).done(function(response) {
+    console.log(response);
+
+    $('#cards').empty();
+
+    for (let i = 0; i < response.data.length; i++) {
+      let questionList = response.data[i];
+      let tempHtml = addAnswerHTML(questionList);
+      $('#cards').append(tempHtml);
+    }
+
+    // 페이지 버튼 업데이트
+    resetPageButtons();
+    createPageButtons(response.totalPages);
+    $('.page-btn[data-page="' + currentPage + '"]').addClass('active');
+  });
+}
+
+// 초기 페이지 로드 시 첫 번째 페이지의 질문 목록 불러오기
+getAllQuestionList(1, 6);
+
+// ----------------------------------------------------------------------------------------------------------------------
+
 
 	function addAnswerHTML(nickname, title, createdAt, answerCount) {
 		let tempHtml = makeCard(nickname, title, createdAt, answerCount);
 		$('#cards').append(tempHtml);
 	  }
 
-function makeCard(questionList){
+	function makeCard(questionList){
 
 	return`
 	<div class="blog-entry align-self-stretch">

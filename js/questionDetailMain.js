@@ -484,8 +484,16 @@ function deleteQuestion() {
 		console.log(response);
 		alert("질문 삭제가 완료되었습니다.");
 		window.location = '/questions.html'
+		
+	}).fail(function(response){
+		console.log(response.status)
+		if(response.status === 500){
+		  alert('질문을 삭제할 권한이 없습니다.')
+		}else{
+		  alert('서버에 문제가 발생하였습니다.')
+		}
 	  });
-}
+	  }
 
 
 //답변 삭제
@@ -503,8 +511,15 @@ function deleteAnswer(answerId) {
 		console.log(response);
 		alert("답변 삭제가 완료되었습니다.")
 		window.location = '/questionDetail.html'
-	});
-}
+	}).fail(function(response){
+		console.log(response.status)
+		if(response.status === 500){
+		  alert('답변을 삭제할 권한이 없습니다.')
+		}else{
+		  alert('서버에 문제가 발생하였습니다.')
+		}
+	  });
+	  }
 
 //댓글 삭제
 function deleteComment(answerId, commentId) {
@@ -521,8 +536,15 @@ function deleteComment(answerId, commentId) {
 		console.log(response);
 		alert("댓글 삭제가 완료되었습니다.");
 		window.location = '/questionDetail.html'
+	  }).fail(function(response){
+		console.log(response.status)
+		if(response.status === 500){
+		  alert('댓글을 삭제할 권한이 없습니다.')
+		}else{
+		  alert('서버에 문제가 발생하였습니다.')
+		}
 	  });
-}
+	  }
 
 
 //답변 좋아요
