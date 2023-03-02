@@ -218,7 +218,7 @@ function resetPageButtons() {
 }
 
 
-function search(){
+function search() {
 
 var searchTerm = document.querySelector('.searchTerm1').value;
 console.log(searchTerm);

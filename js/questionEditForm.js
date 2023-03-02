@@ -209,6 +209,7 @@ function getUserMe() {
     });
 }
 
+
 //질문 수정 완료
 function questionEditSummit() {
     var settings = {
@@ -238,6 +239,7 @@ function questionEditSummit() {
             console.log(response.status)
             if(response.status === 500){
             alert('질문을 수정할 권한이 없습니다.')
+            window.location = '/questionDetail.html'
             }else{
             alert('서버에 문제가 발생하였습니다.')
             }

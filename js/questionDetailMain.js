@@ -423,13 +423,17 @@ function makeAnswer(answerId, nickname, content, createdAt, likes) {
           </div>
           <div class="comment-body">
           <h3>${nickname}
-            <a id="${answerId}-edit" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-            <a id="${answerId}-delete" onclick="deleteAnswer(${answerId})" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+		  	<a id="${answerId}-submit" onclick="submitEditAnswer(${answerId})" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px; display: none"><i class="fa fa-pencil-square-o" aria-hidden="true "> 수정완료</i></a>
+            <a id="${answerId}-edit" onclick="editAnswer(${answerId})" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+            <a id="${answerId}-delete" onclick="deleteAnswer(${answerId})" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
           </h3>
           <div class="meta">${createdAt}
             
           </div>
-          <p id="answerContent">${content}</p>
+          <p id="${answerId}-answerContent" class="text">${content}</p>
+		  <div id="${answerId}-editarea" class="edit">
+                <textarea id="${answerId}-answertextarea" class="form-control1" name="" cols="70" rows="10" style="display: none" placeholder="수정할 답변을 입력해주세요"></textarea>
+        	</div>
           <p><button type="button" class="reply" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Reply</button>
             <div class="comment-group" class="collapse" id="collapseExample">
             <div class="comment-form">
@@ -438,32 +442,14 @@ function makeAnswer(answerId, nickname, content, createdAt, likes) {
             </div>
             </div>
             <button id="${answerId}-isSelected" type="button" onclick="answerIsSelected(${answerId})" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
-            <button onclick="likeAnswer(${answerId})" id="like-button" class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-2x fa-heart-o not-liked" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
+            <button onclick="likeAnswer(${answerId})" id="like-button" class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
           </p>
 		  <ul class="children" id="${answerId}-comment-box">
         	</ul>`;
 }
 
-var like_button = document.getElementById("like-button");
-if (like_button) {
-    like_button.addEventListener("click", doLikeButton);
-}
 
-function doLikeButton(e) {
-    toggleButton(e.target);
-}
 
-function toggleButton(button) {
-    button.classList.remove('liked-shaked');
-    button.classList.toggle('liked');
-    button.classList.toggle('not-liked');
-    button.classList.toggle('fa-heart-o');
-    button.classList.toggle('fa-heart');
-
-    if(button.classList.contains("liked")) {
-        button.classList.add('liked-shaked');
-    }
-}
 
 
 
@@ -480,11 +466,15 @@ function makeComment(answerId, commentId, nickName, content, createdAt) {
 				</div>
 				<div class="comment-body">
 				<h3>${nickName}
-					<a id="${commentId}-edit" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-					<a id="${commentId}-delete" onclick="deleteComment(${answerId}, ${commentId})" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
+					<a id="${commentId}-commentSubmit" onclick="submitEditComment(${answerId}, ${commentId})"  class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px; display: none"><i class="fa fa-pencil-square-o" aria-hidden="true "> 수정완료</i></a>
+					<a id="${commentId}-commentEdit" onclick="editComment(${answerId}, ${commentId})" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right; margin-left: 4px"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
+            		<a id="${commentId}-commentDelete" onclick="deleteComment(${answerId}, ${commentId})" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px; float:right;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
 				</h3>
 				<div class="meta">${createdAt}</div>
-				<p id="${answerId}-comment">${content}</p>
+				<p id="${answerId}-comment" class="text">${content}</p>
+				<div id="${commentId}-editarea" class="edit">
+                <textarea id="${commentId}-commenttextarea" class="form-control1" name="" cols="70" rows="10" style="display: none" placeholder="수정할 댓글을 입력해주세요"></textarea>
+        		</div>
 				</div>
         	</li>`;
 }
@@ -569,6 +559,7 @@ function deleteComment(answerId, commentId) {
 
 //답변 좋아요
 function likeAnswer(answerId) {
+
 	var settings = {
 		"url": "http://localhost:8080/api/likes/answer/"+answerId,
 		"method": "POST",
@@ -582,6 +573,7 @@ function likeAnswer(answerId) {
 		console.log(response);
 		localStorage.setItem('answerId', response.answerId);//DB같은 역할
 		window.location.reload();
+
 	  });
 }
 
@@ -617,8 +609,6 @@ function makeAnswerIsSelected(answerId, nickname, content, createdAt, likes) {
 				<div class="meta">${createdAt}
 				<div class="w3-dropdown-hover w3-right">
 					<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-					<a id="${answerId}-edit" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 수정</i></a>
-					<a id="${answerId}-delete" onclick="deleteAnswer(${answerId})" href="#" class="w3-bar-item w3-button" style="color: gray; padding: 4px; font-size: 14px;"><i class="fa fa-trash-o" aria-hidden="true"> 삭제</i></a>
 					</div>
 				</div>
 				</div>
@@ -631,4 +621,100 @@ function makeAnswerIsSelected(answerId, nickname, content, createdAt, likes) {
 				<button class="nav-icon-btn like" type="button" style="border: none; color: #deb887;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
 				</div>
 			</div>`;
+}
+
+
+//답변 수정 -> 수정 버튼을 누르면 기존 작성 내용을 수정 textarea에 넘겨줌
+function editAnswer(answerId) {
+	showAnswerEdits(answerId);
+	let contents = $('#'+answerId+'-answerContent').text().trim();
+	$('#'+answerId+'-answertextarea').val(contents);
+
+}
+
+function showAnswerEdits(answerId) {
+	$('#'+answerId+'-answertextarea').show();
+	$('#'+answerId+'-submit').show();
+
+	$('#'+answerId+'-answerContent').show();
+	$('#'+answerId+'-edit').hide();
+	$('#'+answerId+'-delete').hide();
+}
+
+//답변 내용 수정
+function submitEditAnswer(answerId) {
+	var settings = {
+		"url": "http://localhost:8080/api/answers/"+answerId,
+		"method": "PUT",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+		  	"Content-Type": "application/json"
+		},
+		"data": JSON.stringify({
+		  "content": $('#'+answerId+'-answertextarea').val()
+		}),
+	  };
+	  
+	  $.ajax(settings).done(function (response) {
+		alert("답변 수정이 완료되었습니다.")
+		window.location = '/questionDetail.html'
+		}).fail(function(response){
+		console.log(response.status)
+		if(response.status === 500){
+		  alert('답변을 수정할 권한이 없습니다.')
+		  window.location.reload();
+		}else{
+		  alert('서버에 문제가 발생하였습니다.')
+		}
+	  });
+}
+
+
+
+
+//댓글 수정 -> 수정 버튼을 누르면 기존 작성 내용을 수정 textarea에 넘겨줌
+function editComment(answerId, commentId) {
+	showCommentEdits(answerId, commentId);
+	let contents = $('#'+answerId+'-comment').text().trim();
+	$('#'+commentId+'-commenttextarea').val(contents);
+}
+
+function showCommentEdits(answerId, commentId) {
+	$('#'+commentId+'-commenttextarea').show();
+	$('#'+commentId+'-commentSubmit').show();
+
+	$('#'+answerId+'-comment').show();
+
+	$('#'+commentId+'-commentEdit').hide();
+	$('#'+commentId+'-commentDelete').hide();
+}
+
+//댓글 내용 수정
+function submitEditComment(answerId, commentId) {
+	var settings = {
+		"url": "http://localhost:8080/api/questions/answers/"+answerId+"/comments/"+commentId,
+		"method": "PUT",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken'),
+		  	"Content-Type": "application/json"
+		},
+		"data": JSON.stringify({
+		  "content": $('#'+commentId+'-commenttextarea').val()
+		}),
+	  };
+	  
+	  $.ajax(settings).done(function (response) {
+		alert("댓글 수정이 완료되었습니다.")
+		window.location = '/questionDetail.html'
+		}).fail(function(response){
+		console.log(response.status)
+		if(response.status === 500){
+		  alert('댓글을 수정할 권한이 없습니다.')
+		  window.location.reload();
+		}else{
+		  alert('서버에 문제가 발생하였습니다.')
+		}
+	  });
 }
