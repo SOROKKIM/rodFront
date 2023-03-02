@@ -689,120 +689,49 @@
                             <div class="col-12">
                                 <div class="bg-light rounded h-100 p-4">
                                     <h6 class="mb-4">답변 내역</h6>
-                                    <div class="table-responsive">
-                                        <table class="table">
+                                    <br></br>
+                                    <div class="table-responsive" >
+                                        <table class="table" >
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">답변 내용</th>
+                                                    <!-- <th scope="col">#</th> -->
                                                     <th scope="col"> </th>
+                                                    <th scope="col"></th>
                                                     <th scope="col"></th>
                                                     <th scope="col"> </th>
                                                     <th scope="col"> </th>
                                                     <th scope="col"></th>
+                                                <tbody>
+                                                        <ul>
+                                                            <ol id="Answers">
+                                                            </ol>
+                                                        </ul>
+                                                </tbody>
                                                 </tr>
                                             </thead>
+                            
+                            
+                            
+                            <div class="col-12">
+                                <div class="bg-light rounded h-100 p-4" >
+                             
+                                   
+                                    <div class="table-responsive" >
+                                       
+                                        <table class="table" id="questions" >
+                                           
+                                            <thead>
+                             
+                                            </thead>
+
                                             <tbody>
-                                                <a href="#">
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td><span id="answerList0"></span></td>
-                            
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td><span id="answerList1"></span></td>
-                            
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </a>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td><span id="answerList2"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td><span id="answerList3"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">5</th>
-                                                    <td><span id="answerList4"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">6</th>
-                                                    <td><span id="answerList0"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">7</th>
-                                                    <td><span id="answerList0"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">8</th>
-                                                    <td><span id="answerList0"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">9</th>
-                                                    <td><span id="answerList0"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">10</th>
-                                                    <td><span id="answerList0"></span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
+                      
+                                             
+
                                             </tbody>
+                                    
                                         </table>
                                     </div>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                     <!-- Table End -->
@@ -816,16 +745,16 @@
               <div class="block-27">
                 <ul>
       
-                  <button class="page-btn" data-page="1" onclick="getAllQuestionList(1, 6)">1</button>
-                  <button class="page-btn" data-page="2" onclick="getAllQuestionList(2, 6)">2</button>
-                  <button class="page-btn" data-page="3" onclick="getAllQuestionList(3, 6)">3</button>
-                  <button class="page-btn" data-page="4" onclick="getAllQuestionList(4, 6)">4</button>
-                  <button class="page-btn" data-page="5" onclick="getAllQuestionList(5, 6)">5</button>
-                  <button class="page-btn" data-page="5" onclick="getAllQuestionList(6, 6)">6</button>
-                  <button class="page-btn" data-page="5" onclick="getAllQuestionList(7, 6)">7</button>
-                  <button class="page-btn" data-page="5" onclick="getAllQuestionList(8, 6)">8</button>
-                  <button class="page-btn" data-page="5" onclick="getAllQuestionList(9, 6)">9</button>
-                  <button class="page-btn" data-page="5" onclick="getAllQuestionList(10, 6)">10</button>
+                  <button class="page-btn" data-page="1" onclick="getMyAnswerList(1, 6)">1</button>
+                  <button class="page-btn" data-page="2" onclick="getMyAnswerList(2, 6)">2</button>
+                  <button class="page-btn" data-page="3" onclick="getMyAnswerList(3, 6)">3</button>
+                  <button class="page-btn" data-page="4" onclick="getMyAnswerList(4, 6)">4</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(5, 6)">5</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(6, 6)">6</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(7, 6)">7</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(8, 6)">8</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(9, 6)">9</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(10, 6)">10</button>
                 
                 </ul>
               </div>

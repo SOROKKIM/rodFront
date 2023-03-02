@@ -213,17 +213,14 @@ function getUserMe() {
 }
 
 
-
-
 // ----------------------------------------------------------------------------------------------------------------------
-
 // 현재 페이지
 let currentPage = 1;
 
 // 페이지 버튼 클릭 시 이벤트 핸들러
 $('.page-btn').on('click', function() {
   currentPage = parseInt($(this).data('page'));
-  getAllQuestionList(currentPage, 6);
+  search(currentPage, 6);
 });
 
 // 페이지 목록 생성 함수
@@ -240,49 +237,35 @@ function resetPageButtons() {
   $('#page-buttons').empty();
 }
 
-
-function search(){
-
-var searchTerm = document.querySelector('.searchTerm1').value;
-console.log(searchTerm);
-alert("검색어 검색 성공");
-
-var settings = {
-	"url": "http://localhost:8080/questions/search?title="+searchTerm,
-	"method": "GET",
-	"timeout": 0,
-	"headers": {
+function search() {
+	window.location.href = "search.html";
+	var searchTerm = document.querySelector('.searchTerm1').value;
+	console.log(searchTerm);
+	
+	var settings = {
+	  "url": "http://localhost:8080/questions/search?title="+searchTerm,
+	  "method": "GET",
+	  "timeout": 0,
+	  "headers": {
 		"Authorization": localStorage.getItem('accessToken')
-    },
-  };
+	  },
+	};
+  
+	// $.ajax() 함수를 사용하여 검색 결과를 가져옴
+	$.ajax(settings).done(function(response) {
+	  console.log(response);
+  
+	  // 검색 결과를 이용하여 카드 생성
+	  for (let i = 0; i < response.data.length; i++) {
+		let questionList = response.data[i];
+		let tempHtml = addAnswerHTML(questionList);
+		$('#card').append(tempHtml);
+	  }
+	});
 
 
-
-  $.ajax(settings).done(function(response) {
-    console.log(response);
-	$('#card').empty();
-
-
-    for (let i = 0; i < response.data.length; i++) {
-      let questionList = response.data[i];
-      let tempHtml = addAnswerHTML(questionList);
-      $('#card').append(tempHtml);
-    }
-
-    // 페이지 버튼 업데이트
-    resetPageButtons();
-    createPageButtons(response.totalPages);
-    $('.page-btn[data-page="' + currentPage + '"]').addClass('active');
-  });
-
-
-  window.location = "/search.html"
-}
-
-// 초기 페이지 로드 시 첫 번째 페이지의 질문 목록 불러오기
-// search(1, 6);
-
-
+	
+  }
 
 	function addAnswerHTML(nickname, title, createdAt, answerCount) {
 		let tempHtml = makeCard(nickname, title, createdAt, answerCount);

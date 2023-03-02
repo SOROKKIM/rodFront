@@ -1,7 +1,7 @@
 (function ($) {
     getUserMe();
     getMyInfo();
-    getMyAnswerList();
+    getMyAnswerList(1, 10);
     "use strict";
 
     // Spinner
@@ -209,21 +209,21 @@
 })(jQuery);
 
 
+// ------------------------------------------------------------------
+// 현재 페이지
+let currentPage = 1;
 
-
-
-
-
-
-
-
+// 페이지 버튼 클릭 시 이벤트 핸들러
+$('.page-btn').on('click', function() {
+  currentPage = parseInt($(this).data('page'));
+  getMyAnswerList(currentPage, 6);
+});
 
 
 // 내 답변 목록 
-function getMyAnswerList(){
+function getMyAnswerList(page, size){
     var settings = {
         "url": "http://localhost:8080/api/answers?page=" + page + "&size=" + size,
-        "method": "GET",
         "timeout": 0,
         "headers": {
             "Authorization": localStorage.getItem('accessToken')
@@ -231,90 +231,43 @@ function getMyAnswerList(){
       };
       
       $.ajax(settings).done(function (response) {
-        console.log(response);
+		console.log(response);
+        $('#Answers').empty();
+
+
         for(let i=0; i<response.length; i++){
-            let answerDto0 = response[0];
-            let answerDto1 = response[1];
-            let answerDto2 = response[2];
-            let answerDto3 = response[3];
-            let answerDto4 = response[4];
-            let answerDto5 = response[5];
-            let answerDto6 = response[6];
-            let answerDto7 = response[7];
-            let answerDto8 = response[8];
-            let answerDto9 = response[9];
-          
-            console.log(answerDto0);
-            $('#answerList0').append(answerDto0.content);
-            $('#answerList1').append(answerDto1.content);
-            $('#answerList2').append(answerDto2.content);
-         
-            $('#answerList3').append(answerDto3.content);
-       
-            $('#answerList4').append(answerDto4.content);
-   
-            $('#answerList5').append(answerDto5.content);
-        
-            $('#answerList6').append(answerDto6.content);
-         
-            $('#answerList7').append(answerDto7.content);
-            $('#answerList8').append(answerDto8.content);
-            $('#answerList9').append(answerDto9.content);
-    
+            let answerDto = response[i];
+            let tempHtml = addAnswerHTML(answerDto);
+            console.log(tempHtml);
+            $('#Answers').append(tempHtml);
         }
-      });
-    }
 
-    // 내 답변 목록 
-function getMyAnswerList(){
-    var settings = {
-        "url": "http://localhost:8080/api/answers",
-        "method": "GET",
-        "timeout": 0,
-        "headers": {
-            "Authorization": localStorage.getItem('accessToken')
-        },
-      };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-        for(let i=0; i<response.length; i++){
-            let answerDto0 = response[0];
-            let answerDto1 = response[1];
-            let answerDto2 = response[2];
-            let answerDto3 = response[3];
-            let answerDto4 = response[4];
-            let answerDto5 = response[5];
-            let answerDto6 = response[6];
-            let answerDto7 = response[7];
-            let answerDto8 = response[8];
-            let answerDto9 = response[9];
-          
-            console.log(answerDto0);
-            $('#answerList0').append(answerDto0.content);
-            $('#answerList1').append(answerDto1.content);
-            $('#answerList2').append(answerDto2.content);
-         
-            $('#answerList3').append(answerDto3.content);
-       
-            $('#answerList4').append(answerDto4.content);
-   
-            $('#answerList5').append(answerDto5.content);
-        
-            $('#answerList6').append(answerDto6.content);
-         
-            $('#answerList7').append(answerDto7.content);
-            $('#answerList8').append(answerDto8.content);
-            $('#answerList9').append(answerDto9.content);
-    
-        }
-      });
-    }
+        // resetPageButtons();
+        createPageButtons(response.totalPages);
+      $('.page-btn[data-page="' + currentPage + '"]').addClass('active');
+	  });
+}
 
+getMyAnswerList(1, 6);
 
+function addAnswerHTML(answerDto) {
+    let tempHtml = makeAnswer(answerDto);
+    $('#Answers').append(tempHtml);
+  }
 
-
-
+function makeAnswer(answerDto){
+        return`
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <span>${answerDto.content}</span>
+            </div>
+            <div>
+                <span class="badge bg-secondary">좋아요 ${answerDto.likes} </span>
+                <span class="badge bg-dark">댓글 ${answerDto.commentCount} </span>
+            </div>
+        </li>`
+}
+// ------------------------------------------------------------------
 
 
 
