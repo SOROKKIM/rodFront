@@ -242,22 +242,39 @@ function getUserMe() {
 // 	});
 // }
 
+//------------------------------------------------------------------------------------------------
 
+// 현재 페이지
+let currentPage = 1;
 
+// 페이지 버튼 클릭 시 이벤트 핸들러
+$('.page-btn').on('click', function() {
+	currentPage = parseInt($(this).data('page'));
+	getQuestionDetail(currentPage, 5);
+  });
+  
+// 페이지 목록 생성 함수
+function createPageButtons(totalPages) {
+	let html = '';
+	for (let i = 1; i <= totalPages; i++) {
+	  html += '<button class="page-btn" data-page="' + i + '">' + i + '</button>';
+	}
+	$('#page-buttons').html(html);
+  }
 
-
-
-
-
-
+// 페이지 목록 초기화
+function resetPageButtons() {
+	$('#page-buttons').empty();
+  }
 
 
 
 //질문/답변/댓글 한꺼번에 개별 조회
-function getQuestionDetail() {
+function getQuestionDetail(page, size) {
 
 	var settings = {
-		"url": "http://localhost:8080/questions/specific/"+localStorage.getItem('currentQuestion'),
+		"url": 
+		"http://localhost:8080/questions/specific/"+localStorage.getItem('currentQuestion') + "?page=" + page + "&size=" + size,
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
@@ -266,6 +283,9 @@ function getQuestionDetail() {
 	};
 
 	$.ajax(settings).done(function (response) {
+
+		$('#answer-box').empty();
+
 		console.log(response)
 		console.log(response.title);
 		console.log(response.createdAt);
@@ -282,8 +302,9 @@ function getQuestionDetail() {
 		$('#title').append(response.title);
 		$('#content').empty();
 		$('#content').append(response.content);
-
 		$('#tag-box').empty();
+
+
 		console.log(response.tagList.hashTags[0])
 		for(let i=0; i<response.tagList.hashTags.length; i++) {
 			let tag = response.tagList.hashTags[i];
@@ -341,6 +362,10 @@ function getQuestionDetail() {
 }
 
 
+getQuestionDetail(1, 5);
+
+
+//------------------------------------------------------------------------------------------------
 function addTagHtml(tag) {
 	let tagHtml = makeTagHtml(tag) 
 	$('#tag-box').append(tagHtml);
@@ -350,6 +375,19 @@ function addTagHtml(tag) {
 function makeTagHtml(tag) {
 	return  `<a href="#" class="tag-cloud-link" id="oneTag">${tag}</a>`;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //답변 등록

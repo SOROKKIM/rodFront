@@ -209,40 +209,6 @@
 
 
 
-// function getMyInfo(){
-//     var settings = {
-//         "url": "http://localhost:8080/users/mypage",
-//         "method": "GET",
-//         "timeout": 0,
-//         "headers": {
-//           "Authorization": localStorage.getItem('accessToken')
-//         },
-//       };
-      
-//       $.ajax(settings).done(function (response) {
-//         console.log(response);
-//         $('#myName').empty();
-//         $('#myName').append(response.username)
-//         $('#mynickname').empty();
-//         $('#mynickname').append(response.nickname)
-//         console.log(response.nickname)
-//         $('#mypoint').empty();
-//         $('#mypoint').append(response.point)
-//         $('#myphoneNumber').empty();
-//         $('#myphoneNumber').append(response.phoneNumber)
-//         $('#mygrade').empty();
-//         $('#mygrade').append(response.grade)
-//         $('#myrating').empty();
-//         $('#myrating').append(response.rating)
-//         $('#mypassword').empty();
-//         $('#mypassword').append(response.password)
-//         $('#gitHubAddress').empty();
-//         $('#gitHubAddress').append(response.githubAddress)
-//         $('#myIntroduce').empty();
-//         $('#myIntroduce').append(response.introduce)
-//       });
-//     }
-
 function getUserMe(){
 	var settings = {
 
@@ -267,6 +233,130 @@ function getUserMe(){
 
 
 
+<<<<<<< HEAD
+=======
+//--------------------------------------------------------------
+// index.html 페이지때 자동 실행 
+function editProfile(){
+    var settings = {
+        "url": "http://localhost:8080/users/mypage",
+        "method": "PATCH",
+        "timeout": 0,
+        "headers": {
+          "Authorization": localStorage.getItem('accessToken'),
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+          "nickname": $('#editNickname1').val(),
+          "phoneNumber": $('#editPhoneNumber').val(),
+          "githubAddress": $('#editGithubAddress').val(),
+          "introduce": $('#editIntroduce').val()
+        }),
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        $('#profiles').empty();
+
+        let editprofileList = response;
+        let tempHtml = addEditProfileHTML(editprofileList);
+        $('#profiles').append(tempHtml);
+      });
+}
+
+function addEditProfileHTML(editprofileList) {
+    let tempHtml = makeEditProfile(editprofileList);
+    $('#profiles').append(tempHtml);
+  }
+
+function makeEditProfile(editprofileList){
+return`
+<tr>
+<th scope="row">아이디</th>
+<td><span>${editprofileList.username}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">닉네임</th>
+<td><span"><input class="form-control" type="text" id="editNickname1" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">깃 허브 주소</th>
+<td><span"><input class="form-control" type="text" id="editGithubAddress" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">핸드폰 번호</th>
+<td><span"><input class="form-control" type="text" id="editPhoneNumber" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+
+<th scope="row">레이팅</th>
+<td><span>${editprofileList.rating}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">등급</th>
+<td><span>${editprofileList.grade}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row">포인트</th>
+<td><span>${editprofileList.point}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">자기소개</th>
+<td><span"><input class="form-control" type="text" id="editIntroduce" placeholder="${editprofileList.introduce}" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>`
+}
+
+
+
+
+
+
+>>>>>>> c7b76f326c80055e6222ca65821df93689e6e1d2
 
 
 
@@ -404,6 +494,7 @@ function addEditProfileHTML(editprofileList) {
     $('#profiles').append(tempHtml);
   }
 
+
 function makeEditProfile(editprofileList){
 return`
 <tr>
@@ -486,6 +577,7 @@ return`
 </tr>`
 }
 
+<<<<<<< HEAD
 
 
 
@@ -627,3 +719,5 @@ function editSuccess(){
 	
 
 // }
+=======
+>>>>>>> c7b76f326c80055e6222ca65821df93689e6e1d2
