@@ -324,7 +324,7 @@ function goDetail(questionId)
   </div> */}
 
 
-function goSearch() {
+function goSearch(searchTerm) {
 	// localStorage.setItem('searchTerm', searchTerm)
 	window.location.href = '/search.html?searchTerm='+searchTerm
 }

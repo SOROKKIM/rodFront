@@ -267,127 +267,6 @@ function getUserMe(){
 
 
 
-//--------------------------------------------------------------
-// index.html 페이지때 자동 실행 
-function editProfile(){
-    var settings = {
-        "url": "http://localhost:8080/users/mypage",
-        "method": "PATCH",
-        "timeout": 0,
-        "headers": {
-          "Authorization": localStorage.getItem('accessToken'),
-          "Content-Type": "application/json"
-        },
-        "data": JSON.stringify({
-          "nickname": $('#editNickname1').val(),
-          "phoneNumber": $('#editPhoneNumber').val(),
-          "githubAddress": $('#editGithubAddress').val(),
-          "introduce": $('#editIntroduce').val()
-        }),
-      };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-        $('#profiles').empty();
-
-        let editprofileList = response;
-        let tempHtml = addEditProfileHTML(editprofileList);
-        $('#profiles').append(tempHtml);
-      });
-}
-
-function addEditProfileHTML(editprofileList) {
-    let tempHtml = makeEditProfile(editprofileList);
-    $('#profiles').append(tempHtml);
-  }
-
-function makeEditProfile(editprofileList){
-return`
-<tr>
-<th scope="row">아이디</th>
-<td><span>${editprofileList.username}</span></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<th scope="row">닉네임</th>
-<td><span"><input class="form-control" type="text" id="editNickname1" placeholder="${editprofileList.nickname}" ></span></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<th scope="row">깃 허브 주소</th>
-<td><span"><input class="form-control" type="text" id="editGithubAddress" placeholder="${editprofileList.githubAddress}" ></span></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<th scope="row">핸드폰 번호</th>
-<td><span"><input class="form-control" type="text" id="editPhoneNumber" placeholder="${editprofileList.phoneNumber}" ></span></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-
-<th scope="row">레이팅</th>
-<td><span>${editprofileList.rating}</span></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<th scope="row">등급</th>
-<td><span>${editprofileList.grade}</span></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<th scope="row">포인트</th>
-<td><span>${editprofileList.point}</span></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<th scope="row">자기소개</th>
-<td><span"><input class="form-control" type="text" id="editIntroduce" placeholder="${editprofileList.introduce}" ></span></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>`
-}
-
-
-
-
-
-
 
 
 
@@ -406,6 +285,7 @@ function getMyInfo(){
       
       $.ajax(settings).done(function (response) {
         console.log(response);
+        console.log(response.nickname);
 
         let profileList = response;
         let tempHtml = addAnswerHTML(profileList);
@@ -433,7 +313,7 @@ function getMyInfo(){
 </tr>
 <tr>
     <th scope="row">닉네임</th>
-    <td><span">${profileList.nickname}</span></td>
+    <td><span id="user_nickname">${profileList.nickname}</span></td>
     <td></td>
     <td></td>
     <td></td>
@@ -497,58 +377,38 @@ function getMyInfo(){
 }
 
 
-
-//---------------------------------------------------------------------------------------------
-// 완료 눌렀을때 실행 
-function editSuccess(){
-    // let contents = $('#editPhoneNumber').text().trim();
-	// $('#editPhoneNumber').val(contents);
-    
+//--------------------------------------------------------------
+// 수정 눌렀을때 실행 
+function editProfile(){
     var settings = {
         "url": "http://localhost:8080/users/mypage",
-        "method": "PATCH",
+        "method": "GET",
         "timeout": 0,
         "headers": {
-          "Authorization": localStorage.getItem('accessToken'),
-          "Content-Type": "application/json"
+          "Authorization": localStorage.getItem('accessToken')
         },
-        "data": JSON.stringify({
-          "nickname": $('#editNickname').val(),
-          "phoneNumber": $('#editPhoneNumber').val(),
-          "githubAddress": $('#editGithubAddress').val(),
-          "introduce": $('#editIntroduce').val()
-        }),
       };
       
       $.ajax(settings).done(function (response) {
         console.log(response);
         $('#profiles').empty();
-
+        
         let editprofileList = response;
         let tempHtml = addEditProfileHTML(editprofileList);
         $('#profiles').append(tempHtml);
-
-        
-
       });
-
-      window.location.reload();
 }
 
 function addEditProfileHTML(editprofileList) {
-   
-    
     let tempHtml = makeEditProfile(editprofileList);
     $('#profiles').append(tempHtml);
   }
 
 function makeEditProfile(editprofileList){
-
- return`
+return`
 <tr>
 <th scope="row">아이디</th>
 <td><span>${editprofileList.username}</span></td>
-<input class="form-control" type="text" placeholder="Default input" >
 <td></td>
 <td></td>
 <td></td>
@@ -557,9 +417,9 @@ function makeEditProfile(editprofileList){
 </tr>
 
 <tr>
-<th scope="row">닉네임</th>
-<td><span"><input class="form-control" type="text" id="editNickname" ></span></td>
-<td></td>
+// <th scope="row">닉네임</th>
+// <td><span>${editprofileList.nickname}<input class="form-control" type="text" id="editNickname" placeholder="수정할 닉네임을 입력해주세요"></span></td>
+// <td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -568,7 +428,7 @@ function makeEditProfile(editprofileList){
 
 <tr>
 <th scope="row">깃 허브 주소</th>
-<td><span"><input class="form-control" type="text" id="editGithubAddress" ></span></td>
+<td><span>${editprofileList.githubAddress}<input class="form-control" type="text" id="editGithubAddress" placeholder="수정할 깃허브 주소를 입력해주세요" ></span></td>
 <td></td>
 <td></td>
 <td></td>
@@ -578,7 +438,7 @@ function makeEditProfile(editprofileList){
 
 <tr>
 <th scope="row">핸드폰 번호</th>
-<td><span"><input class="form-control" type="text" id="editPhoneNumber" placeholder=''></textarea></span></td>
+<td><span>${editprofileList.phoneNumber}<input class="form-control" type="text" id="editPhoneNumber" placeholder="수정할 번호를 입력해주세요" ></span></td>
 <td></td>
 <td></td>
 <td></td>
@@ -605,7 +465,6 @@ function makeEditProfile(editprofileList){
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <th scope="row">포인트</th>
 <td><span>${editprofileList.point}</span></td>
@@ -618,7 +477,7 @@ function makeEditProfile(editprofileList){
 
 <tr>
 <th scope="row">자기소개</th>
-<td><span"><textarea class="form-control" type="text" id="editIntroduce"></textarea></span></td>
+<td><span>${editprofileList.introduce}<textarea class="form-control" type="text" id="editIntroduce" placeholder="수정할 자기소개 내용을 입력해주세요" ></textarea></span></td>
 <td></td>
 <td></td>
 <td></td>
@@ -628,9 +487,143 @@ function makeEditProfile(editprofileList){
 }
 
 
+
+
+
+
+
+//---------------------------------------------------------------------------------------------
+// 완료 눌렀을때 실행 
+function editSuccess(){
+    
+    
+    var settings = {
+        "url": "http://localhost:8080/users/mypage",
+        "method": "PATCH",
+        "timeout": 0,
+        "headers": {
+          "Authorization": localStorage.getItem('accessToken'),
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+          "nickname": $('#editNickname').val(),
+          "phoneNumber": $('#editPhoneNumber').val(),
+          "githubAddress": $('#editGithubAddress').val(),
+          "introduce": $('#editIntroduce').val()
+        }),
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        // $('#profiles').empty();
+
+        // let editprofileList = response;
+        // let tempHtml = addEditProfileHTML(editprofileList);
+        // $('#profiles').append(tempHtml);
+
+        
+
+      });
+
+      window.location.reload();
+}
+
+// function addEditProfileHTML(editprofileList) {
    
-function editAnswer(answerId) {
-	showAnswerEdits(answerId);
+    
+//     let tempHtml = makeEditProfile1(editprofileList);
+//     $('#profiles').append(tempHtml);
+//   }
+
+// function makeEditProfile1(editprofileList){
+
+//  return`
+// <tr>
+// <th scope="row">아이디</th>
+// <td><span>${editprofileList.username}</span></td>
+// <input class="form-control" type="text" placeholder="Default input" >
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// </tr>
+
+// <tr>
+// <th scope="row">닉네임</th>
+// <td><span"><input class="form-control" type="text" id="editNickname" ></span></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// </tr>
+
+// <tr>
+// <th scope="row">깃 허브 주소</th>
+// <td><span"><input class="form-control" type="text" id="editGithubAddress" ></span></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// </tr>
+
+// <tr>
+// <th scope="row">핸드폰 번호</th>
+// <td><span"><input class="form-control" type="text" id="editPhoneNumber" placeholder=''></textarea></span></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// </tr>
+// <tr>
+
+// <th scope="row">레이팅</th>
+// <td><span>${editprofileList.rating}</span></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// </tr>
+
+// <tr>
+// <th scope="row">등급</th>
+// <td><span>${editprofileList.grade}</span></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// </tr>
+
+// <tr>
+// <th scope="row">포인트</th>
+// <td><span>${editprofileList.point}</span></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// </tr>
+
+// <tr>
+// <th scope="row">자기소개</th>
+// <td><span"><textarea class="form-control" type="text" id="editIntroduce"></textarea></span></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// <td></td>
+// </tr>`
+// }
+
+
+   
+// function editAnswer(answerId) {
+// 	showAnswerEdits(answerId);
 	
 
-}
+// }
