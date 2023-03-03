@@ -17,12 +17,14 @@
     <!-- <p class="forgot-pass">Forgot password?</p> -->
     <button type="button" class="submit" onclick="signIn()">Sign In</button>
     <button type="button" class="fb-btn">Connect with <span>Kakao</span></button>
+    <button type="button" class="fb-btn" >Connect with <span style="color: #4285f4;">GOOGLE</span></button>
+    <button type="button" class="fb-btn">Connect with <span style="color: #18ce5f;">NAVER</span></button>
   </div>
   <div class="sub-cont">
     <div class="img">
       <div class="img__text m--up">
         <h2>첫 발걸음 이십니까?</h2>
-        <p>개발자국에 가입 후 수많은 개발자들과 만나보세요!</p>
+        <p>개발자국에 가입 후 <br> 수많은 개발자들과 만나보세요!</p>
       </div>
       <div class="img__text m--in">
         <h2>개발자국의<br> 국민이십니까?</h2>
@@ -55,6 +57,7 @@
 
       <button type="button" class="submit" onclick="signUp()">Sign Up</button>
       <button type="button" class="fb-btn">Join with <span>Kakao</span></button>
+      <button type="button" class="fb-btn">Join with <span style="color: #4285f4;">GOOGLE</span></button>
     </div>
   </div>
 </div>
@@ -108,7 +111,7 @@ button {
   width: 640px;
   height: 100%;
   transition: transform 1.2s ease-in-out;
-  padding: 50px 30px 0;
+  padding: 30px 30px 0;
 }
 
 .sub-cont {
@@ -289,6 +292,7 @@ input {
 .fb-btn {
   border: 2px solid #a67c7c;
   color: #a67c7c;
+  margin-top: 20px;
 }
 .fb-btn span {
   font-weight: bold;
