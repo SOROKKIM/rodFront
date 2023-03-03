@@ -9,7 +9,7 @@
 	// $('#questionIsSelected').hide();
 	$('#questionIsSelected').show();
 
-
+	// getLikeStatus();
 	"use strict";
 
 
@@ -442,7 +442,7 @@ function makeAnswer(answerId, nickname, content, createdAt, likes) {
             </div>
             </div>
             <button id="${answerId}-isSelected" type="button" onclick="answerIsSelected(${answerId})" class="reply" style="border: none; background-color:#deb887; float:right;">채택하기</button>
-            <button onclick="likeAnswer(${answerId})" id="like-button" class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
+            <button onclick="likeAnswer(${answerId})" id="${answerId}-like-button" class="nav-icon-btn like" type="button" style="border: none; color: #deb887; float:right;" ><span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> ${likes}</button>
           </p>
 		  <ul class="children" id="${answerId}-comment-box">
         	</ul>`;
@@ -559,7 +559,7 @@ function deleteComment(answerId, commentId) {
 
 //답변 좋아요
 function likeAnswer(answerId) {
-
+	var likeButton = $(`#`+answerId+'-like-button');
 	var settings = {
 		"url": "http://localhost:8080/api/likes/answer/"+answerId,
 		"method": "POST",
@@ -573,9 +573,47 @@ function likeAnswer(answerId) {
 		console.log(response);
 		localStorage.setItem('answerId', response.answerId);//DB같은 역할
 		window.location.reload();
-
-	  });
+		// var likes = parseInt(likeButton.text().match(/\d+/)[0]); // 좋아요 개수 가져오기
+		// if (likeButton.hasClass('liked')) { // 이미 좋아요를 누른 경우
+		// likeButton.removeClass('liked');
+		// likeButton.html(`<span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> ${response.likes-1}`);
+		// } else { // 좋아요를 누르지 않은 경우
+		// likeButton.addClass('liked');
+		// likeButton.html(`<span class="fa fa-heart" style="font-size: 16px; font-weight: 650;"></span> ${response.likes+1}`);
+		// }
+  });
 }
+// function getLikeStatus(answerId) {
+// 	var likeButton = $(`#`+answerId+'-like-button');
+// 	var settings = {
+// 	  "url": "http://localhost:8080/api/likes/answer/"+answerId,
+// 	  "method": "GET",
+// 	  "timeout": 0,
+// 	  "headers": {
+// 		"Authorization": localStorage.getItem('accessToken'),
+// 	  },
+// 	};
+	
+// 	$.ajax(settings).done(function (response) {
+// 	  console.log(response);
+// 	  if (response.isLiked) { // 좋아요를 누른 경우
+// 		likeButton.addClass('liked');
+// 		likeButton.html(`<span class="fa fa-heart" style="font-size: 16px; font-weight: 650;"></span> ${response.likes}`);
+// 	  } else { // 좋아요를 누르지 않은 경우
+// 		likeButton.removeClass('liked');
+// 		likeButton.html(`<span class="fa fa-heart-o" style="font-size: 16px; font-weight: 650;"></span> ${response.likes}`);
+// 	  }
+// 	});
+//   }
+  
+//   $(document).ready(function() {
+// 	// 각 답변의 좋아요 상태를 가져와서 표시
+// 	$('.comment').each(function() {
+// 	  var answerId = $(this).attr('id');
+// 	  getLikeStatus(answerId);
+// 	});
+//   });
+
 
 
 //답변 채택

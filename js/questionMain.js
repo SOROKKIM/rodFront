@@ -216,7 +216,7 @@ function getUserMe() {
 
 
 
-// ----------------------------------------------------------------------------------------------------------------------
+// // ----------------------------------------------------------------------------------------------------------------------
 
 // 현재 페이지
 let currentPage = 1;
@@ -322,3 +322,9 @@ function goDetail(questionId)
 	  </div>
 	</div>
   </div> */}
+
+
+function goSearch() {
+	// localStorage.setItem('searchTerm', searchTerm)
+	window.location.href = '/search.html?searchTerm='+searchTerm
+}

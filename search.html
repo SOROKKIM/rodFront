@@ -1,117 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Republic Of Development</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<head>
+  <title>Republic Of Development</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="css/animate.css">
+
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+
+
+  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+  <link rel="stylesheet" href="css/flaticon.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
     
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    // function search() {
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- 
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    //   var searchTerm = document.querySelector('.searchTerm1').value;
+    //   console.log(searchTerm);
+    //   alert("검색어 검색 성공");
 
-
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/style.css">
+    //   var settings = {
+    //     "url": "http://localhost:8080/questions/search?title=" + searchTerm,
+    //     "method": "GET",
+    //     "timeout": 0,
+    //     "headers": {
+    //       "Authorization": localStorage.getItem('accessToken')
+    //     },
+    //   };
 
 
 
-  </head>
-  <body>
+    //   $.ajax(settings).done(function (response) {
+    //     console.log(response);
+    //     $('#card').empty();
 
-    <div class="wrap">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 d-flex align-items-center">
-						<p class="mb-0 phone pl-md-2">
-              <a href="profile/index.html">
-								<i class="fa fa-user-circle-o" aria-hidden="true" ></i> 
-								<span id="loginUser"></a></span>					
-              </p>
-					</div>
-					<div class="col-md-6 d-flex justify-content-md-end">
-						<div class="social-media">
-              <p class="mb-0 d-flex">
-                <a href="login.html" class="d-flex align-items-center justify-content-center"><span
-                    class="fa fa-sign-in"><i class="sr-only">SignIn/SignUp</i></span></a>
-                <a href="https://github.com/" class="d-flex align-items-center justify-content-center"><span
-                    class="fa fa-github"><i class="sr-only">Github</i></span></a>
-                <!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a> -->
-                <a href="#" class="d-flex align-items-center justify-content-center"><span
-                    class="fa fa-sign-out"><i class="sr-only">SignOut</i></span></a>
-              </p>
-            </div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	    	<a class="navbar-brand" href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>개발자국</a>
-			  <a>Republic Of Development</a>
+    //     for (let i = 0; i < response.data.length; i++) {
+    //       let questionList = response.data[i];
+    //       let tempHtml = addAnswerHTML(questionList);
+    //       $('#card').append(tempHtml);
+    //     }
 
-            <div class="wrap11">
-              <div class="wrap1">
-                  <div class="search1">
-                      <input type="text" class="searchTerm1" placeholder="Search">
-                      <button  class="searchButton1" onclick="search()">
-                          <i class="fa fa-search"></i>
-                      </button>
-                  </div>
-              </div>
-           </div>
+    //     // window.location = "/search.html"
+
+    //     // 페이지 버튼 업데이트
+    //     resetPageButtons();
+    //     createPageButtons(response.totalPages);
+    //     $('.page-btn[data-page="' + currentPage + '"]').addClass('active');
+    //   });
+    // }
+
+    // // // 초기 페이지 로드 시 첫 번째 페이지의 질문 목록 불러오기
+    // // // search(1, 6);
 
 
 
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="fa fa-bars"></span> Menu
-	      </button>
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-				  <li class="nav-item active"><a href="questions.html" class="nav-link">Questions</a></li>
-				<!-- <li class="nav-item"><a href="index.html" class="nav-link">Answers</a></li> -->
-				  <li class="nav-item"><a href="shop.html" class="nav-link">Shop</a></li>
-	        	<!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    // function addAnswerHTML(nickname, title, createdAt, answerCount) {
+    //   let tempHtml = makeCard(nickname, title, createdAt, answerCount);
+    //   $('#card').append(tempHtml);
+    // }
+
+    // function makeCard(questionList) {
+
+    //   return `
+    //         <div class="blog-entry align-self-stretch">
+    //           <a onclick="goDetail(${questionList.questionId})" class="block-20 rounded" style="background-image: url('images/question_11.png');">
+    //           </a>
+    //           <div class="text p-4">
+    //             <div class="meta mb-2">
+    //             <div><a>${questionList.createdAt}</a></div>
+    //             <div><a>${questionList.nickname}</a></div>
+    //             <div><a class="meta-chat"><span class="fa fa-comment"></span> ${questionList.answerCount}</a></div>
+    //           </div>
+    //           <h3 class="heading"><span id="question0">${questionList.title}</span></h3>
+    //           </div>
+    //         </div>`
+    // }
+  </script>
+
+
+</head>
+
+<body>
+
+  <div class="wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 d-flex align-items-center">
+          <p class="mb-0 phone pl-md-2">
+            <a href="profile/index.html">
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+              <span id="loginUser"></a></span>
+          </p>
+        </div>
+        <div class="col-md-6 d-flex justify-content-md-end">
+          <div class="social-media">
+            <p class="mb-0 d-flex">
+              <a href="login.html" class="d-flex align-items-center justify-content-center"><span
+                  class="fa fa-sign-in"><i class="sr-only">SignIn/SignUp</i></span></a>
+              <a href="https://github.com/" class="d-flex align-items-center justify-content-center"><span
+                  class="fa fa-github"><i class="sr-only">Github</i></span></a>
+              <!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a> -->
+              <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-sign-out"><i
+                    class="sr-only">SignOut</i></span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>개발자국</a>
+      <a>Republic Of Development</a>
+
+      <div class="wrap11">
+        <div class="wrap1">
+          <div class="search1">
+            <input type="text" class="searchTerm1" placeholder="Search">
+            <button class="searchButton1" onclick="search()">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span> Menu
+      </button>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item active"><a href="questions.html" class="nav-link">Questions</a></li>
+          <!-- <li class="nav-item"><a href="index.html" class="nav-link">Answers</a></li> -->
+          <li class="nav-item"><a href="shop.html" class="nav-link">Shop</a></li>
+          <!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="vet.html" class="nav-link">Veterinarian</a></li>
 	        	<li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
 	          <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> -->
-	          <!-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-    <!-- END nav -->
-    <section class="hero-wrap hero-wrap-2" style="background-color: rgb(236, 222, 200);" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-end">
-          <div class="col-md-9 ftco-animate pb-5">
-            <h1 class="mb-0 bread">검색 결과</h1>
-          </div>
+          <!-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+  <section class="hero-wrap hero-wrap-2" style="background-color: rgb(236, 222, 200);"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-end">
+        <div class="col-md-9 ftco-animate pb-5">
+          <h1 class="mb-0 bread">검색 결과</h1>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="ftco-section bg-light">
-      <div class="container">
-          
+  <section class="ftco-section bg-light">
+    <div class="container">
 
 
-          <!-- 카드(질문 목록) -->
-        <div class="row d-flex" id="card">
-          
-          <!-- <div class="col-md-4 d-flex ftco-animate">
+
+      <!-- 카드(질문 목록) -->
+      <div class="row d-flex" id="card">
+
+        <!-- <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
               <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/question_11.png');">
               </a>
@@ -141,8 +211,8 @@
             </div>
           </div> -->
 
-          
-           <!-- <div class="col-md-4 d-flex ftco-animate">
+
+        <!-- <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
               <a href="questionDetail.html" class="block-20 rounded" style="background-image: url('images/error_1.png');">
               </a>
@@ -177,50 +247,51 @@
 
           </div> -->
 
-          
-        </div>
-
-
-         <!-- 페이징 넘버 -->
-        <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <button class="page-btn" data-page="1" onclick="getAllQuestionList(1, 6)">1</button>
-                <button class="page-btn" data-page="2" onclick="getAllQuestionList(2, 6)">2</button>
-                <button class="page-btn" data-page="3" onclick="getAllQuestionList(3, 6)">3</button>
-                <button class="page-btn" data-page="4" onclick="getAllQuestionList(4, 6)">4</button>
-                <button class="page-btn" data-page="5" onclick="getAllQuestionList(5, 6)">5</button>
-                <button class="page-btn" data-page="5" onclick="getAllQuestionList(6, 6)">6</button>
-                <button class="page-btn" data-page="5" onclick="getAllQuestionList(7, 6)">7</button>
-                <button class="page-btn" data-page="5" onclick="getAllQuestionList(8, 6)">8</button>
-                <button class="page-btn" data-page="5" onclick="getAllQuestionList(9, 6)">9</button>
-                <button class="page-btn" data-page="5" onclick="getAllQuestionList(10, 6)">10</button>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-
 
       </div>
-    </section>
 
-    <footer class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-						<h2 class="footer-heading">개발자국</h2>
-						<p>Republic Of Development</p>
-						<ul class="ftco-footer-social p-0">
-              <!-- <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
-              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li> -->
-              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-github" aria-hidden="true"></span></a></li>
+
+      <!-- 페이징 넘버 -->
+      <div class="row mt-5">
+        <div class="col text-center">
+          <div class="block-27">
+            <ul>
+              <li><a href="#">&lt;</a></li>
+              <button class="page-btn" data-page="1" onclick="getAllQuestionList(1, 6)">1</button>
+              <button class="page-btn" data-page="2" onclick="getAllQuestionList(2, 6)">2</button>
+              <button class="page-btn" data-page="3" onclick="getAllQuestionList(3, 6)">3</button>
+              <button class="page-btn" data-page="4" onclick="getAllQuestionList(4, 6)">4</button>
+              <button class="page-btn" data-page="5" onclick="getAllQuestionList(5, 6)">5</button>
+              <button class="page-btn" data-page="5" onclick="getAllQuestionList(6, 6)">6</button>
+              <button class="page-btn" data-page="5" onclick="getAllQuestionList(7, 6)">7</button>
+              <button class="page-btn" data-page="5" onclick="getAllQuestionList(8, 6)">8</button>
+              <button class="page-btn" data-page="5" onclick="getAllQuestionList(9, 6)">9</button>
+              <button class="page-btn" data-page="5" onclick="getAllQuestionList(10, 6)">10</button>
+              <li><a href="#">&gt;</a></li>
             </ul>
-					</div>
-					<!-- <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+          <h2 class="footer-heading">개발자국</h2>
+          <p>Republic Of Development</p>
+          <ul class="ftco-footer-social p-0">
+            <!-- <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li> -->
+            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span
+                  class="fa fa-github" aria-hidden="true"></span></a></li>
+          </ul>
+        </div>
+        <!-- <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
 						<h2 class="footer-heading">Latest News</h2>
 						<div class="block-21 mb-4 d-flex">
               <a class="img mr-4 rounded" style="background-image: url(images/image_1.jpg);"></a>
@@ -245,18 +316,18 @@
               </div>
             </div>
 					</div> -->
-					<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
-						<h2 class="footer-heading">Quick Links</h2>
-						<ul class="list-unstyled">
-              <li><a href="index.html" class="py-2 d-block">Home</a></li>
-              <li><a href="questions.html" class="py-2 d-block">Questions</a></li>
-              <li><a href="shop.html" class="py-2 d-block">Shop</a></li>
-              <!-- <li><a href="#" class="py-2 d-block">Works</a></li>
+        <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+          <h2 class="footer-heading">Quick Links</h2>
+          <ul class="list-unstyled">
+            <li><a href="index.html" class="py-2 d-block">Home</a></li>
+            <li><a href="questions.html" class="py-2 d-block">Questions</a></li>
+            <li><a href="shop.html" class="py-2 d-block">Shop</a></li>
+            <!-- <li><a href="#" class="py-2 d-block">Works</a></li>
               <li><a href="#" class="py-2 d-block">Blog</a></li>
               <li><a href="#" class="py-2 d-block">Contact</a></li> -->
-            </ul>
-					</div>
-					<!-- <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+          </ul>
+        </div>
+        <!-- <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
 						<h2 class="footer-heading">Have a Questions?</h2>
 						<div class="block-23 mb-3">
               <ul>
@@ -266,25 +337,32 @@
               </ul>
             </div>
 					</div> -->
-				</div>
-				<div class="row mt-5">
-          <div class="col-md-12 text-center">
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-12 text-center">
 
-            <p class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-          </div>
+          <p class="copyright">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with
+            <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+              target="_blank">Colorlib.com</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
         </div>
-			</div>
-		</footer>
+      </div>
+    </div>
+  </footer>
 
-    
-  
+
+
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" />
+    </svg></div>
 
 
   <script src="js/jquery.min.js"></script>
@@ -300,31 +378,33 @@
   <script src="js/owl.carousel.min.js"></script>
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  <script src="js/questionMain.js"></script>
+  <!-- <script src="js/questionMain.js"></script>  -->
+  <script src="js/main.js"></script>
   <script src="js/questionSearch.js"></script>
-  <!-- <script src="js/main.js"></script> -->
+
 
   <style>
     button {
-  border:  solid papayawhip;
-  border-radius: 6px;
-  outline: none;
-  background: none;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  cursor: pointer;
-  color: papayawhip;
-  position: relative;
-  
-}
-    #submit {
-  margin-top: 0px;
-  margin-bottom: 20px;
-  background: burlywood;
-  text-transform: uppercase;
-  
-}
-  </style>
-    
-  </body>
-</html>
+      border: solid papayawhip;
+      border-radius: 6px;
+      outline: none;
+      background: none;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      cursor: pointer;
+      color: papayawhip;
+      position: relative;
 
+    }
+
+    #submit {
+      margin-top: 0px;
+      margin-bottom: 20px;
+      background: burlywood;
+      text-transform: uppercase;
+
+    }
+  </style>
+
+</body>
+
+</html>

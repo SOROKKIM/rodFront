@@ -2,6 +2,7 @@
 
 (function ($) {
 
+	search();
 	"use strict";
 
 
@@ -218,27 +219,32 @@ function resetPageButtons() {
 }
 
 
-function search() {
+function search(searchTerm) {
+	// window.location.href = "/search.html?searchTerm=" + searchTerm;
 
-var searchTerm = document.querySelector('.searchTerm1').value;
-console.log(searchTerm);
-alert("검색어 검색 성공");
+	var searchTerm = document.querySelector('.searchTerm1').value;
+	var url = "/search.html?searchTerm=" + searchTerm;
 
-var settings = {
-	"url": "http://localhost:8080/questions/search?title="+searchTerm,
-	"method": "GET",
-	"timeout": 0,
-	"headers": {
-		"Authorization": localStorage.getItem('accessToken')
-    },
-  };
+	console.log(searchTerm);
+	alert("검색어 검색 성공");
+	localStorage.setItem('searchTerm', searchTerm)
+	// location.href = url;
+
+	var settings = {
+		"url": "http://localhost:8080/questions/search?title="+searchTerm,
+		"method": "GET",
+		"timeout": 0,
+		"headers": {
+			"Authorization": localStorage.getItem('accessToken')
+		},
+	};
 
 
 
   $.ajax(settings).done(function(response) {
     console.log(response);
+	console.log(response);
 	$('#card').empty();
-
 
     for (let i = 0; i < response.data.length; i++) {
       let questionList = response.data[i];
@@ -246,7 +252,7 @@ var settings = {
       $('#card').append(tempHtml);
     }
 
-	window.location = "/search.html"
+	
 
     // 페이지 버튼 업데이트
     resetPageButtons();
@@ -282,4 +288,6 @@ var settings = {
 	</div>`
   }
 
+
+  
   // ----------------------------------------------------------------------------------------------------------------------

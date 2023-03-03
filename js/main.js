@@ -213,80 +213,82 @@ function getUserMe() {
 }
 
 
-// ----------------------------------------------------------------------------------------------------------------------
-// 현재 페이지
-let currentPage = 1;
 
-// 페이지 버튼 클릭 시 이벤트 핸들러
-$('.page-btn').on('click', function() {
-  currentPage = parseInt($(this).data('page'));
-  search(currentPage, 6);
-});
 
-// 페이지 목록 생성 함수
-function createPageButtons(totalPages) {
-  let html = '';
-  for (let i = 1; i <= totalPages; i++) {
-    html += '<button class="page-btn" data-page="' + i + '">' + i + '</button>';
-  }
-  $('#page-buttons').html(html);
-}
+// // ----------------------------------------------------------------------------------------------------------------------
+// // 현재 페이지
+// let currentPage = 1;
 
-// 페이지 목록 초기화
-function resetPageButtons() {
-  $('#page-buttons').empty();
-}
+// // 페이지 버튼 클릭 시 이벤트 핸들러
+// $('.page-btn').on('click', function() {
+//   currentPage = parseInt($(this).data('page'));
+//   search(currentPage, 6);
+// });
 
-function search() {
-	window.location.href = "search.html";
-	var searchTerm = document.querySelector('.searchTerm1').value;
-	console.log(searchTerm);
+// // 페이지 목록 생성 함수
+// function createPageButtons(totalPages) {
+//   let html = '';
+//   for (let i = 1; i <= totalPages; i++) {
+//     html += '<button class="page-btn" data-page="' + i + '">' + i + '</button>';
+//   }
+//   $('#page-buttons').html(html);
+// }
+
+// // 페이지 목록 초기화
+// function resetPageButtons() {
+//   $('#page-buttons').empty();
+// }
+
+// function search() {
+// 	window.location = "/search.html";
+// 	var searchTerm = document.querySelector('.searchTerm1').value;
+// 	console.log(searchTerm);
 	
-	var settings = {
-	  "url": "http://localhost:8080/questions/search?title="+searchTerm,
-	  "method": "GET",
-	  "timeout": 0,
-	  "headers": {
-		"Authorization": localStorage.getItem('accessToken')
-	  },
-	};
+// 	var settings = {
+// 	  "url": "http://localhost:8080/questions/search?title="+searchTerm,
+// 	  "method": "GET",
+// 	  "timeout": 0,
+// 	  "headers": {
+// 		"Authorization": localStorage.getItem('accessToken')
+// 	  },
+// 	};
   
-	// $.ajax() 함수를 사용하여 검색 결과를 가져옴
-	$.ajax(settings).done(function(response) {
-	  console.log(response);
+// 	// $.ajax() 함수를 사용하여 검색 결과를 가져옴
+// 	$.ajax(settings).done(function(response) {
+// 	  console.log(response);
   
-	  // 검색 결과를 이용하여 카드 생성
-	  for (let i = 0; i < response.data.length; i++) {
-		let questionList = response.data[i];
-		let tempHtml = addAnswerHTML(questionList);
-		$('#card').append(tempHtml);
-	  }
-	});
+// 	  // 검색 결과를 이용하여 카드 생성
+// 	  for (let i = 0; i < response.data.length; i++) {
+// 		let questionList = response.data[i];
+// 		let tempHtml = addAnswerHTML(questionList);
+// 		$('#card').append(tempHtml);
+// 	  }
+// 	});
 
 
 	
-  }
+//   }
 
-	function addAnswerHTML(nickname, title, createdAt, answerCount) {
-		let tempHtml = makeCard(nickname, title, createdAt, answerCount);
-		$('#card').append(tempHtml);
-	  }
+// 	function addAnswerHTML(nickname, title, createdAt, answerCount) {
+// 		let tempHtml = makeCard(nickname, title, createdAt, answerCount);
+// 		$('#card').append(tempHtml);
+// 	  }
 
-	function makeCard(questionList){
+// 	function makeCard(questionList){
 
-	return`
-	<div class="blog-entry align-self-stretch">
-	  <a onclick="goDetail(${questionList.questionId})" class="block-20 rounded" style="background-image: url('images/question_11.png');">
-	  </a>
-	  <div class="text p-4">
-		  <div class="meta mb-2">
-		  <div><a>${questionList.createdAt}</a></div>
-		  <div><a>${questionList.nickname}</a></div>
-		  <div><a class="meta-chat"><span class="fa fa-comment"></span> ${questionList.answerCount}</a></div>
-		</div>
-		<h3 class="heading"><span id="question0">${questionList.title}</span></h3>
-	  </div>
-	</div>`
-  }
+// 	return`
+// 	<div class="blog-entry align-self-stretch">
+// 	  <a onclick="goDetail(${questionList.questionId})" class="block-20 rounded" style="background-image: url('images/question_11.png');">
+// 	  </a>
+// 	  <div class="text p-4">
+// 		  <div class="meta mb-2">
+// 		  <div><a>${questionList.createdAt}</a></div>
+// 		  <div><a>${questionList.nickname}</a></div>
+// 		  <div><a class="meta-chat"><span class="fa fa-comment"></span> ${questionList.answerCount}</a></div>
+// 		</div>
+// 		<h3 class="heading"><span id="question0">${questionList.title}</span></h3>
+// 	  </div>
+// 	</div>`
+//   }
 
-  // ----------------------------------------------------------------------------------------------------------------------
+//   // ----------------------------------------------------------------------------------------------------------------------

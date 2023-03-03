@@ -46,7 +46,7 @@
 							<a href="https://github.com/" class="d-flex align-items-center justify-content-center"><span
 									class="fa fa-github"><i class="sr-only">Github</i></span></a>
 							<!-- <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a> -->
-							<a href="#" class="d-flex align-items-center justify-content-center"><span
+							<a href="#" class="d-flex align-items-center justify-content-center" onclick="signOut()"><span
 									class="fa fa-sign-out"><i class="sr-only">SignOut</i></span></a>
 						</p>
 					</div>
@@ -63,7 +63,7 @@
 				<div class="wrap1">
 					<div class="search1">
 						<input type="text" class="searchTerm1" placeholder="Search">
-						<button  class="searchButton1" onclick="search()">
+						<button  class="searchButton1" onclick="goSearch(searchTerm)">
 							<i class="fa fa-search"></i>
 						</button>
 					</div>
@@ -853,6 +853,8 @@
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/scrollax.min.js"></script>
 	<script src="js/main.js"></script>
+	<!-- <script src="js/questionSearch.js"></script> -->
+	<script src="js/questionMain.js"></script> 
 
 </body>
 
