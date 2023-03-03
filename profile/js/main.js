@@ -209,79 +209,39 @@
 
 
 
-// function getMyQeustionList(){
-// 	var settings = {
-// 		"url": "http://localhost:8080/my-questions",
-// 		"method": "GET",
-// 		"timeout": 0,
-// 		"headers": {
-//             "Authorization": localStorage.getItem('accessToken')
-// 		},
-// 	  };
-	  
-// 	  $.ajax(settings).done(function (response) {
-// 		console.log(response);
-//         for(let i=0; i<response.data.length; i++){
-//             let questionDto0 = response.data[0];
-//             let questionDto1 = response.data[1];
-//             let questionDto2 = response.data[2];
-//             let questionDto3 = response.data[3];
-//             let questionDto4 = response.data[4];
-//             let questionDto5 = response.data[5];
-//             let questionDto6 = response.data[6];
-//             let questionDto7 = response.data[7];
-//             let questionDto8 = response.data[8];
-//             let questionDto9 = response.data[9];
-//             // $('#questionList1').empty();
-//             $('#questionList0').append(questionDto0.title);
-//             $('#questionList0').append(questionDto0.title);
-//             $('#questionList1').append(questionDto1.title);
-//             // $('#questionList2').empty();
-//             $('#questionList2').append(questionDto2.title);
-//             // $('#questionList3').empty();
-//             $('#questionList3').append(questionDto3.title);
-//             // $('#questionList4').empty();
-//             $('#questionList4').append(questionDto4.title);
-//             // $('#questionList5').empty();
-//             $('#questionList5').append(questionDto5.title);
-//             // $('#questionList').empty();
-//             $('#questionList6').append(questionDto6.title);
-//             $('#questionList7').append(questionDto7.title);
-//             $('#questionList8').append(questionDto8.title);
-//             $('#questionList9').append(questionDto9.title);
-//         }
-// 	  });
-// }
-
-function getMyInfo(){
-    var settings = {
-        "url": "http://localhost:8080/users/mypage",
-        "method": "GET",
-        "timeout": 0,
-        "headers": {
-          "Authorization": localStorage.getItem('accessToken')
-        },
-      };
+// function getMyInfo(){
+//     var settings = {
+//         "url": "http://localhost:8080/users/mypage",
+//         "method": "GET",
+//         "timeout": 0,
+//         "headers": {
+//           "Authorization": localStorage.getItem('accessToken')
+//         },
+//       };
       
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-        $('#myName').empty();
-        $('#myName').append(response.username)
-        $('#mynickname').empty();
-        $('#mynickname').append(response.nickname)
-        console.log(response.nickname)
-        $('#mypoint').empty();
-        $('#mypoint').append(response.point)
-        $('#myphoneNumber').empty();
-        $('#myphoneNumber').append(response.phoneNumber)
-        $('#mygrade').empty();
-        $('#mygrade').append(response.grade)
-        $('#myrating').empty();
-        $('#myrating').append(response.rating)
-        $('#mypassword').empty();
-        $('#mypassword').append(response.password)
-      });
-    }
+//       $.ajax(settings).done(function (response) {
+//         console.log(response);
+//         $('#myName').empty();
+//         $('#myName').append(response.username)
+//         $('#mynickname').empty();
+//         $('#mynickname').append(response.nickname)
+//         console.log(response.nickname)
+//         $('#mypoint').empty();
+//         $('#mypoint').append(response.point)
+//         $('#myphoneNumber').empty();
+//         $('#myphoneNumber').append(response.phoneNumber)
+//         $('#mygrade').empty();
+//         $('#mygrade').append(response.grade)
+//         $('#myrating').empty();
+//         $('#myrating').append(response.rating)
+//         $('#mypassword').empty();
+//         $('#mypassword').append(response.password)
+//         $('#gitHubAddress').empty();
+//         $('#gitHubAddress').append(response.githubAddress)
+//         $('#myIntroduce').empty();
+//         $('#myIntroduce').append(response.introduce)
+//       });
+//     }
 
 function getUserMe(){
 	var settings = {
@@ -297,12 +257,380 @@ function getUserMe(){
 	  
 	  $.ajax(settings).done(function (response) {
 		console.log(response);
-		console.log(status);
-		// if(status ===403){
-		// 	window.location = "/login.html"
-		// }
 		$('#loginUser').empty();
 		$('#loginUser').append(response.username + '님')
         $('#grade').append(response.grade)
 	  });
+}
+
+
+
+
+
+//--------------------------------------------------------------
+// index.html 페이지때 자동 실행 
+function editProfile(){
+    var settings = {
+        "url": "http://localhost:8080/users/mypage",
+        "method": "PATCH",
+        "timeout": 0,
+        "headers": {
+          "Authorization": localStorage.getItem('accessToken'),
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+          "nickname": $('#editNickname1').val(),
+          "phoneNumber": $('#editPhoneNumber').val(),
+          "githubAddress": $('#editGithubAddress').val(),
+          "introduce": $('#editIntroduce').val()
+        }),
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        $('#profiles').empty();
+
+        let editprofileList = response;
+        let tempHtml = addEditProfileHTML(editprofileList);
+        $('#profiles').append(tempHtml);
+      });
+}
+
+function addEditProfileHTML(editprofileList) {
+    let tempHtml = makeEditProfile(editprofileList);
+    $('#profiles').append(tempHtml);
+  }
+
+function makeEditProfile(editprofileList){
+return`
+<tr>
+<th scope="row">아이디</th>
+<td><span>${editprofileList.username}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">닉네임</th>
+<td><span"><input class="form-control" type="text" id="editNickname1" placeholder="${editprofileList.nickname}" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">깃 허브 주소</th>
+<td><span"><input class="form-control" type="text" id="editGithubAddress" placeholder="${editprofileList.githubAddress}" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">핸드폰 번호</th>
+<td><span"><input class="form-control" type="text" id="editPhoneNumber" placeholder="${editprofileList.phoneNumber}" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+
+<th scope="row">레이팅</th>
+<td><span>${editprofileList.rating}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">등급</th>
+<td><span>${editprofileList.grade}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row">포인트</th>
+<td><span>${editprofileList.point}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">자기소개</th>
+<td><span"><input class="form-control" type="text" id="editIntroduce" placeholder="${editprofileList.introduce}" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>`
+}
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------
+function getMyInfo(){
+    var settings = {
+        "url": "http://localhost:8080/users/mypage",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Authorization": localStorage.getItem('accessToken')
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+
+        let profileList = response;
+        let tempHtml = addAnswerHTML(profileList);
+        $('#profiles').append(tempHtml);
+      
+    
+      });
+    }
+
+    function addAnswerHTML(profileList) {
+		let tempHtml = makeProfile(profileList);
+		$('#profiles').append(tempHtml);
+	  }
+
+	function makeProfile(profileList){
+	return`
+    <tr>
+    <th scope="row">아이디</th>
+    <td><span>${profileList.username}</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <th scope="row">닉네임</th>
+    <td><span">${profileList.nickname}</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <th scope="row">깃 허브 주소</th>
+    <td><span>${profileList.githubAddress}</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <th scope="row">핸드폰 번호</th>
+    <td><span >${profileList.phoneNumber}</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <th scope="row">레이팅</th>
+    <td><span>${profileList.rating}</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <th scope="row">등급</th>
+    <td><span>${profileList.grade}</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <th scope="row">포인트</th>
+    <td><span>${profileList.point}</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <th scope="row">자기소개</th>
+    <td><span>${profileList.introduce}</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>`
+}
+
+
+
+//---------------------------------------------------------------------------------------------
+// 완료 눌렀을때 실행 
+function editSuccess(){
+    // let contents = $('#editPhoneNumber').text().trim();
+	// $('#editPhoneNumber').val(contents);
+    
+    var settings = {
+        "url": "http://localhost:8080/users/mypage",
+        "method": "PATCH",
+        "timeout": 0,
+        "headers": {
+          "Authorization": localStorage.getItem('accessToken'),
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+          "nickname": $('#editNickname').val(),
+          "phoneNumber": $('#editPhoneNumber').val(),
+          "githubAddress": $('#editGithubAddress').val(),
+          "introduce": $('#editIntroduce').val()
+        }),
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        $('#profiles').empty();
+
+        let editprofileList = response;
+        let tempHtml = addEditProfileHTML(editprofileList);
+        $('#profiles').append(tempHtml);
+
+        
+
+      });
+
+      window.location.reload();
+}
+
+function addEditProfileHTML(editprofileList) {
+   
+    
+    let tempHtml = makeEditProfile(editprofileList);
+    $('#profiles').append(tempHtml);
+  }
+
+function makeEditProfile(editprofileList){
+
+ return`
+<tr>
+<th scope="row">아이디</th>
+<td><span>${editprofileList.username}</span></td>
+<input class="form-control" type="text" placeholder="Default input" >
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">닉네임</th>
+<td><span"><input class="form-control" type="text" id="editNickname" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">깃 허브 주소</th>
+<td><span"><input class="form-control" type="text" id="editGithubAddress" ></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">핸드폰 번호</th>
+<td><span"><input class="form-control" type="text" id="editPhoneNumber" placeholder=''></textarea></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+
+<th scope="row">레이팅</th>
+<td><span>${editprofileList.rating}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">등급</th>
+<td><span>${editprofileList.grade}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">포인트</th>
+<td><span>${editprofileList.point}</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row">자기소개</th>
+<td><span"><textarea class="form-control" type="text" id="editIntroduce"></textarea></span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>`
+}
+
+
+   
+function editAnswer(answerId) {
+	showAnswerEdits(answerId);
+	
+
 }

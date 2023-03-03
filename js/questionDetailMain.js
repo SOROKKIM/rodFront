@@ -634,10 +634,14 @@ function answerIsSelected(answerId) {
 	  });
 }
 
+
+
 function addAnswerIsSelectedHTML(answerId, nickname, content, createdAt, likes) {
 	let tempHtml = makeAnswerIsSelected(answerId, nickname, content, createdAt, likes);
 	return tempHtml
 }
+
+
 
 function makeAnswerIsSelected(answerId, nickname, content, createdAt, likes) {
 	return `<div id="questionIsSelected" class="mt-5">
@@ -727,6 +731,7 @@ function showCommentEdits(answerId, commentId) {
 	$('#'+commentId+'-commentEdit').hide();
 	$('#'+commentId+'-commentDelete').hide();
 }
+
 
 //댓글 내용 수정
 function submitEditComment(answerId, commentId) {
