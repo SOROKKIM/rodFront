@@ -402,7 +402,7 @@ function answerSummit() {
 		},
 		"data": JSON.stringify({
 			"content": $('#summernote').val(),
-			"difficulty": parseFloat($('#difficulty').val())
+			"difficulty": parseFloat($('#inPutDifficulty').val())
 		}),
 	};
 

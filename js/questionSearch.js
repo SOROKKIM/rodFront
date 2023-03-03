@@ -3,6 +3,7 @@
 (function ($) {
 	// getQuestionDetail();
 	"use strict";
+	search();
 
 
 	$(window).stellar({
@@ -220,13 +221,14 @@ function resetPageButtons() {
 
 function search(searchTerm) {
 	// window.location.href = "/search.html?searchTerm=" + searchTerm;
-
-	var searchTerm = document.querySelector('.searchTerm1').value;
+	var searchTerm = localStorage.getItem('searchTerm')
+	console.log(searchTerm)
+	// var searchTerm = document.querySelector('.searchTerm1').value;
 	var url = "/search.html?searchTerm=" + searchTerm;
 
 	console.log(searchTerm);
 	alert("검색어 검색 성공");
-	localStorage.setItem('searchTerm', searchTerm)
+	
 	// location.href = url;
 
 	var settings = {
