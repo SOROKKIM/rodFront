@@ -224,10 +224,10 @@ function search(searchTerm) {
 	var searchTerm = localStorage.getItem('searchTerm')
 	console.log(searchTerm)
 	// var searchTerm = document.querySelector('.searchTerm1').value;
-	var url = "/search.html?searchTerm=" + searchTerm;
+	// var url = "/search.html?searchTerm=" + searchTerm;
 
 	console.log(searchTerm);
-	alert("검색어 검색 성공");
+	// alert("검색어 검색 성공");
 	
 	// location.href = url;
 
@@ -246,11 +246,14 @@ function search(searchTerm) {
     console.log(response);
 	console.log(response);
 	$('#card').empty();
+	// localStorage.setItem('searchTerm', searchTerm)
+
 
     for (let i = 0; i < response.data.length; i++) {
       let questionList = response.data[i];
       let tempHtml = addAnswerHTML(questionList);
       $('#card').append(tempHtml);
+
     }
 
 	
@@ -297,3 +300,5 @@ function search(searchTerm) {
 	 localStorage.setItem('currentQuestion',questionId)
 	 window.location="./questionDetail.html"
  }
+
+ 

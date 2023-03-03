@@ -24,6 +24,12 @@
 
     <script>
        window.onload = getQuestionDetail();
+
+       function goSearch(searchTerm) {
+          var searchTerm = document.querySelector('.searchTerm1').value;
+          localStorage.setItem('searchTerm', searchTerm)
+          window.location.href = '/search.html?searchTerm='+searchTerm
+        };
     </script>
 
     <!-- <script>
@@ -80,6 +86,7 @@
 
 
 
+
   </head>
   <body>
 
@@ -117,7 +124,7 @@
           <div class="wrap1">
             <div class="search1">
             <input type="text" class="searchTerm1" placeholder="Search">
-            <button type="submit" class="searchButton1">
+            <button type="submit" class="searchButton1" onclick="goSearch()">
               <i class="fa fa-search"></i>
             </button>
             </div>
@@ -534,6 +541,7 @@
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/scrollax.min.js"></script>
   <script src="js/questionDetailMain.js"></script>
+  <!-- <script src="js/questionMain.js"></script> -->
 
 
 
