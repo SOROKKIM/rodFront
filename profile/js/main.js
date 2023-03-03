@@ -209,40 +209,6 @@
 
 
 
-// function getMyInfo(){
-//     var settings = {
-//         "url": "http://localhost:8080/users/mypage",
-//         "method": "GET",
-//         "timeout": 0,
-//         "headers": {
-//           "Authorization": localStorage.getItem('accessToken')
-//         },
-//       };
-      
-//       $.ajax(settings).done(function (response) {
-//         console.log(response);
-//         $('#myName').empty();
-//         $('#myName').append(response.username)
-//         $('#mynickname').empty();
-//         $('#mynickname').append(response.nickname)
-//         console.log(response.nickname)
-//         $('#mypoint').empty();
-//         $('#mypoint').append(response.point)
-//         $('#myphoneNumber').empty();
-//         $('#myphoneNumber').append(response.phoneNumber)
-//         $('#mygrade').empty();
-//         $('#mygrade').append(response.grade)
-//         $('#myrating').empty();
-//         $('#myrating').append(response.rating)
-//         $('#mypassword').empty();
-//         $('#mypassword').append(response.password)
-//         $('#gitHubAddress').empty();
-//         $('#gitHubAddress').append(response.githubAddress)
-//         $('#myIntroduce').empty();
-//         $('#myIntroduce').append(response.introduce)
-//       });
-//     }
-
 function getUserMe(){
 	var settings = {
 
@@ -315,7 +281,7 @@ return`
 
 <tr>
 <th scope="row">닉네임</th>
-<td><span"><input class="form-control" type="text" id="editNickname1" placeholder="${editprofileList.nickname}" ></span></td>
+<td><span"><input class="form-control" type="text" id="editNickname1" ></span></td>
 <td></td>
 <td></td>
 <td></td>
@@ -325,7 +291,7 @@ return`
 
 <tr>
 <th scope="row">깃 허브 주소</th>
-<td><span"><input class="form-control" type="text" id="editGithubAddress" placeholder="${editprofileList.githubAddress}" ></span></td>
+<td><span"><input class="form-control" type="text" id="editGithubAddress" ></span></td>
 <td></td>
 <td></td>
 <td></td>
@@ -335,7 +301,7 @@ return`
 
 <tr>
 <th scope="row">핸드폰 번호</th>
-<td><span"><input class="form-control" type="text" id="editPhoneNumber" placeholder="${editprofileList.phoneNumber}" ></span></td>
+<td><span"><input class="form-control" type="text" id="editPhoneNumber" ></span></td>
 <td></td>
 <td></td>
 <td></td>
@@ -536,11 +502,10 @@ function editSuccess(){
 }
 
 function addEditProfileHTML(editprofileList) {
-   
-    
     let tempHtml = makeEditProfile(editprofileList);
     $('#profiles').append(tempHtml);
   }
+
 
 function makeEditProfile(editprofileList){
 
@@ -627,10 +592,3 @@ function makeEditProfile(editprofileList){
 </tr>`
 }
 
-
-   
-function editAnswer(answerId) {
-	showAnswerEdits(answerId);
-	
-
-}

@@ -1,8 +1,7 @@
 
 
 (function ($) {
-
-	search();
+	// getQuestionDetail();
 	"use strict";
 
 
@@ -208,7 +207,7 @@ $('.page-btn').on('click', function() {
 function createPageButtons(totalPages) {
   let html = '';
   for (let i = 1; i <= totalPages; i++) {
-    html += '<button class="page-btn" data-page="' + i + '">' + i + '</button>';
+    html += '<button class="page-btn" data-page="' + i + '" >' + i + '</button>';
   }
   $('#page-buttons').html(html);
 }
@@ -291,3 +290,8 @@ function search(searchTerm) {
 
   
   // ----------------------------------------------------------------------------------------------------------------------
+
+  function goDetail(questionId){
+	 localStorage.setItem('currentQuestion',questionId)
+	 window.location="./questionDetail.html"
+ }
