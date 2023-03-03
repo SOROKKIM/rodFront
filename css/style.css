@@ -5420,12 +5420,14 @@ button.bg-dark:focus {
 .d-flex {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
-  display: flex !important; }
+  /* display: flex !important;  */
+}
 
 .d-inline-flex {
   display: -webkit-inline-box !important;
   display: -ms-inline-flexbox !important;
-  display: inline-flex !important; }
+  display: inline-flex !important;
+ }
 
 @media (min-width: 576px) {
   .d-sm-none {
@@ -6510,9 +6512,12 @@ button.bg-dark:focus {
 
 .mb-4,
 .my-4 {
+  display: -webkit-inline-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   
-  margin: auto;
-  border-radius: 50%;
+  
   }
 
 .ml-4,
@@ -6624,7 +6629,9 @@ button.bg-dark:focus {
   padding-left: 1rem !important; }
 
 .p-4 {
-  padding: 1.5rem !important; }
+  padding: 1.5rem !important; 
+  height: 210.09px;
+}
 
 .pt-4,
 .py-4 {
@@ -9434,7 +9441,8 @@ textarea.form-control {
   @media (min-width: 768px) {
     .blog-entry {
       margin-bottom: 40px; 
-      margin: auto auto 40px auto;
+      margin: auto 15px 40px 15px;
+      /* margin-left: 20px; */
     } }
   @media (max-width: 767.98px) {
     .blog-entry {
@@ -10242,8 +10250,6 @@ textarea.form-control {
   color: #cd0928;
 } */
 
-.ftco-animate1 {
-  opacity: 0;
-  visibility: hidden; 
-  float: right;
-}
+/* #cards {
+  margin-left: 10px;
+} */
