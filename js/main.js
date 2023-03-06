@@ -213,6 +213,14 @@ function getUserMe() {
 }
 
 
+function signOut() {
+	console.log("logout진행중");
+    localStorage.removeItem('accessToken');
+	alert("로그아웃이 완료되었습니다.")
+
+	window.location = '/index.html'
+}
+
 
 
 // // ----------------------------------------------------------------------------------------------------------------------

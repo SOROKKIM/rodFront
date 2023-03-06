@@ -300,5 +300,6 @@ function search(searchTerm) {
 	 localStorage.setItem('currentQuestion',questionId)
 	 window.location="./questionDetail.html"
  }
+ 
 
  

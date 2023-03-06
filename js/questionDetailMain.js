@@ -218,6 +218,15 @@ function getUserMe() {
 	});
 }
 
+function signOut() {
+	console.log("logout진행중");
+    localStorage.removeItem('accessToken');
+	alert("로그아웃이 완료되었습니다.")
+
+	window.location = '/index.html'
+
+}
+
 //질문 개별 조회 시 답변 개수 확인 (ex. N개의 답변이 있습니다.)
 // function getAnswerCount() {
 // 	var settings = {
