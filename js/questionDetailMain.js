@@ -4,7 +4,7 @@
 
 	getUserMe();
 	// getAnswerCount();
-	getQuestionDetail();
+	// getQuestionDetail();
 
 	// $('#questionIsSelected').hide();
 	$('#questionIsSelected').show();
