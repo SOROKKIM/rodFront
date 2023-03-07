@@ -233,6 +233,7 @@ function orderProduct(productId) {
 }
 
 
+
 function getAllProducts(page, size) {
     var settings = {
         "url": "http://localhost:8080/api/shop?page=" + page + "&size=" + size,
@@ -341,7 +342,7 @@ function makeProductCard1(productId, productName, price, productDescription) {
     return `<div class="col-md-6 col-lg-3">
                 <div class="staff">
                     <div class="img-wrap d-flex align-items-stretch">
-                        <div class="img align-self-stretch" style="background-image: url(images/starbucks_2.jpeg);">
+                        <div class="img align-self-stretch" style="background-image: url(images/베라.jpeg);">
                         </div>
                     </div>
                     <div class="text pt-3 px-3 pb-4 text-center">
@@ -372,7 +373,7 @@ function makeProductCard2(productId, productName, price, productDescription) {
     return `<div class="col-md-6 col-lg-3">
                 <div class="staff">
                     <div class="img-wrap d-flex align-items-stretch">
-                        <div class="img align-self-stretch" style="background-image: url(images/베라.jpeg);">
+                        <div class="img align-self-stretch" style="background-image: url(images/starbucks_2.jpeg);">
                         </div>
                     </div>
                     <div class="text pt-3 px-3 pb-4 text-center">
@@ -434,7 +435,7 @@ function makeProductCard4(productId, productName, price, productDescription) {
     return `<div class="col-md-6 col-lg-3">
                 <div class="staff">
                     <div class="img-wrap d-flex align-items-stretch">
-                        <div class="img align-self-stretch" style="background-image: url(images/cake_1.jpeg);">
+                        <div class="img align-self-stretch" style="background-image: url(images/투썸케이크.jpeg);">
                         </div>
                     </div>
                     <div class="text pt-3 px-3 pb-4 text-center">
@@ -465,7 +466,7 @@ function makeProductCard5(productId, productName, price, productDescription) {
     return `<div class="col-md-6 col-lg-3">
                 <div class="staff">
                     <div class="img-wrap d-flex align-items-stretch">
-                        <div class="img align-self-stretch" style="background-image: url(images/도넛.jpeg);">
+                        <div class="img align-self-stretch" style="background-image: url(images/스벅3.jpeg);">
                         </div>
                     </div>
                     <div class="text pt-3 px-3 pb-4 text-center">
@@ -496,7 +497,7 @@ function makeProductCard6(productId, productName, price, productDescription) {
     return `<div class="col-md-6 col-lg-3">
                 <div class="staff">
                     <div class="img-wrap d-flex align-items-stretch">
-                        <div class="img align-self-stretch" style="background-image: url(images/스벅3.jpeg);">
+                        <div class="img align-self-stretch" style="background-image: url(images/도넛.jpeg);">
                         </div>
                     </div>
                     <div class="text pt-3 px-3 pb-4 text-center">
@@ -547,3 +548,5 @@ function makeProductCard6(productId, productName, price, productDescription) {
                     </div>
                     </div>`;
         }
+
+    

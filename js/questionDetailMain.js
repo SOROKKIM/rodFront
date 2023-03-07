@@ -466,7 +466,7 @@ function addAnswerHTML(answerId, nickname, content, createdAt, likes) {
 function makeAnswer(answerId, nickname, content, createdAt, likes) {
 	return `<li class="comment" id="${answerId}">
           <div class="vcard bio">
-          <img src="images/person_1.jpg" alt="Image placeholder">
+          <img src="images/기본프로필.jpg" alt="Image placeholder">
           </div>
           <div class="comment-body">
           <h3>${nickname}
@@ -509,7 +509,7 @@ function addCommentHTML(answerId, commentId, nickName, content, createdAt) {
 function makeComment(answerId, commentId, nickName, content, createdAt) {
 	return `<li class="comment" >
 				<div class="vcard bio">
-				<img src="images/person_1.jpg" alt="Image placeholder">
+				<img src="images/기본프로필.jpg" alt="Image placeholder">
 				</div>
 				<div class="comment-body">
 				<h3>${nickName}
