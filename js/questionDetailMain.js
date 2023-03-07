@@ -421,6 +421,14 @@ function answerSummit() {
 		alert("답변등록이 완료되었습니다.")
 		window.location = '/questionDetail.html'
 
+	}).fail(function(response){
+		console.log(response.status)
+		if(response.status === 500){
+		alert('본인 글에는 답변 할 수 없습니다.')
+		window.location = '/questionDetail.html'
+		}else{
+		alert('서버에 문제가 발생하였습니다.')
+		}
 	});
 }
 
@@ -628,7 +636,16 @@ function likeAnswer(answerId) {
 		// likeButton.addClass('liked');
 		// likeButton.html(`<span class="fa fa-heart" style="font-size: 16px; font-weight: 650;"></span> ${response.likes+1}`);
 		// }
+  })	.fail(function(response){
+	console.log(response.status)
+	if(response.status === 500){
+	  alert('본인 글에 "좋아요"를 누를 수 없습니다.')
+	  window.location.reload();
+	}else{
+	  alert('서버에 문제가 발생하였습니다.')
+	}
   });
+  
 }
 // function getLikeStatus(answerId) {
 // 	var likeButton = $(`#`+answerId+'-like-button');
@@ -678,6 +695,15 @@ function answerIsSelected(answerId) {
 		console.log(response);
 		alert("답변 채택이 완료되었습니다.");
 		window.location = '/questionDetail.html'
+		
+	  })	.fail(function(response){
+		console.log(response.status)
+		if(response.status === 500){
+		  alert('채택을 할 권한이 없습니다.')
+		  window.location.reload();
+		}else{
+		  alert('서버에 문제가 발생하였습니다.')
+		}
 	  });
 }
 
@@ -798,7 +824,8 @@ function submitEditComment(answerId, commentId) {
 	  $.ajax(settings).done(function (response) {
 		alert("댓글 수정이 완료되었습니다.")
 		window.location = '/questionDetail.html'
-		}).fail(function(response){
+		})
+		.fail(function(response){
 		console.log(response.status)
 		if(response.status === 500){
 		  alert('댓글을 수정할 권한이 없습니다.')
