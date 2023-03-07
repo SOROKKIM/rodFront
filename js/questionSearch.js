@@ -201,7 +201,8 @@ let currentPage = 1;
 // 페이지 버튼 클릭 시 이벤트 핸들러
 $('.page-btn').on('click', function() {
   currentPage = parseInt($(this).data('page'));
-  getAllQuestionList(currentPage, 6);
+  var searchTerm = localStorage.getItem('searchTerm');
+  getAllQuestionList(searchTerm, currentPage, 6);
 });
 
 // 페이지 목록 생성 함수
@@ -219,20 +220,19 @@ function resetPageButtons() {
 }
 
 
-function search(searchTerm) {
+function search(searchTerm, page, size) {
 	// window.location.href = "/search.html?searchTerm=" + searchTerm;
 	var searchTerm = localStorage.getItem('searchTerm')
 	console.log(searchTerm)
 	// var searchTerm = document.querySelector('.searchTerm1').value;
 	// var url = "/search.html?searchTerm=" + searchTerm;
-
-	console.log(searchTerm);
+	// console.log(searchTerm);
 	// alert("검색어 검색 성공");
 	
-	// location.href = url;
+
 
 	var settings = {
-		"url": "http://localhost:8080/questions/search?title="+searchTerm,
+		"url": "http://localhost:8080/questions/search?title="+searchTerm+ "&page=" + page + "&size=" + size,
 		"method": "GET",
 		"timeout": 0,
 		"headers": {
@@ -244,7 +244,6 @@ function search(searchTerm) {
 
   $.ajax(settings).done(function(response) {
     console.log(response);
-	console.log(response);
 	$('#card').empty();
 	// localStorage.setItem('searchTerm', searchTerm)
 
@@ -256,7 +255,6 @@ function search(searchTerm) {
 
     }
 
-	
 
     // 페이지 버튼 업데이트
     resetPageButtons();
@@ -266,8 +264,9 @@ function search(searchTerm) {
 }
 
 // 초기 페이지 로드 시 첫 번째 페이지의 질문 목록 불러오기
-// search(1, 6);
 
+var searchTerm = localStorage.getItem('searchTerm');
+search(searchTerm, 1, 6);
 
 
 	function addAnswerHTML(nickname, title, createdAt, answerCount) {
@@ -301,5 +300,9 @@ function search(searchTerm) {
 	 window.location="./questionDetail.html"
  }
  
-
+ function goSearch(searchTerm) {
+	var searchTerm = document.querySelector('.searchTerm1').value;
+	localStorage.setItem('searchTerm', searchTerm)
+	window.location.href = '/search.html?searchTerm='+searchTerm
+}
  
