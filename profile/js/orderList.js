@@ -230,6 +230,30 @@ function getUserMe(){
 }
 
 
+//주문 취소
+function cancelOrder(orderId) {
+    var settings = {
+        "url": "http://localhost:8080/shop/orders/cancel/"+orderId,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+		    "Authorization": localStorage.getItem('accessToken'),
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        alert("주문이 취소되었습니다.")
+        // window.location.reload();
+
+        $('#'+orderId+'-cancelButton').hide();
+        $('#'+orderId+'-cancelOrder').show();
+      });
+}
+
+
+
+
 
 
 //-------------------------------------------------------------------------
@@ -248,6 +272,7 @@ function getMyOrderList(){
 
       $.ajax(settings).done(function (response) {
         console.log(response);
+        console.log(response[0].orderStatus)
         for(let i=0; i<response.length; i++){
             
             let orderDto = response[i];
@@ -255,13 +280,24 @@ function getMyOrderList(){
     
             $('#orderList').append(tempHtml);
 
+            if(orderDto.orderStatus === "CANCEL") {
+                $('#'+orderDto.orderId+'-cancelButton').hide();
+                $('#'+orderDto.orderId+'-cancelOrder').show();
+            }
+            else if (orderDto.orderStatus === "ORDER") {
+                $('#'+orderDto.orderId+'-cancelButton').show();
+                $('#'+orderDto.orderId+'-cancelOrder').hide();
+            }
         }
+
+
+        
       });
 
 
       function addOrderListHTML(orderDto) {
         let tempHtml = makeOrderList(orderDto);
-        $('#questions').append(tempHtml);
+        $('#orderList').append(tempHtml);
       }
     
     // function makeOrderList(orderDto){
@@ -301,12 +337,29 @@ function getMyOrderList(){
             <li class="list-group-item d-flex justify-content-between align-items-center" style="white-space: nowrap;">
                 <span>${orderDto.productName}</span>
                 <span>
-                    <span class="badge bg-secondary">가격 ${orderDto.price} </span>
+                    <span class="badge bg-secondary">주문 가격 : ${orderDto.price} POINT</span>
                     <span class="badge bg-dark">주문 날짜 ${orderDto.createdAt} </span>
                     <tr>
                         <td>
-                            <button style="
-                                background-color: #bd3838; 
+                            <button id="${orderDto.orderId}-cancelButton" 
+                                style="
+                                background-color: burlywood; 
+                                border: none;
+                                color: white;
+                                padding: 8px 10px;
+                                text-align: center;
+                                text-decoration: none;
+                                display: inline-block;
+                                font-size: 10px;
+                                margin: 4px 2px;
+                                cursor: pointer;
+                                border-radius: 10px;" 
+                                onclick="cancelOrder(${orderDto.orderId})">
+                                주문 취소
+                            </button>
+                            <a id="${orderDto.orderId}-cancelOrder"
+                                style="
+                                background-color: rgb(144 30 0); 
                                 border: none;
                                 color: white;
                                 padding: 8px 10px;
@@ -317,9 +370,9 @@ function getMyOrderList(){
                                 margin: 4px 2px;
                                 cursor: pointer;
                                 border-radius: 10px;
-                            ">
-                                주문 취소
-                            </button>
+                                display: none;" >
+                                취소된 주문입니다.
+                            </a>
                         </td>
                     </tr>
                 </span>

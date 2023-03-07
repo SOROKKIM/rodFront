@@ -606,7 +606,7 @@ function deleteComment(answerId, commentId) {
 
 //답변 좋아요
 function likeAnswer(answerId) {
-	var likeButton = $(`#`+answerId+'-like-button');
+	// var likeButton = $(`#`+answerId+'-like-button');
 	var settings = {
 		"url": "http://localhost:8080/api/likes/answer/"+answerId,
 		"method": "POST",

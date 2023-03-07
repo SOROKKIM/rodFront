@@ -30,6 +30,20 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+
+    <script>
+        function signOut() {
+        console.log("logout진행중");
+          localStorage.removeItem('accessToken');
+        alert("로그아웃이 완료되었습니다.")
+
+        window.location = '/index.html'
+      }
+    </script>
+
+
+
 </head>
 
 <body>
@@ -94,17 +108,17 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                <a href="/index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-paw"></i></h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
+                <!-- <form class="d-none d-md-flex ms-4">
                     <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
+                </form> -->
                 <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
+                    <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-envelope me-lg-2"></i>
                             <span class="d-none d-lg-inline-flex">Message</span>
@@ -166,16 +180,16 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item text-center">See all notifications</a>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="img/black.jpg" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="index.html" class="dropdown-item">My Profile</a>
+                            <!-- <a href="#" class="dropdown-item">Settings</a> -->
+                            <a href="#" class="dropdown-item" onclick="signOut()">Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -484,35 +498,19 @@
                                     <div class="table-responsive" >
                                         <table class="table" >
                                             <thead>
-                                                <tr>
-                                                    <!-- <th scope="col">#</th> -->
-                                                    <th scope="col"> </th>
-                                                    <th scope="col"></th>
-                                                    <th scope="col"></th>
-                                                    <th scope="col"> </th>
-                                                    <th scope="col"> </th>
-                                                    <th scope="col"></th>
-                                                <tbody>
-                                                        <ul>
-                                                            <ol id="Answers">
-                                                            </ol>
-                                                        </ul>
-                                                </tbody>
-                                                </tr>
+                                                <ul>
+                                                    <ol id="Answers">
+                                                    </ol>
+                                                </ul>
                                             </thead>
                             
                             
                             
-                            <div class="col-12">
-                                <div class="bg-light rounded h-100 p-4" >
                              
                                    
                                     <div class="table-responsive" >
                                         <table class="table" id="questions" >
-                                            <thead>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
+                                            
                                         </table>
                                     </div>
                         </div>
@@ -528,16 +526,86 @@
               <div class="block-27">
                 <ul>
       
-                  <button class="page-btn" data-page="1" onclick="getMyAnswerList(1, 6)">1</button>
-                  <button class="page-btn" data-page="2" onclick="getMyAnswerList(2, 6)">2</button>
-                  <button class="page-btn" data-page="3" onclick="getMyAnswerList(3, 6)">3</button>
-                  <button class="page-btn" data-page="4" onclick="getMyAnswerList(4, 6)">4</button>
-                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(5, 6)">5</button>
-                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(6, 6)">6</button>
-                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(7, 6)">7</button>
-                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(8, 6)">8</button>
-                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(9, 6)">9</button>
-                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(10, 6)">10</button>
+                  <button class="page-btn" data-page="1" onclick="getMyAnswerList(1, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">1</button>
+                  <button class="page-btn" data-page="2" onclick="getMyAnswerList(2, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">2</button>
+                  <button class="page-btn" data-page="3" onclick="getMyAnswerList(3, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">3</button>
+                  <button class="page-btn" data-page="4" onclick="getMyAnswerList(4, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">4</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(5, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">5</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(6, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">6</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(7, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">7</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(8, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">8</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(9, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">9</button>
+                  <button class="page-btn" data-page="5" onclick="getMyAnswerList(10, 6)" style="color: gray;
+                  text-align: center;
+                  display: inline-block;
+                  width: 40px;
+                  height: 40px;
+                  line-height: 35px;
+                  border-radius: 50%;
+                  border: 2px solid burlywood;">10</button>
                 
                 </ul>
               </div>
